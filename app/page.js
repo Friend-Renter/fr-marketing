@@ -2,6 +2,30 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Accordion from "@/components/ui/Accordion";
 
+export const metadata = {
+  title: "FR — Local car rentals made simple",
+  description: "Verified people, fair prices, no counter lines.",
+  openGraph: {
+    images: [
+      `/og?title=${encodeURIComponent(
+        "Local car rentals made simple"
+      )}&subtitle=${encodeURIComponent(
+        "Verified people • Fair prices • No counter lines"
+      )}`,
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [
+      `/og?title=${encodeURIComponent(
+        "Local car rentals made simple"
+      )}&subtitle=${encodeURIComponent(
+        "Verified people • Fair prices • No counter lines"
+      )}`,
+    ],
+  },
+};
+
 const homeFaq = [
   {
     q: "Do you verify renters and hosts?",
@@ -33,12 +57,17 @@ export default function HomePage() {
         </p>
         <div className="mt-6 flex gap-3">
           <Link href="/hosts">
-            <Button variant="primary">List your car</Button>
+            <Button ctaId="cta_home_primary" variant="primary">
+              List your car
+            </Button>
           </Link>
           <Link href="/renters">
-            <Button variant="outline">Find a rental</Button>
+            <Button ctaId="cta_home_secondary" variant="outline">
+              Find a rental
+            </Button>
           </Link>
         </div>
+
         <div className="mt-8 text-sm text-gray-600">
           Verified IDs • Secure payments • Local support
         </div>
@@ -107,7 +136,9 @@ export default function HomePage() {
           </p>
           <div className="mt-4">
             <Link href="/renters">
-              <Button variant="primary">Get started</Button>
+              <Button ctaId="cta_home_get_started" variant="primary">
+                Get started
+              </Button>
             </Link>
           </div>
         </div>
