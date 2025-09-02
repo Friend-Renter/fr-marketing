@@ -1,0 +1,41 @@
+{
+  "id": "omaha-ne",
+  "cityName": "Omaha",
+  "state": "Nebraska",
+  "seo": {
+    "title": "Car rentals in Omaha, NE | FR",
+    "metaDescription": "Local car rentals in Omaha — verified people, fair prices, quick pickup near Eppley, Old Market, and Midtown.",
+    "canonicalPath": "/city/omaha-ne",
+    "ogImage": ""
+  },
+  "hero": {
+    "headline": "Omaha car rentals—no counter, no lines.",
+    "subhead": "Old Market, Midtown, Benson—verified cars across the city.",
+    "bgImage": ""
+  },
+  "valueProps": [
+    { "title": "Airport-adjacent pickup", "desc": "Use the rideshare lot at Eppley when available." },
+    { "title": "Neighborhood meetups", "desc": "Public garages in Old Market & Midtown Crossing." },
+    { "title": "Transparent pricing", "desc": "What you see is what you pay—no desk add-ons." }
+  ],
+  "howItWorksLocal": [
+    { "step": 1, "title": "Meet at a public garage or lot", "desc": "Hosts specify the exact spot." },
+    { "step": 2, "title": "Quick inspection photos", "desc": "Exterior + odometer before you roll." },
+    { "step": 3, "title": "Return to the same spot", "desc": "Unless you arrange otherwise with the host." }
+  ],
+  "pickupAreas": [
+    { "name": "Eppley rideshare lot", "tip": "Terminal curbside only if host offers." },
+    { "name": "Old Market garages", "tip": "Event nights can be busy—plan ahead." },
+    { "name": "Midtown Crossing", "tip": "Convenient structured parking." },
+    { "name": "Westroads area", "tip": "Easy access from I-680." }
+  ],
+  "faq": [
+    { "q": "Terminal pickup allowed?", "a": "Usually rideshare lot; terminal curbside if host offers." },
+    { "q": "Are there tolls?", "a": "Minimal; any tolls are billed post-trip." },
+    { "q": "Busy weekends?", "a": "Reserve early around Old Market events." },
+    { "q": "Deposit/hold?", "a": "Temporary hold (e.g., $200–$300), released after return." },
+    { "q": "Mileage limits?", "a": "Shown on each listing; ask your host if unsure." }
+  ],
+  "primaryCta": { "label": "List your car in Omaha", "href": "/hosts", "id": "cta_city_primary" },
+  "secondaryCta": { "label": "Join the Omaha waitlist", "href": "/renters", "id": "cta_city_secondary" }
+}
