@@ -1,0 +1,7 @@
+[
+  { "q": "Minimum age and ID?", "a": "Minimum age 21 (example). Valid license and ID verification required." },
+  { "q": "Deposit release timing?", "a": "Temporary hold (e.g., $200–$300) released after return if no issues." },
+  { "q": "Can I extend my trip?", "a": "Yes, if the car’s available. Request in advance." },
+  { "q": "Mileage limits?", "a": "Shown on each listing; confirm with the host if unsure." },
+  { "q": "Fuel & cleaning policy?", "a": "Return with the same fuel level and reasonable cleanliness." }
+]
