@@ -19,8 +19,10 @@ export default function LeadForm({ type = "host", citySlug }) {
     setLoading(true);
     setStatus(null);
 
-    const formData = new FormData(e.currentTarget);
-    // Honeypot: if filled → bail quietly
+    const form = e.currentTarget; // ← capture form BEFORE any await
+    const formData = new FormData(form);
+
+    // Honeypot: if filled → bail quietly (client-side)
     if (formData.get("website")) {
       setLoading(false);
       setStatus({ ok: true, msg: "Thanks! We received your request." });
@@ -28,9 +30,15 @@ export default function LeadForm({ type = "host", citySlug }) {
     }
 
     try {
-      // Recaptcha: invisible execute
-      const captchaToken = await recaptchaRef.current.executeAsync();
-      recaptchaRef.current.reset();
+      // reCAPTCHA (invisible) — execute now, reset later
+      let captchaToken = "";
+      if (recaptchaRef.current?.executeAsync) {
+        try {
+          captchaToken = await recaptchaRef.current.executeAsync();
+        } catch (err) {
+          console.warn("reCAPTCHA execute failed", err);
+        }
+      }
 
       const payload = {
         type,
@@ -42,6 +50,7 @@ export default function LeadForm({ type = "host", citySlug }) {
         message: formData.get("message")?.trim() || "",
         consentMarketing: formData.get("consentMarketing") === "on",
         captchaToken,
+        honeypot: (formData.get("website") || "").toString(),
       };
 
       const res = await fetch(`${API_BASE}/v1/leads`, {
@@ -50,18 +59,47 @@ export default function LeadForm({ type = "host", citySlug }) {
         body: JSON.stringify(payload),
       });
 
-      if (res.status === 201) {
+      // Safe body read (works even if empty / non-JSON)
+      let data = null;
+      try {
+        const text = await res.text();
+        data = text ? JSON.parse(text) : null;
+      } catch {}
+
+      if (res.ok) {
         setStatus({ ok: true, msg: "Thanks! We’ll reach out soon." });
-        e.currentTarget.reset();
-      } else if (res.status === 429) {
-        setStatus({ ok: false, msg: "Too many requests. Please try again later." });
-      } else if (res.status === 401) {
-        setStatus({ ok: false, msg: "Could not verify you’re human. Please try again." });
-      } else {
-        const data = await res.json().catch(() => ({}));
-        setStatus({ ok: false, msg: data?.message || "Something went wrong." });
+        try {
+          form.reset();
+        } catch {} // ← use captured form, not e.currentTarget
+        return;
       }
+      if (res.status === 429) {
+        setStatus({
+          ok: false,
+          msg: "Too many requests. Please try again later.",
+        });
+        return;
+      }
+      if (res.status === 401) {
+        setStatus({
+          ok: false,
+          msg: "Could not verify you’re human. Please try again.",
+        });
+        return;
+      }
+      setStatus({
+        ok: false,
+        msg: (data && data.message) || `http_${res.status}`,
+      });
+
+      // reset reCAPTCHA AFTER the request, with a brief delay
+      setTimeout(() => {
+        try {
+          recaptchaRef.current?.reset();
+        } catch {}
+      }, 800);
     } catch (err) {
+      console.error("Lead submit error:", err);
       setStatus({ ok: false, msg: "Network error. Please try again." });
     } finally {
       setLoading(false);
@@ -69,24 +107,42 @@ export default function LeadForm({ type = "host", citySlug }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-card">
+    <form
+      onSubmit={onSubmit}
+      className="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-card"
+    >
       <input type="hidden" name="citySlug" defaultValue={citySlug || ""} />
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div>
           <label className="block text-sm text-gray-700">First name *</label>
-          <input name="firstName" required className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2" />
+          <input
+            name="firstName"
+            required
+            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+          />
         </div>
         <div>
           <label className="block text-sm text-gray-700">Last name</label>
-          <input name="lastName" className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2" />
+          <input
+            name="lastName"
+            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+          />
         </div>
         <div>
           <label className="block text-sm text-gray-700">Email *</label>
-          <input type="email" name="email" required className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2" />
+          <input
+            type="email"
+            name="email"
+            required
+            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+          />
         </div>
         <div>
           <label className="block text-sm text-gray-700">Phone</label>
-          <input name="phone" className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2" />
+          <input
+            name="phone"
+            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+          />
         </div>
       </div>
 
@@ -99,12 +155,22 @@ export default function LeadForm({ type = "host", citySlug }) {
       {type === "host" && (
         <div>
           <label className="block text-sm text-gray-700">Message</label>
-          <textarea name="message" rows={3} className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2" />
+          <textarea
+            name="message"
+            rows={3}
+            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+          />
         </div>
       )}
 
       <div className="flex items-center gap-2">
-        <input id="consentMarketing" name="consentMarketing" type="checkbox" required className="h-4 w-4" />
+        <input
+          id="consentMarketing"
+          name="consentMarketing"
+          type="checkbox"
+          required
+          className="h-4 w-4"
+        />
         <label htmlFor="consentMarketing" className="text-sm text-gray-700">
           I agree to be contacted about FR.
         </label>
@@ -114,15 +180,31 @@ export default function LeadForm({ type = "host", citySlug }) {
         ref={recaptchaRef}
         size="invisible"
         sitekey={SITE_KEY}
-        badge="inline"
+        badge="bottomright" // “inline” can be twitchy in dev
+        onExpired={() => {
+          try {
+            recaptchaRef.current?.reset();
+          } catch {}
+        }}
+        onErrored={() => console.warn("reCAPTCHA errored (non-fatal)")}
       />
 
       <div className="flex items-center gap-3">
         <Button type="submit" variant="primary" disabled={loading}>
-          {loading ? "Submitting…" : type === "host" ? "Send interest" : "Join waitlist"}
+          {loading
+            ? "Submitting…"
+            : type === "host"
+            ? "Send interest"
+            : "Join waitlist"}
         </Button>
         {status && (
-          <p className={`text-sm ${status.ok ? "text-green-700" : "text-red-600"}`}>{status.msg}</p>
+          <p
+            className={`text-sm ${
+              status.ok ? "text-green-700" : "text-red-600"
+            }`}
+          >
+            {status.msg}
+          </p>
         )}
       </div>
     </form>
