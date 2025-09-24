@@ -150,7 +150,7 @@ export default function HostsPage() {
           We’ll follow up with next steps.
         </p>
         <div className="mt-4">
-          <LeadForm type="host" />
+          <LeadForm defaultRole="host" pageSource="hosts" />
         </div>
       </section>
     </div>

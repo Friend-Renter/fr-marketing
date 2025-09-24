@@ -265,7 +265,7 @@ export default function HomePage() {
           soon.
         </p>
 
-        <LeadForm />
+        <LeadForm defaultRole="host" pageSource="landing" />
       </section>
     </div>
   );

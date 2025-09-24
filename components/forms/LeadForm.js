@@ -1,186 +1,253 @@
+// components/forms/LeadForm.jsx
 "use client";
 
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import Button from "@/components/ui/Button";
+import Step1Quick from "./Step1Quick";
+import Step2Host from "./Step2Host";
+import Step2Renter from "./Step2Renter";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-export default function LeadForm({ type = "host", citySlug }) {
-  const [status, setStatus] = useState(null);
+/**
+ * Role-aware, 2-step Lead form shell.
+ * Back-compat:
+ *  - accepts `type` prop from old usage ("host" | "renter")
+ *  - maps to defaultRole for Step 2 routing
+ */
+export default function LeadForm({
+  defaultRole,
+  pageSource = "landing",
+  citySlug,
+  // legacy prop:
+  type,
+}) {
+  // Back-compat mapping
+  const initialRole = useMemo(() => {
+    if (defaultRole) return defaultRole;
+    if (type === "host") return "host";
+    if (type === "renter") return "renter";
+    // Landing default: host (as requested)
+    return "host";
+  }, [defaultRole, type]);
+
+  const [role, setRole] = useState(initialRole); // 'host' | 'renter' | 'both'
+  const [step, setStep] = useState(1); // 1 or 2
   const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(null); // { ok, msg }
+  const [leadEmail, setLeadEmail] = useState(""); // key for enrich
+  const [savedAt, setSavedAt] = useState(null);
+
   const recaptchaRef = useRef(null);
 
-  async function onSubmit(e) {
-    e.preventDefault();
-    if (loading) return;
+  // Utilities
+  const getIdem = () => {
+    try {
+      return crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random()}`;
+    } catch {
+      return `${Date.now()}-${Math.random()}`;
+    }
+  };
+  const getUtm = () => {
+    if (typeof window === "undefined") return {};
+    const u = new URL(window.location.href);
+    return {
+      utmSource: u.searchParams.get("utm_source") || undefined,
+      utmMedium: u.searchParams.get("utm_medium") || undefined,
+      utmCampaign: u.searchParams.get("utm_campaign") || undefined,
+      referrer: document?.referrer || undefined,
+      pageSource,
+    };
+  };
 
+  // Step 1 submit handler (POST /v1/leads)
+  async function submitStep1(values) {
+    if (loading) return;
     setLoading(true);
     setStatus(null);
-
-    const form = e.currentTarget; // ← capture form BEFORE any await
-    const formData = new FormData(form);
-
-    // Honeypot: if filled → bail quietly (client-side)
-    if (formData.get("website")) {
-      setLoading(false);
-      setStatus({ ok: true, msg: "Thanks! We received your request." });
-      return;
-    }
-
+    let captchaToken = "";
     try {
-      // reCAPTCHA (invisible) — execute now, reset later
-      let captchaToken = "";
-      if (recaptchaRef.current?.executeAsync) {
-        try {
-          captchaToken = await recaptchaRef.current.executeAsync();
-        } catch (err) {
-          console.warn("reCAPTCHA execute failed", err);
-        }
-      }
-
+      captchaToken = await recaptchaRef.current?.executeAsync?.();
+    } catch {}
+    try {
       const payload = {
-        type,
-        firstName: formData.get("firstName")?.trim(),
-        lastName: formData.get("lastName")?.trim() || "",
-        email: formData.get("email")?.trim(),
-        phone: formData.get("phone")?.trim() || "",
-        citySlug: formData.get("citySlug") || citySlug || "",
-        message: formData.get("message")?.trim() || "",
-        consentMarketing: formData.get("consentMarketing") === "on",
+        firstName: values.firstName?.trim(),
+        email: values.email?.trim(),
+        phone: values.phone?.trim() || "",
+        cityOrZip: values.cityOrZip?.trim(),
+        role, // 'host'|'renter'|'both'
+        consent: !!values.consent,
         captchaToken,
-        honeypot: (formData.get("website") || "").toString(),
+        honeypot: values.honeypot || "",
+        citySlug: citySlug || "",
+        ...getUtm(),
       };
-
       const res = await fetch(`${API_BASE}/v1/leads`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "X-Idempotency-Key": getIdem(),
+        },
         body: JSON.stringify(payload),
       });
-
-      // Safe body read (works even if empty / non-JSON)
+      // safe body read
       let data = null;
       try {
-        const text = await res.text();
-        data = text ? JSON.parse(text) : null;
+        const t = await res.text();
+        data = t ? JSON.parse(t) : null;
       } catch {}
-
       if (res.ok) {
-        setStatus({ ok: true, msg: "Thanks! We’ll reach out soon." });
-        try {
-          form.reset();
-        } catch {} // ← use captured form, not e.currentTarget
-        return;
-      }
-      if (res.status === 429) {
+        setLeadEmail(payload.email);
         setStatus({
-          ok: false,
-          msg: "Too many requests. Please try again later.",
+          ok: true,
+          msg: "Thanks! Add a few details to skip the line.",
         });
+        setStep(2);
         return;
       }
-      if (res.status === 401) {
-        setStatus({
+      if (res.status === 429)
+        return setStatus({
           ok: false,
-          msg: "Could not verify you’re human. Please try again.",
+          msg: "Too many requests. Try again later.",
         });
-        return;
-      }
+      if (res.status === 401)
+        return setStatus({
+          ok: false,
+          msg: "Captcha check failed. Please try again.",
+        });
       setStatus({
         ok: false,
         msg: (data && data.message) || `http_${res.status}`,
       });
-
-      // reset reCAPTCHA AFTER the request, with a brief delay
+    } catch (err) {
+      console.error("Step1 error", err);
+      setStatus({ ok: false, msg: "Network error. Please try again." });
+    } finally {
+      setLoading(false);
       setTimeout(() => {
         try {
           recaptchaRef.current?.reset();
         } catch {}
-      }, 800);
+      }, 600);
+    }
+  }
+
+  // Step 2 submit handler (PATCH /v1/leads/enrich)
+  async function submitStep2({ hostDetails, renterDetails }) {
+    if (loading) return;
+    setLoading(true);
+    setStatus(null);
+    let captchaToken = "";
+    try {
+      captchaToken = await recaptchaRef.current?.executeAsync?.();
+    } catch {}
+    try {
+      const body = { captchaToken };
+      if (hostDetails) body.hostDetails = hostDetails;
+      if (renterDetails) body.renterDetails = renterDetails;
+      if (!leadEmail) {
+        setStatus({
+          ok: false,
+          msg: "Missing email context. Please complete Step 1.",
+        });
+        return;
+      }
+      const res = await fetch(
+        `${API_BASE}/v1/leads/enrich?email=${encodeURIComponent(leadEmail)}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Idempotency-Key": getIdem(),
+          },
+          body: JSON.stringify(body),
+        }
+      );
+      let data = null;
+      try {
+        const t = await res.text();
+        data = t ? JSON.parse(t) : null;
+      } catch {}
+      if (res.ok) {
+        setSavedAt(new Date());
+        setStatus({ ok: true, msg: "Saved. You’re at the front of the line." });
+        return;
+      }
+      if (res.status === 429)
+        return setStatus({
+          ok: false,
+          msg: "Too many updates today. Try later.",
+        });
+      if (res.status === 401)
+        return setStatus({
+          ok: false,
+          msg: "Captcha check failed. Please try again.",
+        });
+      setStatus({
+        ok: false,
+        msg: (data && data.message) || `http_${res.status}`,
+      });
     } catch (err) {
-      console.error("Lead submit error:", err);
+      console.error("Step2 error", err);
       setStatus({ ok: false, msg: "Network error. Please try again." });
     } finally {
       setLoading(false);
+      setTimeout(() => {
+        try {
+          recaptchaRef.current?.reset();
+        } catch {}
+      }, 600);
     }
   }
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-card"
-    >
-      <input type="hidden" name="citySlug" defaultValue={citySlug || ""} />
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div>
-          <label className="block text-sm text-gray-700">First name *</label>
-          <input
-            name="firstName"
-            required
-            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
-          />
-        </div>
-        <div>
-          <label className="block text-sm text-gray-700">Last name</label>
-          <input
-            name="lastName"
-            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
-          />
-        </div>
-        <div>
-          <label className="block text-sm text-gray-700">Email *</label>
-          <input
-            type="email"
-            name="email"
-            required
-            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
-          />
-        </div>
-        <div>
-          <label className="block text-sm text-gray-700">Phone</label>
-          <input
-            name="phone"
-            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
-          />
-        </div>
-      </div>
-
-      {/* Honeypot */}
-      <div className="hp-hidden" aria-hidden="true">
-        <label>Website</label>
-        <input name="website" tabIndex={-1} autoComplete="off" />
-      </div>
-
-      {type === "host" && (
-        <div>
-          <label className="block text-sm text-gray-700">Message</label>
-          <textarea
-            name="message"
-            rows={3}
-            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
-          />
+    <div className="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-card">
+      {step === 1 ? (
+        <Step1Quick
+          role={role}
+          setRole={setRole}
+          onSubmit={submitStep1}
+          loading={loading}
+        />
+      ) : (
+        <div className="space-y-6">
+          {role === "host" && (
+            <Step2Host
+              onSubmit={(hostDetails) => submitStep2({ hostDetails })}
+              loading={loading}
+              savedAt={savedAt}
+            />
+          )}
+          {role === "renter" && (
+            <Step2Renter
+              onSubmit={(renterDetails) => submitStep2({ renterDetails })}
+              loading={loading}
+              savedAt={savedAt}
+            />
+          )}
+          {role === "both" && (
+            <div className="grid gap-6 md:grid-cols-2">
+              <Step2Host
+                onSubmit={(hostDetails) => submitStep2({ hostDetails })}
+                loading={loading}
+                savedAt={savedAt}
+              />
+              <Step2Renter
+                onSubmit={(renterDetails) => submitStep2({ renterDetails })}
+                loading={loading}
+                savedAt={savedAt}
+              />
+            </div>
+          )}
         </div>
       )}
-
-      <div className="flex items-center gap-2">
-        <input
-          id="consentMarketing"
-          name="consentMarketing"
-          type="checkbox"
-          required
-          className="h-4 w-4"
-        />
-        <label htmlFor="consentMarketing" className="text-sm text-gray-700">
-          I agree to be contacted about FR.
-        </label>
-      </div>
 
       <ReCAPTCHA
         ref={recaptchaRef}
         size="invisible"
         sitekey={SITE_KEY}
-        badge="bottomright" // “inline” can be twitchy in dev
+        badge="bottomright"
         onExpired={() => {
           try {
             recaptchaRef.current?.reset();
@@ -189,24 +256,14 @@ export default function LeadForm({ type = "host", citySlug }) {
         onErrored={() => console.warn("reCAPTCHA errored (non-fatal)")}
       />
 
-      <div className="flex items-center gap-3">
-        <Button type="submit" variant="primary" disabled={loading}>
-          {loading
-            ? "Submitting…"
-            : type === "host"
-            ? "Send interest"
-            : "Join waitlist"}
-        </Button>
-        {status && (
-          <p
-            className={`text-sm ${
-              status.ok ? "text-green-700" : "text-red-600"
-            }`}
-          >
-            {status.msg}
-          </p>
-        )}
-      </div>
-    </form>
+      {status && (
+        <p
+          aria-live="polite"
+          className={`text-sm ${status.ok ? "text-green-700" : "text-red-600"}`}
+        >
+          {status.msg}
+        </p>
+      )}
+    </div>
   );
 }
