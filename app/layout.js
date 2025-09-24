@@ -15,12 +15,12 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
-  title: "FR — Local car rentals made simple",
+  title: "FriendRenter™ — Local car rentals made simple",
   description: "Verified people, fair prices, no counter lines.",
   openGraph: {
     type: "website",
     url: siteUrl,
-    title: "FR — Local car rentals made simple",
+    title: "FriendRenter™ — Local car rentals made simple",
     description: "Verified people, fair prices, no counter lines.",
     images: [
       `/og?title=${encodeURIComponent("FR")}&subtitle=${encodeURIComponent(
@@ -30,7 +30,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "FR — Local car rentals made simple",
+    title: "FriendRenter™ — Local car rentals made simple",
     description: "Verified people, fair prices, no counter lines.",
     images: [
       `/og?title=${encodeURIComponent("FR")}&subtitle=${encodeURIComponent(

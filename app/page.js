@@ -6,7 +6,7 @@ import LeadForm from "@/components/forms/LeadForm";
 import heroimage from "../public/brand/heroimagedesktop.png";
 
 export const metadata = {
-  title: "FR — Local car rentals made simple",
+  title: "FriendRenter™ — Local car rentals made simple",
   description: "Verified people, fair prices, no counter lines.",
   openGraph: {
     images: [
