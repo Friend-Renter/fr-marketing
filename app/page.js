@@ -3,7 +3,7 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Accordion from "@/components/ui/Accordion";
 import LeadForm from "@/components/forms/LeadForm";
-import heroimage from "../assets/heroimagedesktop.png";
+import heroimage from "../public/brand/heroimagedesktop.png";
 
 export const metadata = {
   title: "FR — Local car rentals made simple",

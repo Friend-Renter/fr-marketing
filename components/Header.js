@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Button from "./ui/Button";
-import { useLayoutEffect, useState } from "react";
 import cities from "../content/cities/_list.json";
+import frlogo from "../public/brand/friendrenterlogo.svg";
 
 // Basic nav link that can render in light (over hero) or dark (default) tone
 const NavLink = ({ href, children, tone }) => {
@@ -21,20 +23,21 @@ const NavLink = ({ href, children, tone }) => {
 
 // Logo lockup — keeps the tiny square + FR text; flips depending on tone
 function Logo({ tone }) {
+  // Only the text tone flips; the mark stays branded (multi-color)
+  const textTone = tone === "light" ? "text-white" : "text-emerald-900";
   return (
-    <Link href="/" className="flex items-center gap-2">
-      <span
-        className={`inline-block h-6 w-6 rounded-sm ${
-          tone === "light" ? "bg-white/90" : "bg-emerald-600"
-        }`}
-        aria-hidden="true"
+    <Link href="/" className="flex items-start gap-2">
+      <img
+        src="/brand/friendrenterfavicon.svg"
+        alt="FriendRenter"
+        className="h-12"
+        decoding="async"
+        loading="eager"
       />
       <span
-        className={`text-base font-semibold ${
-          tone === "light" ? "text-white" : "text-emerald-900"
-        }`}
+        className={`text-xl font-semibold ${textTone} leading-none tracking-[2px]`}
       >
-        FR
+        Friend<br></br>Renter
       </span>
     </Link>
   );
@@ -82,55 +85,67 @@ function CitiesMenu({ tone }) {
 }
 
 export default function Header() {
-  // Over-hero state driven by #hero-sentinel presence + IntersectionObserver
+  const pathname = usePathname(); // trigger re-bind on client navigation
   const [overHero, setOverHero] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (typeof window === "undefined") return;
-    const start = document.getElementById("hero-sentinel-start");
-    const end = document.getElementById("hero-sentinel-end");
 
-    // If either sentinel is missing, treat as non-home (opaque header forever)
-    if (!start || !end) {
+    let ioStart = null;
+    let ioEnd = null;
+
+    const HEADER_H = 64; // px (matches h-16)
+
+    const startEl = document.getElementById("hero-sentinel-start");
+    const endEl = document.getElementById("hero-sentinel-end");
+
+    // If either sentinel is missing, treat as non-home (opaque header)
+    if (!startEl || !endEl) {
       setOverHero(false);
-      return;
+      return () => {
+        ioStart?.disconnect?.();
+        ioEnd?.disconnect?.();
+      };
     }
 
-    let topPassed = false; // true once we’ve scrolled past the hero’s top
-    let bottomNotPassed = true; // true until we’ve scrolled past the hero’s bottom
+    let topPassed = false; // true after crossing hero top
+    let bottomNotPassed = true; // true until crossing hero bottom
 
-    const update = () => {
-      // over = between top and bottom
-      setOverHero(topPassed && bottomNotPassed);
-    };
+    const update = () => setOverHero(topPassed && bottomNotPassed);
 
     const opts = {
       root: null,
-      rootMargin: "-64px 0px 0px 0px", // header height
+      rootMargin: `-${HEADER_H}px 0px 0px 0px`,
       threshold: 0,
     };
 
-    const ioStart = new IntersectionObserver((entries) => {
+    ioStart = new IntersectionObserver((entries) => {
       const e = entries[0];
       topPassed = !e.isIntersecting;
       requestAnimationFrame(update);
     }, opts);
 
-    const ioEnd = new IntersectionObserver((entries) => {
+    ioEnd = new IntersectionObserver((entries) => {
       const e = entries[0];
-      // While the header line is ABOVE the hero’s bottom, end is still intersecting.
-      // Once we scroll past the bottom, it stops intersecting.
       bottomNotPassed = e.isIntersecting;
       requestAnimationFrame(update);
     }, opts);
 
-    ioStart.observe(start);
-    ioEnd.observe(end);
+    ioStart.observe(startEl);
+    ioEnd.observe(endEl);
+
+    // Compute initial state immediately (covers landing mid-hero)
+    const startTop = startEl.getBoundingClientRect().top;
+    const endTop = endEl.getBoundingClientRect().top;
+    topPassed = startTop - HEADER_H < 0;
+    bottomNotPassed = endTop - HEADER_H > 0;
+    update();
+
     return () => {
-      ioStart.disconnect();
-      ioEnd.disconnect();
+      ioStart?.disconnect?.();
+      ioEnd?.disconnect?.();
     };
-  }, []);
+  }, [pathname]); // re-run on every client navigation
 
   // Tone + frame swap (2-state)
   const tone = overHero ? "light" : "dark";
