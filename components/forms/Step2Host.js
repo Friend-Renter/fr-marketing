@@ -2,21 +2,23 @@
 "use client";
 import { useState } from "react";
 import Button from "../ui/Button";
+import { useEffect, useState } from "react";
 
-export default function Step2Host({ onSubmit, loading, savedAt }) {
-  const [rows, setRows] = useState([
-    {
-      year: "",
-      make: "",
-      model: "",
-      bodyType: "Sedan",
-      seats: "5",
-      transmission: "Auto",
-      mileageBand: "<50k",
-      availability: "Both",
-      readiness: "Ready now",
-    },
-  ]);
+export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
+  const initialRow = {
+    year: "",
+    make: "",
+    model: "",
+    bodyType: "Sedan",
+    seats: "5",
+    transmission: "Auto",
+    mileageBand: "<50k",
+    availability: "Both",
+    readiness: "Ready now",
+    condition: "Good",
+  };
+  const [rows, setRows] = useState([initialRow]);
+
   const [meta, setMeta] = useState({
     city: "",
     state: "",
@@ -28,21 +30,24 @@ export default function Step2Host({ onSubmit, loading, savedAt }) {
     notes: "",
   });
 
+  useEffect(() => {
+    if (resetSignal != null) {
+      setRows([initialRow]);
+      setMeta({
+        city: "",
+        state: "",
+        zip5: "",
+        insuranceStatus: "unsure",
+        handoff: "both",
+        pricingExpectation: "",
+        fleetSize: "1",
+        notes: "",
+      });
+    }
+  }, [resetSignal]);
+
   function addRow() {
-    setRows((r) => [
-      ...r,
-      {
-        year: "",
-        make: "",
-        model: "",
-        bodyType: "Sedan",
-        seats: "5",
-        transmission: "Auto",
-        mileageBand: "<50k",
-        availability: "Both",
-        readiness: "Ready now",
-      },
-    ]);
+    setRows((r) => [...r, { ...initialRow }]);
   }
   function removeRow(i) {
     setRows((r) => r.filter((_, idx) => idx !== i));
@@ -61,6 +66,7 @@ export default function Step2Host({ onSubmit, loading, savedAt }) {
       seats: Number(r.seats || 0),
       transmission: r.transmission,
       mileageBand: r.mileageBand,
+      condition: r.condition,
       availability: r.availability,
       readiness: r.readiness,
     }));
@@ -193,7 +199,7 @@ export default function Step2Host({ onSubmit, loading, savedAt }) {
                 ))}
               </select>
             </div>
-            <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-3">
+            <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-4">
               <select
                 value={row.availability}
                 onChange={(e) => updateRow(i, "availability", e.target.value)}
@@ -209,6 +215,15 @@ export default function Step2Host({ onSubmit, loading, savedAt }) {
                 className="rounded-md border border-gray-300 px-3 py-2"
               >
                 {["Ready now", "In 1–3 mo", "Just exploring"].map((v) => (
+                  <option key={v}>{v}</option>
+                ))}
+              </select>
+              <select
+                value={row.condition}
+                onChange={(e) => updateRow(i, "condition", e.target.value)}
+                className="rounded-md border border-gray-300 px-3 py-2"
+              >
+                {["Excellent", "Good", "Fair"].map((v) => (
                   <option key={v}>{v}</option>
                 ))}
               </select>

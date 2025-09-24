@@ -6,6 +6,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import Step1Quick from "./Step1Quick";
 import Step2Host from "./Step2Host";
 import Step2Renter from "./Step2Renter";
+import Modal from "../ui/Modal";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
@@ -38,6 +39,10 @@ export default function LeadForm({
   const [status, setStatus] = useState(null); // { ok, msg }
   const [leadEmail, setLeadEmail] = useState(""); // key for enrich
   const [savedAt, setSavedAt] = useState(null);
+
+  const [resetSignal, setResetSignal] = useState(0);
+  const [openStep1Modal, setOpenStep1Modal] = useState(false);
+  const [openStep2Modal, setOpenStep2Modal] = useState(false);
 
   const recaptchaRef = useRef(null);
 
@@ -73,6 +78,7 @@ export default function LeadForm({
     try {
       const payload = {
         firstName: values.firstName?.trim(),
+        lastName: values.lastName?.trim() || "",
         email: values.email?.trim(),
         phone: values.phone?.trim() || "",
         cityOrZip: values.cityOrZip?.trim(),
@@ -104,6 +110,11 @@ export default function LeadForm({
           msg: "Thanks! Add a few details to skip the line.",
         });
         setStep(2);
+        setStatus({
+          ok: true,
+          msg: "Thanks! Add a few details to skip the line.",
+        });
+        setOpenStep1Modal(true); // show CTA
         return;
       }
       if (res.status === 429)
@@ -172,6 +183,9 @@ export default function LeadForm({
       if (res.ok) {
         setSavedAt(new Date());
         setStatus({ ok: true, msg: "Saved. You’re at the front of the line." });
+        setStatus({ ok: true, msg: "Saved. You’re at the front of the line." });
+        setResetSignal((n) => n + 1); // clear Step 2 forms
+        setOpenStep2Modal(true);
         return;
       }
       if (res.status === 429)
@@ -217,6 +231,7 @@ export default function LeadForm({
               onSubmit={(hostDetails) => submitStep2({ hostDetails })}
               loading={loading}
               savedAt={savedAt}
+              resetSignal={resetSignal}
             />
           )}
           {role === "renter" && (
@@ -224,6 +239,7 @@ export default function LeadForm({
               onSubmit={(renterDetails) => submitStep2({ renterDetails })}
               loading={loading}
               savedAt={savedAt}
+              resetSignal={resetSignal}
             />
           )}
           {role === "both" && (
@@ -232,11 +248,13 @@ export default function LeadForm({
                 onSubmit={(hostDetails) => submitStep2({ hostDetails })}
                 loading={loading}
                 savedAt={savedAt}
+                resetSignal={resetSignal}
               />
               <Step2Renter
                 onSubmit={(renterDetails) => submitStep2({ renterDetails })}
                 loading={loading}
                 savedAt={savedAt}
+                resetSignal={resetSignal}
               />
             </div>
           )}
@@ -264,6 +282,37 @@ export default function LeadForm({
           {status.msg}
         </p>
       )}
+
+      {/* Step 1 modal: CTA -> go to Step 2 */}
+      <Modal
+        open={openStep1Modal}
+        title="You're on the list!"
+        onClose={() => {
+          setOpenStep1Modal(false);
+          setStep(2);
+        }}
+        actionLabel="Skip the line — add details"
+        onAction={() => {
+          setOpenStep1Modal(false);
+          setStep(2);
+        }}
+      >
+        Add a few details now to get priority matching in your area.
+      </Modal>
+
+      {/* Step 2 modal: Done -> refresh */}
+      <Modal
+        open={openStep2Modal}
+        title="Details saved"
+        onClose={() => setOpenStep2Modal(false)}
+        actionLabel="Done"
+        onAction={() => {
+          setOpenStep2Modal(false);
+          if (typeof window !== "undefined") window.location.reload();
+        }}
+      >
+        Thanks! We’ll reach out as vehicles become available.
+      </Modal>
     </div>
   );
 }

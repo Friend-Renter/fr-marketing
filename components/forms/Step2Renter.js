@@ -1,9 +1,14 @@
 // components/forms/Step2Renter.jsx
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
 
-export default function Step2Renter({ onSubmit, loading, savedAt }) {
+export default function Step2Renter({
+  onSubmit,
+  loading,
+  savedAt,
+  resetSignal,
+}) {
   const [pickup, setPickup] = useState({ city: "", state: "", zip5: "" });
   const [dates, setDates] = useState({
     earliestStart: "",
@@ -19,6 +24,26 @@ export default function Step2Renter({ onSubmit, loading, savedAt }) {
   const [budgetBand, setBudgetBand] = useState("50_80");
   const [ageBand, setAgeBand] = useState("25_plus");
   const [notes, setNotes] = useState("");
+
+  useEffect(() => {
+    if (resetSignal != null) {
+      setPickup({ city: "", state: "", zip5: "" });
+      setDates({
+        earliestStart: "",
+        latestStart: "",
+        typicalDurationBand: "1-3",
+      });
+      setPrefs({
+        bodyType: "No preference",
+        seats: "5",
+        transmission: "No preference",
+        extras: [],
+      });
+      setBudgetBand("50_80");
+      setAgeBand("25_plus");
+      setNotes("");
+    }
+  }, [resetSignal]);
 
   function toggleExtra(x) {
     setPrefs((p) =>

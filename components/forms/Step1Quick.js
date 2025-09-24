@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Button from "../ui/Button";
 
 export default function Step1Quick({
-  role,            // 'host' | 'renter' | 'both'
+  role, // 'host' | 'renter' | 'both'
   setRole,
   onSubmit,
   loading,
@@ -19,6 +19,7 @@ export default function Step1Quick({
       // pretend success to bots
       onSubmit({
         firstName: "Bot",
+        lastName: "Bot",
         email: "bot@example.com",
         phone: "",
         cityOrZip: "",
@@ -29,33 +30,56 @@ export default function Step1Quick({
     }
     onSubmit({
       firstName: fd.get("firstName"),
+      lastName: fd.get("lastName"),
       email: fd.get("email"),
       phone: fd.get("phone"),
       cityOrZip: fd.get("cityOrZip"),
       consent: fd.get("consent") === "on",
       honeypot: fd.get("website") || "",
     });
-    try { formRef.current?.reset(); } catch {}
+    try {
+      formRef.current?.reset();
+    } catch {}
   }
 
   return (
     <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
       {/* name / email */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div>
           <label className="block text-sm text-gray-700">First name *</label>
-          <input name="firstName" required className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2" />
+          <input
+            name="firstName"
+            required
+            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm text-gray-700">Last name</label>{" "}
+          <input
+            name="lastName"
+            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+          />{" "}
         </div>
         <div>
           <label className="block text-sm text-gray-700">Email *</label>
-          <input type="email" name="email" required className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2" />
+          <input
+            type="email"
+            name="email"
+            required
+            className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+          />
         </div>
       </div>
 
       {/* phone */}
       <div>
         <label className="block text-sm text-gray-700">Phone (optional)</label>
-        <input name="phone" className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2" />
+        <input
+          name="phone"
+          className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+        />
       </div>
 
       {/* city or zip */}
@@ -71,14 +95,19 @@ export default function Step1Quick({
 
       {/* role picker */}
       <fieldset className="mt-1">
-        <legend className="block text-sm text-gray-700">I’m interested as *</legend>
+        <legend className="block text-sm text-gray-700">
+          I’m interested as *
+        </legend>
         <div className="mt-2 flex flex-wrap gap-3">
           {[
             { value: "host", label: "Host" },
             { value: "renter", label: "Renter" },
             { value: "both", label: "Both" },
           ].map((opt) => (
-            <label key={opt.value} className="inline-flex items-center gap-2 text-sm text-gray-800">
+            <label
+              key={opt.value}
+              className="inline-flex items-center gap-2 text-sm text-gray-800"
+            >
               <input
                 type="radio"
                 name="role"
@@ -94,9 +123,18 @@ export default function Step1Quick({
 
       {/* consent */}
       <div className="flex items-center gap-2">
-        <input id="consent" name="consent" type="checkbox" required className="h-4 w-4" />
+        <input
+          id="consent"
+          name="consent"
+          type="checkbox"
+          required
+          className="h-4 w-4"
+        />
         <label htmlFor="consent" className="text-sm text-gray-700">
-          I agree to be contacted about FR. <a href="/legal/privacy" className="underline">Privacy Policy</a>
+          I agree to be contacted about FR.{" "}
+          <a href="/legal/privacy" className="underline">
+            Privacy Policy
+          </a>
         </label>
       </div>
 
