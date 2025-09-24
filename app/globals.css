@@ -36,3 +36,74 @@
   overflow: hidden !important;
   opacity: 0 !important;
 }
+
+/* === Hero utilities === */
+@layer utilities {
+  /* top -> bottom gradient overlay to ensure text contrast on busy photos */
+  .hero-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(12, 12, 12, 0.20),
+      rgba(12, 12, 12, 0.55) 40%,
+      rgba(12, 12, 12, 0.70)
+    );
+  }
+
+  /* Optional subtle text shadow for readability */
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+  }
+}
+/* Optional: site background gradient */
+/* body {
+  background:
+    radial-gradient(1200px 400px at 50% -200px, rgba(16,185,129,0.05), rgba(18, 106, 21, 0) 60%),
+    linear-gradient(#ffffff, #427454);
+} */
+
+/* Header color tokens (default = PRE) */
+:root {
+  --hdr-bg: #ffffff;
+  --hdr-border: #e5e7eb;              /* zinc-200 */
+  --hdr-link: #065f46;                /* emerald-700/800 */
+  --hdr-link-hover: #064e3b;          /* emerald-900 */
+  --hdr-logo-box: #059669;            /* emerald-600 */
+  --hdr-logo-text: #ecfdf5;           /* emerald-50 */
+  --hdr-btn-primary-bg: #10b981;      /* emerald-500/600 */
+  --hdr-btn-primary-text: #ffffff;
+  --hdr-btn-ghost-bg: #ecfdf5;        /* emerald-50 */
+  --hdr-btn-ghost-text: #064e3b;      /* emerald-900 */
+  --hdr-btn-ghost-ring: #a7f3d0;      /* emerald-200 */
+}
+
+/* OVER hero (transparent header, white text) */
+html[data-header-phase="over"] {
+  --hdr-bg: transparent;
+  --hdr-border: transparent;
+  --hdr-link: rgba(255,255,255,.85);
+  --hdr-link-hover: #ffffff;
+  --hdr-logo-box: rgba(255,255,255,.9);
+  --hdr-logo-text: #ffffff;
+  --hdr-btn-primary-bg: #ffffff;
+  --hdr-btn-primary-text: #065f46;    /* emerald dark text */
+  --hdr-btn-ghost-bg: rgba(255,255,255,.10);
+  --hdr-btn-ghost-text: #ffffff;
+  --hdr-btn-ghost-ring: rgba(255,255,255,.35);
+}
+
+/* POST hero (solid green header, white text) */
+html[data-header-phase="post"] {
+  --hdr-bg: rgba(5, 122, 85, .95);    /* emerald-700ish */
+  --hdr-border: #059669;              /* emerald-600 */
+  --hdr-link: #ffffff;
+  --hdr-link-hover: #ffffff;
+  --hdr-logo-box: #059669;
+  --hdr-logo-text: #ecfdf5;
+  --hdr-btn-primary-bg: #ffffff;
+  --hdr-btn-primary-text: #065f46;
+  --hdr-btn-ghost-bg: rgba(255,255,255,.10);
+  --hdr-btn-ghost-text: #ffffff;
+  --hdr-btn-ghost-ring: rgba(255,255,255,.35);
+}
+
+
