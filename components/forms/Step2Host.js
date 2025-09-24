@@ -37,10 +37,13 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
   });
 
   // ---- vehicle options + caches (per component)
-  const [years, setYears] = useState({ min: 1980, max: new Date().getFullYear() });
+  const [years, setYears] = useState({
+    min: 1980,
+    max: new Date().getFullYear(),
+  });
   const makesCache = useRef(new Map()); // key: year -> string[]
   const modelsCache = useRef(new Map()); // key: `${year}|${make}` -> string[]
-  const trimsCache = useRef(new Map());  // key: `${year}|${make}|${model}` -> string[]
+  const trimsCache = useRef(new Map()); // key: `${year}|${make}|${model}` -> string[]
 
   // prefetch years once
   useEffect(() => {
@@ -55,7 +58,9 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
         // keep defaults
       }
     })();
-    return () => { alive = false; };
+    return () => {
+      alive = false;
+    };
   }, []);
 
   // helpers
@@ -63,7 +68,9 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
     if (!year) return [];
     const k = String(year);
     if (makesCache.current.has(k)) return makesCache.current.get(k);
-    const res = await fetch(`${VEH_API}/makes?year=${encodeURIComponent(year)}`);
+    const res = await fetch(
+      `${VEH_API}/makes?year=${encodeURIComponent(year)}`
+    );
     const data = await res.json();
     const list = Array.isArray(data?.makes) ? data.makes : [];
     makesCache.current.set(k, list);
@@ -90,8 +97,12 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
     const res = await fetch(`${VEH_API}/trims?${qs.toString()}`);
     const data = await res.json();
     const list = Array.isArray(data?.trims) ? data.trims : [];
-    trimsCache.current.set(k, list);
-    return list;
+    // Store the full payload so we can look up specs later
+    trimsCache.current.set(k, {
+      trims: list,
+      specByTrim: data?.specByTrim || {},
+    });
+    return { trims: list, specByTrim: data?.specByTrim || {} };
   }
 
   // derived options per row
@@ -99,6 +110,7 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
     const [makes, setMakes] = useState([]);
     const [models, setModels] = useState([]);
     const [trims, setTrims] = useState([]);
+    const [specByTrim, setSpecByTrim] = useState({});
 
     useEffect(() => {
       let alive = true;
@@ -107,7 +119,9 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
       } else {
         setMakes([]);
       }
-      return () => { alive = false; };
+      return () => {
+        alive = false;
+      };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [row.year]);
 
@@ -118,22 +132,40 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
       } else {
         setModels([]);
       }
-      return () => { alive = false; };
+      return () => {
+        alive = false;
+      };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [row.year, row.make]);
 
     useEffect(() => {
       let alive = true;
       if (row.year && row.make && row.model) {
-        fetchTrims(row.year, row.make, row.model).then((t) => alive && setTrims(t));
+        // FETCH TRIMS (+ possible specs)
+        const k = `${row.year}|${row.make}|${row.model}`;
+        // if cached payload is already an object, use it
+        const cached = trimsCache.current.get(k);
+        if (cached && cached.trims) {
+          setTrims(cached.trims);
+          setSpecByTrim(cached.specByTrim || {});
+        } else {
+          fetchTrims(row.year, row.make, row.model).then((payload) => {
+            if (!alive) return;
+            setTrims(payload.trims || []);
+            setSpecByTrim(payload.specByTrim || {});
+          });
+        }
       } else {
         setTrims([]);
+        setSpecByTrim({});
       }
-      return () => { alive = false; };
+      return () => {
+        alive = false;
+      };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [row.year, row.make, row.model]);
 
-    return { makes, models, trims };
+    return { makes, models, trims, specByTrim };
   }
 
   // reset support from parent
@@ -168,7 +200,15 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
     setRows((r) =>
       r.map((row, idx) =>
         idx === i
-          ? { ...row, year, make: "", model: "", trim: "", modelManual: false, trimManual: false }
+          ? {
+              ...row,
+              year,
+              make: "",
+              model: "",
+              trim: "",
+              modelManual: false,
+              trimManual: false,
+            }
           : row
       )
     );
@@ -176,13 +216,24 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
   function onMakeChange(i, make) {
     setRows((r) =>
       r.map((row, idx) =>
-        idx === i ? { ...row, make, model: "", trim: "", modelManual: false, trimManual: false } : row
+        idx === i
+          ? {
+              ...row,
+              make,
+              model: "",
+              trim: "",
+              modelManual: false,
+              trimManual: false,
+            }
+          : row
       )
     );
   }
   function onModelChange(i, model) {
     setRows((r) =>
-      r.map((row, idx) => (idx === i ? { ...row, model, trim: "", trimManual: false } : row))
+      r.map((row, idx) =>
+        idx === i ? { ...row, model, trim: "", trimManual: false } : row
+      )
     );
   }
 
@@ -229,7 +280,10 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
   }, [years]);
 
   return (
-    <form onSubmit={handleSave} className="rounded-lg border border-gray-200 p-4 bg-white">
+    <form
+      onSubmit={handleSave}
+      className="rounded-lg border border-gray-200 p-4 bg-white"
+    >
       <h3 className="text-lg font-semibold text-gray-900">Host details</h3>
       <p className="mt-1 text-sm text-gray-700">
         Tell us about your vehicle(s) and setup.
@@ -238,7 +292,9 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
       {/* location */}
       <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
         <div>
-          <label className="block text-sm font-medium text-gray-900">City</label>
+          <label className="block text-sm font-medium text-gray-900">
+            City
+          </label>
           <input
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900"
             value={meta.city}
@@ -246,7 +302,9 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-900">State</label>
+          <label className="block text-sm font-medium text-gray-900">
+            State
+          </label>
           <input
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900"
             value={meta.state}
@@ -269,20 +327,29 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
       <div className="mt-6 space-y-4">
         <div className="flex items-center justify-between">
           <h4 className="font-medium text-gray-900">Vehicle(s)</h4>
-          <button type="button" onClick={addRow} className="text-sm text-green-700 underline">
+          <button
+            type="button"
+            onClick={addRow}
+            className="text-sm text-green-700 underline"
+          >
             Add vehicle
           </button>
         </div>
 
         {rows.map((row, i) => {
-          const { makes, models, trims } = useOptionsForRow(row);
+         {rows.map((row, i) => {
+          const { makes, models, trims, specByTrim } = useOptionsForRow(row);
           const yearDisabled = false;
           const makeDisabled = !row.year || row.makeManual;
           const modelDisabled = !row.year || !row.make || row.modelManual;
-          const trimDisabled = !row.year || !row.make || !row.model || row.trimManual;
+          const trimDisabled =
+            !row.year || !row.make || !row.model || row.trimManual;
 
           return (
-            <div key={i} className="rounded-md border border-gray-200 p-3 bg-white">
+            <div
+              key={i}
+              className="rounded-md border border-gray-200 p-3 bg-white"
+            >
               <div className="grid grid-cols-1 gap-3 md:grid-cols-4">
                 {/* Year */}
                 <div>
@@ -312,7 +379,9 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
                     <button
                       type="button"
                       className="text-xs text-green-700 underline"
-                      onClick={() => updateRow(i, "makeManual", !row.makeManual)}
+                      onClick={() =>
+                        updateRow(i, "makeManual", !row.makeManual)
+                      }
                       disabled={!row.year}
                       title="Type manually if you can't find your make"
                     >
@@ -355,7 +424,9 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
                     <button
                       type="button"
                       className="text-xs text-green-700 underline"
-                      onClick={() => updateRow(i, "modelManual", !row.modelManual)}
+                      onClick={() =>
+                        updateRow(i, "modelManual", !row.modelManual)
+                      }
                       disabled={!row.year || !row.make}
                       title="Type manually if you can't find your model"
                     >
@@ -392,11 +463,15 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
                 {/* Trim (optional) */}
                 <div>
                   <div className="flex items-center justify-between">
-                    <label className="block text-sm font-medium text-gray-900">Trim</label>
+                    <label className="block text-sm font-medium text-gray-900">
+                      Trim
+                    </label>
                     <button
                       type="button"
                       className="text-xs text-green-700 underline"
-                      onClick={() => updateRow(i, "trimManual", !row.trimManual)}
+                      onClick={() =>
+                        updateRow(i, "trimManual", !row.trimManual)
+                      }
                       disabled={!row.year || !row.make || !row.model}
                       title="Type manually if you can't find your trim"
                     >
@@ -414,12 +489,31 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
                   ) : (
                     <select
                       value={row.trim}
-                      onChange={(e) => updateRow(i, "trim", e.target.value)}
+                     onChange={(e) => {
+                        const nextTrim = e.target.value;
+                        // Set trim
+                        updateRow(i, "trim", nextTrim);
+                        // PREFILL FROM SPEC (only if user hasn't touched these fields yet)
+                        const spec = specByTrim?.[nextTrim] || {};
+                        setRows((rws) =>
+                          rws.map((rw, idx) => {
+                            if (idx !== i) return rw;
+                            const updates = {};
+                            // Only prefill if current value equals the default (user hasn't edited)
+                            if (spec.bodyType && rw.bodyType === "Sedan") updates.bodyType = spec.bodyType;
+                            if (Number.isFinite(spec.seats) && String(rw.seats) === "5") updates.seats = String(spec.seats);
+                            if (spec.transmission && rw.transmission === "Auto") updates.transmission = spec.transmission;
+                            return Object.keys(updates).length ? { ...rw, ...updates } : rw;
+                          })
+                        );
+                      }}
                       className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900"
                       disabled={trimDisabled}
                     >
                       <option value="">
-                        {row.model ? "Select trim (optional)" : "Select model first"}
+                        {row.model
+                          ? "Select trim (optional)"
+                          : "Select model first"}
                       </option>
                       {trims.map((t) => (
                         <option key={t} value={t}>
@@ -434,19 +528,25 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
               {/* secondary vehicle fields */}
               <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-900">Body type</label>
+                  <label className="block text-sm font-medium text-gray-900">
+                    Body type
+                  </label>
                   <select
                     value={row.bodyType}
                     onChange={(e) => updateRow(i, "bodyType", e.target.value)}
                     className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900"
                   >
-                    {["Sedan", "SUV", "Truck", "Van", "EV", "Other"].map((v) => (
-                      <option key={v}>{v}</option>
-                    ))}
+                    {["Sedan", "SUV", "Truck", "Van", "EV", "Other"].map(
+                      (v) => (
+                        <option key={v}>{v}</option>
+                      )
+                    )}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-900">Seats</label>
+                  <label className="block text-sm font-medium text-gray-900">
+                    Seats
+                  </label>
                   <select
                     value={row.seats}
                     onChange={(e) => updateRow(i, "seats", e.target.value)}
@@ -458,10 +558,14 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-900">Transmission</label>
+                  <label className="block text-sm font-medium text-gray-900">
+                    Transmission
+                  </label>
                   <select
                     value={row.transmission}
-                    onChange={(e) => updateRow(i, "transmission", e.target.value)}
+                    onChange={(e) =>
+                      updateRow(i, "transmission", e.target.value)
+                    }
                     className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900"
                   >
                     {["Auto", "Manual"].map((v) => (
@@ -470,10 +574,14 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-900">Mileage</label>
+                  <label className="block text-sm font-medium text-gray-900">
+                    Mileage
+                  </label>
                   <select
                     value={row.mileageBand}
-                    onChange={(e) => updateRow(i, "mileageBand", e.target.value)}
+                    onChange={(e) =>
+                      updateRow(i, "mileageBand", e.target.value)
+                    }
                     className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900"
                   >
                     {["<50k", "50–100k", "100–150k", "150k+"].map((v) => (
@@ -485,10 +593,14 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
 
               <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-900">Availability</label>
+                  <label className="block text-sm font-medium text-gray-900">
+                    Availability
+                  </label>
                   <select
                     value={row.availability}
-                    onChange={(e) => updateRow(i, "availability", e.target.value)}
+                    onChange={(e) =>
+                      updateRow(i, "availability", e.target.value)
+                    }
                     className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900"
                   >
                     {["Weekdays", "Weekends", "Both"].map((v) => (
@@ -497,7 +609,9 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-900">Readiness</label>
+                  <label className="block text-sm font-medium text-gray-900">
+                    Readiness
+                  </label>
                   <select
                     value={row.readiness}
                     onChange={(e) => updateRow(i, "readiness", e.target.value)}
@@ -509,7 +623,9 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-900">Condition</label>
+                  <label className="block text-sm font-medium text-gray-900">
+                    Condition
+                  </label>
                   <select
                     value={row.condition}
                     onChange={(e) => updateRow(i, "condition", e.target.value)}
@@ -540,10 +656,14 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
       {/* misc */}
       <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-3">
         <div>
-          <label className="block text-sm font-medium text-gray-900">Insurance</label>
+          <label className="block text-sm font-medium text-gray-900">
+            Insurance
+          </label>
           <select
             value={meta.insuranceStatus}
-            onChange={(e) => setMeta((m) => ({ ...m, insuranceStatus: e.target.value }))}
+            onChange={(e) =>
+              setMeta((m) => ({ ...m, insuranceStatus: e.target.value }))
+            }
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900"
           >
             <option value="personal">Personal</option>
@@ -552,10 +672,14 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-900">Handoff</label>
+          <label className="block text-sm font-medium text-gray-900">
+            Handoff
+          </label>
           <select
             value={meta.handoff}
-            onChange={(e) => setMeta((m) => ({ ...m, handoff: e.target.value }))}
+            onChange={(e) =>
+              setMeta((m) => ({ ...m, handoff: e.target.value }))
+            }
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900"
           >
             <option value="in_person">In-person</option>
@@ -564,10 +688,14 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-900">Fleet size</label>
+          <label className="block text-sm font-medium text-gray-900">
+            Fleet size
+          </label>
           <select
             value={meta.fleetSize}
-            onChange={(e) => setMeta((m) => ({ ...m, fleetSize: e.target.value }))}
+            onChange={(e) =>
+              setMeta((m) => ({ ...m, fleetSize: e.target.value }))
+            }
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900"
           >
             <option value="1">1</option>
@@ -579,11 +707,15 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
       </div>
 
       <div className="mt-4">
-        <label className="block text-sm font-medium text-gray-900">Pricing comfort (optional)</label>
+        <label className="block text-sm font-medium text-gray-900">
+          Pricing comfort (optional)
+        </label>
         <input
           placeholder="$ per night"
           value={meta.pricingExpectation}
-          onChange={(e) => setMeta((m) => ({ ...m, pricingExpectation: e.target.value }))}
+          onChange={(e) =>
+            setMeta((m) => ({ ...m, pricingExpectation: e.target.value }))
+          }
           className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900"
         />
       </div>
@@ -600,7 +732,9 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
 
       <div className="mt-5 flex items-center justify-between">
         <div className="text-xs text-gray-600">
-          {savedAt ? `Saved at ${savedAt.toLocaleTimeString()}` : "Not saved yet"}
+          {savedAt
+            ? `Saved at ${savedAt.toLocaleTimeString()}`
+            : "Not saved yet"}
         </div>
         <Button type="submit" variant="primary" disabled={loading}>
           {loading ? "Saving…" : "Save host details"}
