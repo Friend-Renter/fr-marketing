@@ -1,8 +1,6 @@
-// components/forms/Step2Host.jsx
 "use client";
-import { useState } from "react";
-import Button from "../ui/Button";
 import { useEffect, useState } from "react";
+import Button from "@/components/ui/Button";
 
 export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
   const initialRow = {
@@ -23,10 +21,10 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
     city: "",
     state: "",
     zip5: "",
-    insuranceStatus: "unsure",
-    handoff: "both",
+    insuranceStatus: "unsure", // "personal" | "commercial" | "unsure"
+    handoff: "both",           // "in_person" | "lockbox" | "both"
     pricingExpectation: "",
-    fleetSize: "1",
+    fleetSize: "1",            // "1" | "2_3" | "4_9" | "10_plus"
     notes: "",
   });
 
@@ -91,14 +89,9 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
   }
 
   return (
-    <form
-      onSubmit={handleSave}
-      className="rounded-lg border border-gray-200 p-4"
-    >
+    <form onSubmit={handleSave} className="rounded-lg border border-gray-200 p-4">
       <h3 className="text-lg font-semibold text-gray-900">Host details</h3>
-      <p className="mt-1 text-sm text-gray-600">
-        Tell us about your vehicle(s) and setup.
-      </p>
+      <p className="mt-1 text-sm text-gray-600">Tell us about your vehicle(s) and setup.</p>
 
       {/* location */}
       <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
@@ -124,6 +117,8 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
             value={meta.zip5}
             onChange={(e) => setMeta((m) => ({ ...m, zip5: e.target.value }))}
+            inputMode="numeric"
+            pattern="\d{5}"
           />
         </div>
       </div>
@@ -136,6 +131,7 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
             Add vehicle
           </button>
         </div>
+
         {rows.map((row, i) => (
           <div key={i} className="rounded-md border border-gray-200 p-3">
             <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
@@ -145,6 +141,7 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
                 onChange={(e) => updateRow(i, "year", e.target.value)}
                 className="rounded-md border border-gray-300 px-3 py-2"
                 required
+                inputMode="numeric"
               />
               <input
                 placeholder="Make *"
@@ -161,6 +158,7 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
                 required
               />
             </div>
+
             <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-4">
               <select
                 value={row.bodyType}
@@ -199,6 +197,7 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
                 ))}
               </select>
             </div>
+
             <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-4">
               <select
                 value={row.availability}
@@ -249,9 +248,7 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
           <label className="block text-sm text-gray-700">Insurance</label>
           <select
             value={meta.insuranceStatus}
-            onChange={(e) =>
-              setMeta((m) => ({ ...m, insuranceStatus: e.target.value }))
-            }
+            onChange={(e) => setMeta((m) => ({ ...m, insuranceStatus: e.target.value }))}
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
           >
             <option value="personal">Personal</option>
@@ -263,9 +260,7 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
           <label className="block text-sm text-gray-700">Handoff</label>
           <select
             value={meta.handoff}
-            onChange={(e) =>
-              setMeta((m) => ({ ...m, handoff: e.target.value }))
-            }
+            onChange={(e) => setMeta((m) => ({ ...m, handoff: e.target.value }))}
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
           >
             <option value="in_person">In-person</option>
@@ -277,9 +272,7 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
           <label className="block text-sm text-gray-700">Fleet size</label>
           <select
             value={meta.fleetSize}
-            onChange={(e) =>
-              setMeta((m) => ({ ...m, fleetSize: e.target.value }))
-            }
+            onChange={(e) => setMeta((m) => ({ ...m, fleetSize: e.target.value }))}
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
           >
             <option value="1">1</option>
@@ -291,18 +284,15 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
       </div>
 
       <div className="mt-4">
-        <label className="block text-sm text-gray-700">
-          Pricing comfort (optional)
-        </label>
+        <label className="block text-sm text-gray-700">Pricing comfort (optional)</label>
         <input
           placeholder="$ per night"
           value={meta.pricingExpectation}
-          onChange={(e) =>
-            setMeta((m) => ({ ...m, pricingExpectation: e.target.value }))
-          }
+          onChange={(e) => setMeta((m) => ({ ...m, pricingExpectation: e.target.value }))}
           className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
         />
       </div>
+
       <div className="mt-3">
         <label className="block text-sm text-gray-700">Notes</label>
         <textarea
@@ -315,9 +305,7 @@ export default function Step2Host({ onSubmit, loading, savedAt, resetSignal }) {
 
       <div className="mt-5 flex items-center justify-between">
         <div className="text-xs text-gray-500">
-          {savedAt
-            ? `Saved at ${savedAt.toLocaleTimeString()}`
-            : "Not saved yet"}
+          {savedAt ? `Saved at ${savedAt.toLocaleTimeString()}` : "Not saved yet"}
         </div>
         <Button type="submit" variant="primary" disabled={loading}>
           {loading ? "Saving…" : "Save host details"}
