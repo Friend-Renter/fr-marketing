@@ -6,11 +6,13 @@ import { usePathname } from "next/navigation";
 import Button from "./ui/Button";
 import cities from "../content/cities/_list.json";
 import frlogo from "../public/brand/friendrenterlogo.svg";
+import MobileDrawer from "./header/MobileDrawer";
+import { track } from "@/lib/analytics";
 
 // Basic nav link that can render in light (over hero) or dark (default) tone
 const NavLink = ({ href, children, tone }) => {
   const base =
-    "px-3 py-2 text-sm transition-colors " +
+    "px-3 py-2 text-base transition-colors " +
     (tone === "light"
       ? "text-white/85 hover:text-white"
       : "text-emerald-900 hover:text-emerald-700");
@@ -30,12 +32,12 @@ function Logo({ tone }) {
       <img
         src="/brand/friendrenterfavicon.svg"
         alt="FriendRenter"
-        className="h-12"
+        className="h-10"
         decoding="async"
         loading="eager"
       />
       <span
-        className={`text-xl font-semibold ${textTone} leading-none tracking-[2px]`}
+        className={`text-xl font-display font-extrabold ${textTone} leading-4.5 tracking-[2px]`}
       >
         Friend<br></br>Renter
       </span>
@@ -50,7 +52,7 @@ function CitiesMenu({ tone }) {
     <div className="relative">
       <button
         type="button"
-        className={`px-3 py-2 text-sm transition-colors ${
+        className={`px-3 py-2 text-base transition-colors ${
           tone === "light"
             ? "text-white/85 hover:text-white"
             : "text-emerald-900 hover:text-emerald-700"
@@ -87,6 +89,7 @@ function CitiesMenu({ tone }) {
 export default function Header() {
   const pathname = usePathname(); // trigger re-bind on client navigation
   const [overHero, setOverHero] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -147,6 +150,12 @@ export default function Header() {
     };
   }, [pathname]); // re-run on every client navigation
 
+  // Close the mobile drawer when the route changes (including hash nav)
+  useEffect(() => {
+    if (mobileOpen) setMobileOpen(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
   // Tone + frame swap (2-state)
   const tone = overHero ? "light" : "dark";
   const frame =
@@ -164,7 +173,10 @@ export default function Header() {
         </div>
 
         {/* Center: nav (desktop) */}
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
+        <nav
+          className="hidden items-center gap-1 md:flex font-sans"
+          aria-label="Primary"
+        >
           <NavLink href="/hosts" tone={tone === "light" ? "light" : "dark"}>
             Host
           </NavLink>
@@ -172,8 +184,11 @@ export default function Header() {
             Renters
           </NavLink>
           <CitiesMenu tone={tone === "light" ? "light" : "dark"} />
-          <NavLink href="/safety" tone={tone === "light" ? "light" : "dark"}>
-            Safety
+          <NavLink
+            href="/why-friendrenter"
+            tone={tone === "light" ? "light" : "dark"}
+          >
+            Why FriendRenter™
           </NavLink>
           <NavLink
             href="/legal/terms"
@@ -188,19 +203,66 @@ export default function Header() {
           {overHero ? (
             <Button
               variant="custom"
-              className="border border-white/70 bg-transparent text-white hover:bg-white/10"
-              href="/join"
+              className="hidden md:inline-flex border border-white/70 bg-transparent text-white hover:bg-white/10 "
+              href="/#waitlist"
               ctaId="cta_header_join"
             >
               Join waitlist
             </Button>
           ) : (
-            <Button variant="primary" href="/join" ctaId="cta_header_join">
+            <Button
+              variant="primary"
+              href="/#waitlist"
+              ctaId="cta_header_join"
+              className="hidden md:inline-flex "
+            >
               Join waitlist
             </Button>
           )}
+          {/* Hamburger — visible on mobile only */}
+          <button
+            type="button"
+            aria-label="Open menu"
+            aria-controls="mobile-drawer"
+            aria-expanded={mobileOpen}
+            onClick={() => {
+              setMobileOpen(true);
+              try {
+                track("nav_open", { surface: "header" });
+              } catch {}
+            }}
+            className={
+              "md:hidden inline-flex items-center justify-center rounded p-2 transition-colors " +
+              (tone === "light"
+                ? "text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30"
+                : "text-emerald-900 hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-emerald-600/20")
+            }
+          >
+            {/* Icon (3 lines) */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              className="h-8 w-8"
+              aria-hidden="true"
+            >
+              <path
+                fill="currentColor"
+                d="M3 6.75h18v1.5H3zM3 11.25h18v1.5H3zM3 15.75h18v1.5H3z"
+              />
+            </svg>
+          </button>
         </div>
       </div>
+      {/* Mobile Drawer */}
+      <MobileDrawer
+        open={mobileOpen}
+        onClose={(reason = "dismiss") => {
+          setMobileOpen(false);
+          try {
+            track("nav_close", { surface: "header", reason });
+          } catch {}
+        }}
+      />
     </header>
   );
 }

@@ -566,20 +566,11 @@ function VehicleRow({
                 updateRow(i, "trim", nextTrim);
                 const spec = specByTrim?.[nextTrim] || {};
                 if (!spec || !Object.keys(spec).length) return;
-                // Prefill using *current* state
-                setRows((rowsPrev) =>
-                  rowsPrev.map((rw, idx) => {
-                    if (idx !== i) return rw;
-                    const out = { ...rw };
-                    if (spec.bodyType && rw.bodyType === "Sedan")
-                      out.bodyType = spec.bodyType;
-                    if (Number.isFinite(spec.seats) && String(rw.seats) === "5")
-                      out.seats = String(spec.seats);
-                    if (spec.transmission && rw.transmission === "Auto")
-                      out.transmission = spec.transmission;
-                    return out;
-                  })
-                );
+                if (spec.bodyType) updateRow(i, "bodyType", spec.bodyType);
+                if (Number.isFinite(Number(spec.seats)))
+                  updateRow(i, "seats", String(Number(spec.seats)));
+                if (spec.transmission)
+                  updateRow(i, "transmission", spec.transmission);
               }}
               className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900"
               disabled={trimDisabled}
@@ -597,7 +588,13 @@ function VehicleRow({
           {/* Optional helper */}
           {row.trim && specByTrim?.[row.trim] && (
             <p className="mt-1 text-xs text-gray-600">
-              Prefilled from database — you can edit.
+              Prefilled {specByTrim[row.trim].bodyType ? "body type" : ""}
+              {specByTrim[row.trim].bodyType &&
+              specByTrim[row.trim].transmission
+                ? " & "
+                : ""}
+              {specByTrim[row.trim].transmission ? "transmission" : ""} — you
+              can edit.
             </p>
           )}
         </div>

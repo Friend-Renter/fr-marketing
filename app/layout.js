@@ -1,6 +1,6 @@
 // app/layout.js
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Inter, Raleway } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ConsentBanner from "@/components/ConsentBanner";
@@ -8,7 +8,18 @@ import { AnalyticsProvider } from "@/lib/analytics";
 import SeoJsonLd from "@/components/SeoJsonLd";
 import { orgJsonLd } from "@/lib/seo";
 
-const inter = Inter({ subsets: ["latin"], weight: ["400", "600", "700"] });
+// Use variable fonts (self-hosted at build) and expose CSS variables
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const raleway = Raleway({
+  subsets: ["latin"],
+  variable: "--font-raleway",
+  display: "swap",
+});
 
 // app/layout.js (only the exports/metadata part)
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
@@ -42,8 +53,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="bg-white">
-      <body className={inter.className}>
+    <html lang="en" className={`${inter.variable} ${raleway.variable}`}>
+      <body className="font-sans antialiased">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[60] focus:rounded-md focus:border focus:border-gray-300 focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:text-gray-900"

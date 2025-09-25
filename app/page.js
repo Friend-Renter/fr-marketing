@@ -255,7 +255,7 @@ export default function HomePage() {
       {/* WAITLIST FORM (anchor only; plug in your component or keep simple form) */}
       <section
         id="waitlist"
-        className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8"
+        className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 scroll-mt-8 md:scroll-mt-10"
       >
         <h2 className="text-2xl font-semibold tracking-tight text-zinc-100">
           Be first in line
