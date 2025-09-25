@@ -2,6 +2,7 @@
 "use client";
 
 import { track } from "@/lib/analytics";
+import Link from "next/link";
 
 export default function Button({
   children,
@@ -10,6 +11,10 @@ export default function Button({
   ctaId,            // optional: if passed, fires `cta_click`
   trackProps = {},  // optional: extra analytics props
   onClick,
+  href,
+ target,
+  rel,
+  prefetch = false,
   ...props
 }) {
   const base =
@@ -19,6 +24,7 @@ export default function Button({
       "bg-brand-600 text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-600/30",
     outline: "border border-brand-300 text-brand-700 hover:bg-brand-50",
     ghost: "text-brand-700 hover:bg-brand-50",
+     custom: "", // allow caller to fully control styles
   };
 
   function handleClick(e) {
@@ -26,9 +32,28 @@ export default function Button({
     onClick?.(e);
   }
 
+    // If an href is provided, render a Next.js Link styled like a button
+  if (href) {
+    return (
+      <Link
+        href={href}
+        prefetch={prefetch}
+        onClick={handleClick}
+        target={target}
+        rel={rel}
+        className={`${base} ${variants[variant] ?? ""} ${className}`}
+        {...props}
+      >
+        {children}
+      </Link>
+    );
+  }
+
+  // Otherwise render a native button
   return (
     <button
-      className={`${base} ${variants[variant]} ${className}`}
+      type="button"
+      className={`${base} ${variants[variant] ?? ""} ${className}`}
       onClick={handleClick}
       {...props}
     >

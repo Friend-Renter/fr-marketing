@@ -10,7 +10,7 @@ import frlogo from "../public/brand/friendrenterlogo.svg";
 // Basic nav link that can render in light (over hero) or dark (default) tone
 const NavLink = ({ href, children, tone }) => {
   const base =
-    "px-3 py-2 text-sm transition-colors " +
+    "px-3 py-2 text-base transition-colors " +
     (tone === "light"
       ? "text-white/85 hover:text-white"
       : "text-emerald-900 hover:text-emerald-700");
@@ -30,12 +30,12 @@ function Logo({ tone }) {
       <img
         src="/brand/friendrenterfavicon.svg"
         alt="FriendRenter"
-        className="h-12"
+        className="h-10"
         decoding="async"
         loading="eager"
       />
       <span
-        className={`text-xl font-semibold ${textTone} leading-none tracking-[2px]`}
+        className={`text-xl font-display font-extrabold ${textTone} leading-4.5 tracking-[2px]`}
       >
         Friend<br></br>Renter
       </span>
@@ -50,7 +50,7 @@ function CitiesMenu({ tone }) {
     <div className="relative">
       <button
         type="button"
-        className={`px-3 py-2 text-sm transition-colors ${
+        className={`px-3 py-2 text-base transition-colors ${
           tone === "light"
             ? "text-white/85 hover:text-white"
             : "text-emerald-900 hover:text-emerald-700"
@@ -164,7 +164,10 @@ export default function Header() {
         </div>
 
         {/* Center: nav (desktop) */}
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
+        <nav
+          className="hidden items-center gap-1 md:flex font-sans"
+          aria-label="Primary"
+        >
           <NavLink href="/hosts" tone={tone === "light" ? "light" : "dark"}>
             Host
           </NavLink>
@@ -172,8 +175,11 @@ export default function Header() {
             Renters
           </NavLink>
           <CitiesMenu tone={tone === "light" ? "light" : "dark"} />
-          <NavLink href="/safety" tone={tone === "light" ? "light" : "dark"}>
-            Safety
+          <NavLink
+            href="/why-friendrenter"
+            tone={tone === "light" ? "light" : "dark"}
+          >
+            Why FriendRenter™
           </NavLink>
           <NavLink
             href="/legal/terms"
@@ -189,13 +195,13 @@ export default function Header() {
             <Button
               variant="custom"
               className="border border-white/70 bg-transparent text-white hover:bg-white/10"
-              href="/join"
+              href="/#waitlist"
               ctaId="cta_header_join"
             >
               Join waitlist
             </Button>
           ) : (
-            <Button variant="primary" href="/join" ctaId="cta_header_join">
+            <Button variant="primary" href="/#waitlist" ctaId="cta_header_join">
               Join waitlist
             </Button>
           )}
