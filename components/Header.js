@@ -203,7 +203,7 @@ export default function Header() {
           {overHero ? (
             <Button
               variant="custom"
-              className="border border-white/70 bg-transparent text-white hover:bg-white/10"
+              className="border border-white/70 bg-transparent text-white hover:bg-white/10 "
               href="/#waitlist"
               ctaId="cta_header_join"
             >
@@ -214,7 +214,7 @@ export default function Header() {
               variant="primary"
               href="/#waitlist"
               ctaId="cta_header_join"
-              className="md:inline-flex hidden"
+              className="hidden md:inline-flex "
             >
               Join waitlist
             </Button>

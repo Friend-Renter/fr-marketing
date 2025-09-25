@@ -3,16 +3,17 @@
 
 import { track } from "@/lib/analytics";
 import Link from "next/link";
+import { twMerge } from "tailwind-merge";
 
 export default function Button({
   children,
   variant = "primary",
   className = "",
-  ctaId,            // optional: if passed, fires `cta_click`
-  trackProps = {},  // optional: extra analytics props
+  ctaId, // optional: if passed, fires `cta_click`
+  trackProps = {}, // optional: extra analytics props
   onClick,
   href,
- target,
+  target,
   rel,
   prefetch = false,
   ...props
@@ -24,7 +25,7 @@ export default function Button({
       "bg-brand-600 text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-600/30",
     outline: "border border-brand-300 text-brand-700 hover:bg-brand-50",
     ghost: "text-brand-700 hover:bg-brand-50",
-     custom: "", // allow caller to fully control styles
+    custom: "", // allow caller to fully control styles
   };
 
   function handleClick(e) {
@@ -32,7 +33,7 @@ export default function Button({
     onClick?.(e);
   }
 
-    // If an href is provided, render a Next.js Link styled like a button
+  // If an href is provided, render a Next.js Link styled like a button
   if (href) {
     return (
       <Link
@@ -41,7 +42,7 @@ export default function Button({
         onClick={handleClick}
         target={target}
         rel={rel}
-        className={`${base} ${variants[variant] ?? ""} ${className}`}
+        className={twMerge(`${base} ${variants[variant] ?? ""} ${className}`)}
         {...props}
       >
         {children}
@@ -53,7 +54,7 @@ export default function Button({
   return (
     <button
       type="button"
-      className={`${base} ${variants[variant] ?? ""} ${className}`}
+      className={twMerge(`${base} ${variants[variant] ?? ""} ${className}`)}
       onClick={handleClick}
       {...props}
     >
