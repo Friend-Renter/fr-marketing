@@ -7,6 +7,28 @@ import { Dialog, Transition } from "@headlessui/react";
 import Button from "@/components/ui/Button";
 import cities from "@/content/cities/_list.json";
 
+// Logo lockup — keeps the tiny square + FR text; flips depending on tone
+function Logo({ tone = "dark", onClick }) {
+  // Only the text tone flips; the mark stays branded (multi-color)
+  const textTone = tone === "light" ? "text-white" : "text-emerald-900";
+  return (
+    <Link href="/" className="flex items-start gap-2" onClick={onClick}>
+      <img
+        src="/brand/friendrenterfavicon.svg"
+        alt="FriendRenter"
+        className="h-10"
+        decoding="async"
+        loading="eager"
+      />
+      <span
+        className={`text-xl font-display font-extrabold ${textTone} leading-4.5 tracking-[2px]`}
+      >
+        Friend<br></br>Renter
+      </span>
+    </Link>
+  );
+}
+
 export default function MobileDrawer({ open, onClose }) {
   const closeBtnRef = useRef(null);
 
@@ -55,9 +77,10 @@ export default function MobileDrawer({ open, onClose }) {
                 <div className="flex h-full flex-col">
                   {/* Header row (close) */}
                   <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-200">
-                    <Dialog.Title className="text-base font-display font-semibold text-emerald-900">
-                      Menu
-                    </Dialog.Title>
+                    {/* Visual logo (clicking it navigates home and closes) */}
+                    <Logo tone="dark" onClick={() => onClose("logo")} />
+                    {/* A11y title for the dialog */}
+                    <Dialog.Title className="sr-only">Menu</Dialog.Title>
                     <button
                       ref={closeBtnRef}
                       type="button"
@@ -65,8 +88,15 @@ export default function MobileDrawer({ open, onClose }) {
                       aria-label="Close menu"
                       className="rounded p-2 text-zinc-600 hover:bg-zinc-100"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-6 w-6">
-                        <path fill="currentColor" d="M6.4 5.3 5.3 6.4 10.9 12l-5.6 5.6 1.1 1.1L12 13.1l5.6 5.6 1.1-1.1L13.1 12l5.6-5.6-1.1-1.1L12 10.9z"/>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        className="h-6 w-6"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M6.4 5.3 5.3 6.4 10.9 12l-5.6 5.6 1.1 1.1L12 13.1l5.6 5.6 1.1-1.1L13.1 12l5.6-5.6-1.1-1.1L12 10.9z"
+                        />
                       </svg>
                     </button>
                   </div>

@@ -203,7 +203,7 @@ export default function Header() {
           {overHero ? (
             <Button
               variant="custom"
-              className="border border-white/70 bg-transparent text-white hover:bg-white/10 "
+              className="hidden md:inline-flex border border-white/70 bg-transparent text-white hover:bg-white/10 "
               href="/#waitlist"
               ctaId="cta_header_join"
             >
@@ -242,7 +242,7 @@ export default function Header() {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
-              className="h-6 w-6"
+              className="h-8 w-8"
               aria-hidden="true"
             >
               <path
