@@ -78,7 +78,7 @@ export default function HomePage() {
         </div>
 
         {/* Content */}
-        <div className="mx-auto flex min-h-[80vh] sm:min-h-[80vh] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex min-h-[85vh] sm:min-h-[80vh] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
           <div className="w-full max-w-2xl">
             <h1 className="text-5xl font-bold leading-tight tracking-tight text-slate-100 sm:text-5xl md:text-6xl ">
               Local car rentals made simple.
