@@ -102,7 +102,7 @@ export default function HomePage() {
             <h1 className="text-5xl font-bold leading-tight tracking-tight text-slate-100 sm:text-5xl md:text-6xl ">
               Peer-to-peer vehicle sharing between friends.
             </h1>
-            <p className="mt-4 max-w-prose text-base text-slate-100 sm:text-lg font-sans">
+            <p className=" max-w-prose text-base text-slate-100 sm:text-lg font-sans">
               Add a friend, get accepted, then pick up—simple. <br></br>A
               tighter, trust-first way to rent local cars.
             </p>
