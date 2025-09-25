@@ -170,6 +170,7 @@ export default function MobileDrawer({ open, onClose }) {
                       href="/#waitlist"
                       ctaId="cta_mobile_drawer_join"
                       className="w-full"
+                      onClick={() => onClose("cta_button")}
                     >
                       Join waitlist
                     </Button>
