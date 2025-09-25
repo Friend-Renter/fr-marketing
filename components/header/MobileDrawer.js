@@ -10,7 +10,7 @@ import cities from "@/content/cities/_list.json";
 // Logo lockup — keeps the tiny square + FR text; flips depending on tone
 function Logo({ tone = "dark", onClick }) {
   // Only the text tone flips; the mark stays branded (multi-color)
-  const textTone = tone === "light" ? "text-white" : "text-emerald-900";
+  const textTone = tone === "light" ? "text-white" : "text-zinc-900";
   return (
     <Link href="/" className="flex items-start gap-2" onClick={onClick}>
       <img
