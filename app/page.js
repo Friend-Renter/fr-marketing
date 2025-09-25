@@ -72,38 +72,38 @@ export default function HomePage() {
             priority
             fill
             sizes="(max-width: 640px) 100vw, 100vw"
-            className="object-cover object-center md:object-[center_40%]"
+            className="object-cover object-center md:object-[center_50%]"
           />
           <div className="absolute inset-0 hero-overlay" aria-hidden />
         </div>
 
         {/* Content */}
-        <div className="mx-auto flex min-h-[75vh] sm:min-h-[80vh] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex min-h-[80vh] sm:min-h-[80vh] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
           <div className="w-full max-w-2xl">
-            <h1 className="text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
+            <h1 className="text-5xl font-bold leading-tight tracking-tight text-slate-100 sm:text-5xl md:text-6xl ">
               Local car rentals made simple.
             </h1>
-            <p className="mt-4 max-w-prose text-base text-white/90 sm:text-lg">
+            <p className="mt-4 max-w-prose text-base text-slate-100 sm:text-lg font-sans">
               Verified people, fair prices, no counter lines.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
                 href="#waitlist"
-                className="inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                className="inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium text-slate-100 bg-emerald-600 hover:bg-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               >
                 Join the Waitlist
               </Link>
               <Link
                 href="#become-host"
-                className="inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium text-white/90 ring-1 ring-inset ring-white/60 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                className="inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium text-slate-100/90 ring-1 ring-inset ring-white/60 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               >
                 Become a Host
               </Link>
             </div>
 
             {/* Social proof / location teaser (optional lightweight) */}
-            <p className="mt-6 text-xs text-white/70">
+            <p className="mt-6 text-sm  text-slate-100/80">
               Launching soon — be first in line in your city.
             </p>
           </div>
@@ -171,7 +171,7 @@ export default function HomePage() {
             <div className="mt-6">
               <a
                 href="#waitlist"
-                className="inline-flex items-center justify-center rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
+                className="inline-flex items-center justify-center rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-slate-100 hover:bg-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
               >
                 Join host waitlist
               </a>
