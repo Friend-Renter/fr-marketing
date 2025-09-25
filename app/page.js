@@ -4,47 +4,67 @@ import Button from "@/components/ui/Button";
 import Accordion from "@/components/ui/Accordion";
 import LeadForm from "@/components/forms/LeadForm";
 import heroimage from "../public/brand/heroimagedesktop.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faIdBadge,
+  faUserPlus,
+  faCheckCircle,
+  faKey,
+  faCarSide,
+  faUserShield,
+  faUsers,
+  faDollarSign,
+} from "@fortawesome/free-solid-svg-icons";
 
 export const metadata = {
-  title: "FriendRenter™ — Local car rentals made simple",
-  description: "Verified people, fair prices, no counter lines.",
+  title: "FriendRenter™ — Rent from friends (Coming Soon)",
+  description:
+    "A friend-first rental marketplace. Add the host as a friend, get accepted, then book. A tighter, trust-first way to rent",
   openGraph: {
     images: [
       `/og?title=${encodeURIComponent(
-        "Local car rentals made simple"
-      )}&subtitle=${encodeURIComponent(
-        "Verified people • Fair prices • No counter lines"
-      )}`,
+        "Rent from friends"
+      )}&subtitle=${encodeURIComponent("Add • Accept • Book")}`,
     ],
   },
   twitter: {
     card: "summary_large_image",
     images: [
       `/og?title=${encodeURIComponent(
-        "Local car rentals made simple"
-      )}&subtitle=${encodeURIComponent(
-        "Verified people • Fair prices • No counter lines"
-      )}`,
+        "Rent from friends"
+      )}&subtitle=${encodeURIComponent("Add • Accept • Book")}`,
     ],
   },
 };
 
 const homeFaq = [
   {
-    q: "Do you verify renters and hosts?",
-    a: "Yes. We use third-party KYC to verify ID and reduce fraud.",
+    q: "Do I have to be friends to book?",
+    a: "Yes. You add the host as a friend (or request + add at the same time). Once the host accepts, your booking can be confirmed.",
   },
   {
-    q: "Is there a deposit?",
-    a: "A temporary hold (e.g., $200–$300) is released after return if no issues.",
+    q: "Why “friends-only”?",
+    a: "It reduces randomness. Hosts stay in control, and renters join a community that values trust and respect.",
+  },
+  {
+    q: "What if the host doesn’t accept me?",
+    a: "No hard feelings—you can add other hosts or try again after completing your profile and verifications.",
+  },
+  {
+    q: "Do you verify renters and hosts?",
+    a: "Yes. We use third-party ID (KYC) and fraud checks before booking.",
+  },
+  {
+    q: "Is there a deposit or hold?",
+    a: "A temporary hold (e.g., $200–$300) may apply and is released after return if no issues.",
   },
   {
     q: "How do payouts work for hosts?",
-    a: "Weekly payouts, typically 2–3 business days after trip end.",
+    a: "Fast payouts, typically 2–3 business days after the trip ends.",
   },
   {
-    q: "What’s covered?",
-    a: "See Safety for coverage overview in plain English.",
+    q: "Is FriendRenter like Turo?",
+    a: "Similar mechanics, different vibe—bookings happen between friends. Add → accept → book.",
   },
 ];
 
@@ -52,7 +72,6 @@ export default function HomePage() {
   return (
     <div className="">
       {/* HERO — full-bleed background with overlay */}
-
       <section
         className="relative isolate min-h-[75vh] sm:min-h-[80vh]"
         id="hero"
@@ -81,10 +100,11 @@ export default function HomePage() {
         <div className="mx-auto flex min-h-[85vh] sm:min-h-[80vh] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
           <div className="w-full max-w-2xl">
             <h1 className="text-5xl font-bold leading-tight tracking-tight text-slate-100 sm:text-5xl md:text-6xl ">
-              Local car rentals made simple.
+              Peer-to-peer vehicle sharing between friends.
             </h1>
             <p className="mt-4 max-w-prose text-base text-slate-100 sm:text-lg font-sans">
-              Verified people, fair prices, no counter lines.
+              Add a friend, get accepted, then pick up—simple. <br></br>A
+              tighter, trust-first way to rent local cars.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -117,61 +137,131 @@ export default function HomePage() {
       </section>
 
       {/* HOW IT WORKS (Renters + Hosts) */}
+      {/* HOW IT WORKS (Renters + Hosts) */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2">
           <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-zinc-100">
+            <h2 className="text-3xl font-semibold tracking-tight text-brand-900">
               How it works for renters
             </h2>
-            <ul className="mt-6 space-y-4 text-zinc-300">
-              <li>
-                <span className="font-medium text-emerald-400">
-                  Verify once
+            <ul className="mt-6 space-y-4 text-brand-800">
+              <li className="flex items-center gap-3">
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
+                  <FontAwesomeIcon icon={faIdBadge} className="text-[25px]" />
                 </span>
-                — keep the community safe.
+                <div className="leading-normal ">
+                  <span className="font-medium text-lg text-brand-500">
+                    Create your profile
+                  </span>{" "}
+                  — a real face behind the request.
+                </div>
               </li>
-              <li>
-                <span className="font-medium text-emerald-400">
-                  Book in minutes
+
+              <li className="flex items-center gap-3">
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
+                  <FontAwesomeIcon icon={faUserPlus} className="text-[25px]" />
                 </span>
-                — local pickup, no counters.
+                <div className="leading-normal">
+                  <span className="font-medium text-lg text-brand-500">
+                    Add the host as a friend
+                  </span>{" "}
+                  — or send a booking request that includes a friend request.
+                </div>
               </li>
-              <li>
-                <span className="font-medium text-emerald-400">Drive away</span>
-                — simple hand-off, clear return.
+
+              <li className="flex items-center gap-3">
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
+                  <FontAwesomeIcon
+                    icon={faCheckCircle}
+                    className="text-[25px]"
+                  />
+                </span>
+                <div className="leading-normal">
+                  <span className="font-medium text-lg text-brand-500">
+                    Get accepted
+                  </span>{" "}
+                  — hosts approve friends before confirming trips.
+                </div>
+              </li>
+
+              <li className="flex items-center gap-3">
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
+                  <FontAwesomeIcon icon={faKey} className="text-[25px]" />
+                </span>
+                <div className="leading-normal">
+                  <span className="font-medium text-lg text-brand-500">
+                    Pick up & go
+                  </span>{" "}
+                  — smooth handoff, clear return.
+                </div>
               </li>
             </ul>
           </div>
 
           <div id="become-host">
-            <h2 className="text-2xl font-semibold tracking-tight text-zinc-100">
-              Earn with your car
+            <h2 className="text-3xl font-semibold tracking-tight text-brand-900">
+              How it works for hosts
             </h2>
-            <ul className="mt-6 space-y-4 text-zinc-300">
-              <li>
-                <span className="font-medium text-emerald-400">
-                  List your car
+            <ul className="mt-6 space-y-4 text-brand-800">
+              <li className="flex items-center gap-3">
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
+                  <FontAwesomeIcon icon={faCarSide} className="text-[25px]" />
                 </span>
-                — set availability & pickup details.
+                <div className="leading-normal">
+                  <span className="font-medium text-lg text-brand-500">
+                    List your car
+                  </span>{" "}
+                  — set availability, pickup, and house rules.
+                </div>
               </li>
-              <li>
-                <span className="font-medium text-emerald-400">
-                  Get verified guests
+
+              <li className="flex items-center gap-3">
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
+                  <FontAwesomeIcon
+                    icon={faUserShield}
+                    className="text-[25px]"
+                  />
                 </span>
-                — you’re always in control.
+                <div className="leading-normal">
+                  <span className="font-medium text-lg text-brand-500">
+                    Friends only
+                  </span>{" "}
+                  — you choose who can book by accepting friend requests.
+                </div>
               </li>
-              <li>
-                <span className="font-medium text-emerald-400">
-                  Hand off & get paid
+
+              <li className="flex items-center gap-3">
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
+                  <FontAwesomeIcon icon={faUsers} className="text-[25px]" />
                 </span>
-                — smooth check-in / check-out.
+                <div className="leading-normal">
+                  <span className="font-medium text-lg text-brand-500">
+                    Lower risk, better guests
+                  </span>{" "}
+                  — real profiles, mutuals, and verifications.
+                </div>
+              </li>
+
+              <li className="flex items-center gap-3">
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
+                  <FontAwesomeIcon
+                    icon={faDollarSign}
+                    className="text-[25px]"
+                  />
+                </span>
+                <div className="leading-normal">
+                  <span className="font-medium text-lg text-brand-500">
+                    Get paid
+                  </span>{" "}
+                  — fast payouts after the trip ends.
+                </div>
               </li>
             </ul>
 
-            <div className="mt-6">
+            <div className="mt-10">
               <a
                 href="#waitlist"
-                className="inline-flex items-center justify-center rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-slate-100 hover:bg-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
+                className="inline-flex items-center justify-center rounded-md bg-emerald-600 px-6 py-2 text-base font-medium text-slate-100 hover:bg-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
               >
                 Join host waitlist
               </a>
@@ -184,14 +274,17 @@ export default function HomePage() {
       <section className="grid gap-6 py-8 md:grid-cols-3 mx-auto max-w-7xl">
         {[
           {
-            t: "Keep more of your earnings",
-            d: "Transparent fees and weekly payouts.",
+            t: "Friends-only booking",
+            d: "Requests include a friend add. You approve who books.",
           },
           {
-            t: "Verified community",
-            d: "Government ID + fraud checks before booking.",
+            t: "Photo check-in & receipts",
+            d: "Government ID & fraud checks before anyone can book.",
           },
-          { t: "No counter lines", d: "Contactless pickup options available." },
+          {
+            t: "Easy-to-use app",
+            d: "Manage friends, requests, and trips from your phone.",
+          },
         ].map((c, i) => (
           <div
             key={i}
@@ -202,10 +295,16 @@ export default function HomePage() {
           </div>
         ))}
       </section>
+
       {/* CITIES */}
       <section className="py-8 mx-auto max-w-7xl">
-        <h2 className="text-xl font-semibold text-gray-900">Cities</h2>
-        <div className="mt-4 grid gap-4 md:grid-cols-2">
+        <h2 className="text-xl font-semibold text-gray-900">
+          Cities (launching soon)
+        </h2>
+        <p className="mt-1 text-sm text-gray-700">
+          Starting local and growing through friends.
+        </p>
+        <div className="mt-4 grid gap-3 md:grid-cols-2">
           <Link
             href="/city/lincoln-ne"
             className="rounded-lg border border-gray-200 bg-white p-4 shadow-card hover:border-brand-300"
@@ -234,19 +333,21 @@ export default function HomePage() {
           <Accordion items={homeFaq} />
         </div>
       </section>
-      {/* LIIL BANNER */}
+
+      {/* FINAL CTA BANNER */}
       <section className="py-14 mx-auto max-w-7xl">
         <div className="rounded-lg bg-brand-50 p-6">
           <h3 className="text-lg font-semibold text-gray-900">
-            Ready to roll?
+            Ready when your friends are.
           </h3>
           <p className="mt-1 text-sm text-gray-700">
-            Get verified in minutes and book with confidence.
+            Renters add hosts as friends and book with confidence; hosts approve
+            friends and stay in control—coming soon.
           </p>
           <div className="mt-4">
-            <Link href="/renters">
+            <Link href="#waitlist">
               <Button ctaId="cta_home_get_started" variant="primary">
-                Get started
+                Join waitlist
               </Button>
             </Link>
           </div>
@@ -257,12 +358,12 @@ export default function HomePage() {
         id="waitlist"
         className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 scroll-mt-8 md:scroll-mt-10"
       >
-        <h2 className="text-2xl font-semibold tracking-tight text-zinc-100">
+        <h2 className="text-2xl font-semibold tracking-tight text-emerald-900">
           Be first in line
         </h2>
-        <p className="mt-2 text-zinc-300">
-          Tell us how you’d like to use FriendRenter. We’ll email next steps
-          soon.
+        <p className="mb-4 mt-1 text-emerald-700">
+          Tell us how you plan to use FriendRenter (rent, host, or both) and
+          your city. We’ll send next steps soon.
         </p>
 
         <LeadForm defaultRole="host" pageSource="landing" />

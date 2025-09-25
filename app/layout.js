@@ -7,6 +7,9 @@ import ConsentBanner from "@/components/ConsentBanner";
 import { AnalyticsProvider } from "@/lib/analytics";
 import SeoJsonLd from "@/components/SeoJsonLd";
 import { orgJsonLd } from "@/lib/seo";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
 
 // Use variable fonts (self-hosted at build) and expose CSS variables
 const inter = Inter({
