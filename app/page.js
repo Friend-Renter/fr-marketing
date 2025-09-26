@@ -20,6 +20,7 @@ import {
   faCheck,
   faMinus,
 } from "@fortawesome/free-solid-svg-icons";
+import CitiesSection from "@/components/CitiesSection";
 
 export const metadata = {
   title: "FriendRenter™ — Rent from friends (Coming Soon)",
@@ -503,34 +504,7 @@ export default function HomePage() {
       </section>
 
       {/* CITIES */}
-      <section className="py-8 mx-auto max-w-7xl">
-        <h2 className="text-xl font-semibold text-gray-900">
-          Cities (launching soon)
-        </h2>
-        <p className="mt-1 text-sm text-gray-700">
-          Starting local and growing through friends.
-        </p>
-        <div className="mt-4 grid gap-3 md:grid-cols-2">
-          <Link
-            href="/city/lincoln-ne"
-            className="rounded-lg border border-gray-200 bg-white p-4 shadow-card hover:border-brand-300"
-          >
-            <div className="font-medium text-gray-900">Lincoln, NE</div>
-            <div className="text-sm text-gray-700">
-              Quick pickup near Haymarket and UNL.
-            </div>
-          </Link>
-          <Link
-            href="/city/omaha-ne"
-            className="rounded-lg border border-gray-200 bg-white p-4 shadow-card hover:border-brand-300"
-          >
-            <div className="font-medium text-gray-900">Omaha, NE</div>
-            <div className="text-sm text-gray-700">
-              Meet at Eppley area, Old Market, or Midtown.
-            </div>
-          </Link>
-        </div>
-      </section>
+      <CitiesSection />
 
       {/* FAQS */}
       <section className="py-10 mx-auto max-w-5xl">
@@ -541,7 +515,7 @@ export default function HomePage() {
       </section>
 
       {/* FINAL CTA BANNER */}
-      <section className="py-14 mx-auto max-w-7xl">
+      <section className="py-14 mx-auto max-w-6xl">
         <div className="rounded-lg bg-brand-50 p-6">
           <h3 className="text-lg font-semibold text-gray-900">
             Ready when your friends are.
