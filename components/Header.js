@@ -162,7 +162,7 @@ export default function Header() {
     "sticky top-0 z-50 transition-colors" +
     (overHero ? " bg-transparent" : " bg-white shadow-sm");
   const row =
-    "mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8";
+    "mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8";
 
   return (
     <header className={frame} role="banner">
