@@ -1,12 +1,20 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
     <footer className="mt-16 border-t border-gray-200 bg-white">
       <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 md:grid-cols-3">
         <div>
-          <div className="mb-3 flex items-center gap-2">
-            <div className="h-6 w-6 rounded-sm bg-brand-600" />
+          <div className="mb-2 flex items-center gap-2">
+            <Image
+              src="/brand/friendrenterfavicon.svg" // or "/brand/logo-mark.png"
+              alt="FriendRenter logo"
+              width={24}
+              height={24}
+              className="h-6 w-6"
+              priority={false}
+            />
             <span className="text-base font-semibold text-gray-900">
               FriendRenter™
             </span>
