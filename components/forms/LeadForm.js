@@ -265,7 +265,7 @@ export default function LeadForm({
         ref={recaptchaRef}
         size="invisible"
         sitekey={SITE_KEY}
-        badge="bottomright"
+        badge="inline"
         onExpired={() => {
           try {
             recaptchaRef.current?.reset();
