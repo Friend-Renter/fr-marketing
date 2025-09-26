@@ -110,7 +110,7 @@ export default function HomePage() {
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
                 href="#waitlist"
-                className="inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium text-slate-100 bg-emerald-600 hover:bg-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                className="inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium text-slate-100 bg-brand-600 hover:bg-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               >
                 Join the Waitlist
               </Link>
@@ -136,21 +136,35 @@ export default function HomePage() {
         />
       </section>
 
-      {/* HOW IT WORKS (Renters + Hosts) */}
-      {/* HOW IT WORKS (Renters + Hosts) */}
+      {/* HOW IT WORKS */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-2">
+        {/* Main heading centered above both columns */}
+        <div className="text-center">
+          <h2 className="text-4xl font-bold tracking-tight text-brand-900">
+            How It Works
+          </h2>
+          {/* under the main H2 */}
+          <p className="mt-3 text-base text-brand-700 max-w-xl mx-auto">
+            Add <span className="font-medium text-brand-900">→</span> accept{" "}
+            <span className="font-medium text-brand-900">→</span> book — a
+            friend-first flow for safer, smoother trips.
+          </p>
+          {/* <div className="mt-3 mx-auto h-px w-90 bg-brand-400 rounded" /> */}
+        </div>
+
+        <div className="mt-10 grid gap-12 px-2 lg:grid-cols-2 ">
+          {/* Renters */}
           <div>
-            <h2 className="text-3xl font-semibold tracking-tight text-brand-900">
-              How it works for renters
-            </h2>
-            <ul className="mt-6 space-y-4 text-brand-800">
+            <h3 className="text-3xl text-center md:text-left font-semibold tracking-tight text-brand-900">
+              Renters
+            </h3>
+            <ul className="mt-4 space-y-4 px-2 text-brand-800">
               <li className="flex items-center gap-3">
                 <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
                   <FontAwesomeIcon icon={faIdBadge} className="text-[25px]" />
                 </span>
                 <div className="leading-normal ">
-                  <span className="font-medium text-lg text-brand-500">
+                  <span className="font-medium text-lg text-brand-800">
                     Create your profile
                   </span>{" "}
                   — a real face behind the request.
@@ -162,7 +176,7 @@ export default function HomePage() {
                   <FontAwesomeIcon icon={faUserPlus} className="text-[25px]" />
                 </span>
                 <div className="leading-normal">
-                  <span className="font-medium text-lg text-brand-500">
+                  <span className="font-medium text-lg text-brand-800">
                     Add the host as a friend
                   </span>{" "}
                   — or send a booking request that includes a friend request.
@@ -177,7 +191,7 @@ export default function HomePage() {
                   />
                 </span>
                 <div className="leading-normal">
-                  <span className="font-medium text-lg text-brand-500">
+                  <span className="font-medium text-lg text-brand-800">
                     Get accepted
                   </span>{" "}
                   — hosts approve friends before confirming trips.
@@ -189,7 +203,7 @@ export default function HomePage() {
                   <FontAwesomeIcon icon={faKey} className="text-[25px]" />
                 </span>
                 <div className="leading-normal">
-                  <span className="font-medium text-lg text-brand-500">
+                  <span className="font-medium text-lg text-brand-800">
                     Pick up & go
                   </span>{" "}
                   — smooth handoff, clear return.
@@ -198,17 +212,18 @@ export default function HomePage() {
             </ul>
           </div>
 
+          {/* Hosts */}
           <div id="become-host">
-            <h2 className="text-3xl font-semibold tracking-tight text-brand-900">
-              How it works for hosts
-            </h2>
-            <ul className="mt-6 space-y-4 text-brand-800">
+            <h3 className="text-3xl text-center md:text-left font-semibold tracking-tight text-brand-900">
+              Hosts
+            </h3>
+            <ul className="mt-3 px-2 space-y-4 text-brand-800">
               <li className="flex items-center gap-3">
                 <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
                   <FontAwesomeIcon icon={faCarSide} className="text-[25px]" />
                 </span>
                 <div className="leading-normal">
-                  <span className="font-medium text-lg text-brand-500">
+                  <span className="font-medium text-lg text-brand-800">
                     List your car
                   </span>{" "}
                   — set availability, pickup, and house rules.
@@ -223,7 +238,7 @@ export default function HomePage() {
                   />
                 </span>
                 <div className="leading-normal">
-                  <span className="font-medium text-lg text-brand-500">
+                  <span className="font-medium text-lg text-brand-800">
                     Friends only
                   </span>{" "}
                   — you choose who can book by accepting friend requests.
@@ -235,7 +250,7 @@ export default function HomePage() {
                   <FontAwesomeIcon icon={faUsers} className="text-[25px]" />
                 </span>
                 <div className="leading-normal">
-                  <span className="font-medium text-lg text-brand-500">
+                  <span className="font-medium text-lg text-brand-800">
                     Lower risk, better guests
                   </span>{" "}
                   — real profiles, mutuals, and verifications.
@@ -250,23 +265,22 @@ export default function HomePage() {
                   />
                 </span>
                 <div className="leading-normal">
-                  <span className="font-medium text-lg text-brand-500">
+                  <span className="font-medium text-lg text-brand-800">
                     Get paid
                   </span>{" "}
                   — fast payouts after the trip ends.
                 </div>
               </li>
             </ul>
-
-            <div className="mt-10">
-              <a
-                href="#waitlist"
-                className="inline-flex items-center justify-center rounded-md bg-emerald-600 px-6 py-2 text-base font-medium text-slate-100 hover:bg-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
-              >
-                Join host waitlist
-              </a>
-            </div>
           </div>
+        </div>
+        <div className="mt-12 text-center">
+          <a
+            href="#waitlist"
+            className="inline-flex items-center justify-center rounded-md bg-brand-600 px-6 py-2 text-base font-medium text-slate-100 hover:bg-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300"
+          >
+            Join waitlist
+          </a>
         </div>
       </section>
 
@@ -358,10 +372,10 @@ export default function HomePage() {
         id="waitlist"
         className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 scroll-mt-8 md:scroll-mt-10"
       >
-        <h2 className="text-2xl font-semibold tracking-tight text-emerald-900">
+        <h2 className="text-2xl font-semibold tracking-tight text-brand-900">
           Be first in line
         </h2>
-        <p className="mb-4 mt-1 text-emerald-700">
+        <p className="mb-4 mt-1 text-brand-700">
           Tell us how you plan to use FriendRenter (rent, host, or both) and
           your city. We’ll send next steps soon.
         </p>
