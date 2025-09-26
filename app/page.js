@@ -14,6 +14,11 @@ import {
   faUserShield,
   faUsers,
   faDollarSign,
+  faShieldHalved,
+  faMobileScreenButton,
+  faLocationDot,
+  faCheck,
+  faMinus,
 } from "@fortawesome/free-solid-svg-icons";
 
 export const metadata = {
@@ -284,30 +289,215 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TRUST STRIP */}
-      <section className="grid gap-6 py-8 md:grid-cols-3 mx-auto max-w-7xl">
-        {[
-          {
-            t: "Friends-only booking",
-            d: "Requests include a friend add. You approve who books.",
-          },
-          {
-            t: "Photo check-in & receipts",
-            d: "Government ID & fraud checks before anyone can book.",
-          },
-          {
-            t: "Easy-to-use app",
-            d: "Manage friends, requests, and trips from your phone.",
-          },
-        ].map((c, i) => (
-          <div
-            key={i}
-            className="rounded-lg border border-gray-200 bg-white p-4 shadow-card"
-          >
-            <h3 className="font-semibold text-gray-900">{c.t}</h3>
-            <p className="mt-1 text-sm text-gray-700">{c.d}</p>
+      {/* WHY FRIENDRENTER */}
+      <section
+        id="why"
+        className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"
+      >
+        <div className="text-center">
+          <h2 className="text-4xl font-bold tracking-tight text-brand-900">
+            Why FriendRenter
+          </h2>
+          <p className="mt-3 text-base text-brand-700 max-w-2xl mx-auto">
+            Trust isn’t an add-on—it’s how booking works here.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Trust by design */}
+          <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-card">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-emerald-600">
+                <FontAwesomeIcon
+                  icon={faShieldHalved}
+                  className="text-[24px]"
+                />
+              </span>
+              <h3 className="font-semibold text-gray-900">Trust by design</h3>
+            </div>
+            <p className="mt-2 text-sm text-gray-700">
+              Bookings only happen between friends (or soon-to-be). Add → accept
+              → book.
+            </p>
           </div>
-        ))}
+
+          {/* Friends-only booking */}
+          <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-card">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-emerald-600">
+                <FontAwesomeIcon icon={faUserPlus} className="text-[24px]" />
+              </span>
+              <h3 className="font-semibold text-gray-900">
+                Friends-only booking
+              </h3>
+            </div>
+            <p className="mt-2 text-sm text-gray-700">
+              You add the host as a friend, they accept, then your trip is
+              confirmed.
+            </p>
+          </div>
+
+          {/* Mobile-first */}
+          <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-card">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-emerald-600">
+                <FontAwesomeIcon
+                  icon={faMobileScreenButton}
+                  className="text-[24px]"
+                />
+              </span>
+              <h3 className="font-semibold text-gray-900">Mobile-first</h3>
+            </div>
+            <p className="mt-2 text-sm text-gray-700">
+              Manage friends, requests, and trips from your phone. Photo
+              check-in/out built in.
+            </p>
+          </div>
+
+          {/* Local convenience */}
+          <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-card">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-emerald-600">
+                <FontAwesomeIcon icon={faLocationDot} className="text-[24px]" />
+              </span>
+              <h3 className="font-semibold text-gray-900">Local convenience</h3>
+            </div>
+            <p className="mt-2 text-sm text-gray-700">
+              Meet where it’s easy for both of you. No counter lines, no upsell
+              desk.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* COMPARISON STRIP */}
+      <section
+        id="compare"
+        className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 justify-center flex flex-col"
+      >
+        <div className="text-center">
+          <h2 className="text-4xl font-bold tracking-tight text-brand-900">
+            How we compare
+          </h2>
+          <p className="mt-2 text-base text-brand-700 max-w-2xl mx-auto">
+            The friend-first way vs. the usual way.
+          </p>
+        </div>
+
+        <div className="mt-8 overflow-x-auto">
+          <table className="w-full min-w-[720px] border-separate border-spacing-0 rounded-lg overflow-hidden">
+            <thead>
+              <tr>
+                <th className="bg-emerald-50 px-4 py-3 text-left text-base font-semibold text-emerald-900">
+                  Feature
+                </th>
+                <th className="bg-emerald-50 px-4 py-3 text-center text-base font-semibold text-emerald-900">
+                  FriendRenter
+                </th>
+                <th className="bg-gray-50 px-4 py-3 text-center text-base font-semibold text-gray-900">
+                  Traditional Rentals
+                </th>
+                {/* <th className="bg-gray-50 px-4 py-3 text-left text-base font-semibold text-gray-900">
+                  Other P2P
+                </th> */}
+              </tr>
+            </thead>
+            <tbody className="text-base">
+              {[
+                {
+                  label: "Book between friends",
+                  fr: true,
+                  tr: false,
+                  p2p: "maybe",
+                },
+                {
+                  label: "Host approval required",
+                  fr: true,
+                  tr: false,
+                  p2p: "sometimes",
+                },
+                {
+                  label: "Photo check-in/out & receipts",
+                  fr: true,
+                  tr: false,
+                  p2p: "varies",
+                },
+                {
+                  label: "No counter lines",
+                  fr: true,
+                  tr: false,
+                  p2p: true,
+                },
+                {
+                  label: "Transparent, app-first experience",
+                  fr: true,
+                  tr: false,
+                  p2p: "varies",
+                },
+                {
+                  label: "Local, flexible meetup",
+                  fr: true,
+                  tr: false,
+                  p2p: true,
+                },
+              ].map((row, i) => (
+                <tr
+                  key={row.label}
+                  className="border-b border-gray-200 last:border-b-0"
+                >
+                  <td className="px-4 py-3 font-normal text-gray-900">
+                    {row.label}
+                  </td>
+
+                  {/* FriendRenter */}
+                  <td className="px-4 py-3 text-center">
+                    <span className="inline-flex items-center text-emerald-700">
+                      <FontAwesomeIcon
+                        icon={faCheck}
+                        className="mr-2 text-[16px]"
+                      />
+                      <span className="sr-only">Yes</span>
+                    </span>
+                  </td>
+
+                  {/* Traditional */}
+                  <td className="px-4 py-3 text-center">
+                    <span className="inline-flex items-center text-gray-500">
+                      <FontAwesomeIcon
+                        icon={faMinus}
+                        className="mr-2 text-[16px]"
+                      />
+                      <span className="sr-only">No</span>
+                    </span>
+                  </td>
+
+                  {/* Other P2P */}
+                  {/* <td className="px-4 py-3">
+                    {row.p2p === true ? (
+                      <span className="inline-flex items-center text-emerald-700">
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          className="mr-2 text-[16px]"
+                        />
+                        <span className="sr-only">Yes</span>
+                      </span>
+                    ) : row.p2p === false ? (
+                      <span className="inline-flex items-center text-gray-500">
+                        <FontAwesomeIcon
+                          icon={faMinus}
+                          className="mr-2 text-[16px]"
+                        />
+                        <span className="sr-only">No</span>
+                      </span>
+                    ) : (
+                      <span className="text-gray-600">varies</span>
+                    )}
+                  </td> */}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
 
       {/* CITIES */}
@@ -341,8 +531,8 @@ export default function HomePage() {
       </section>
 
       {/* FAQS */}
-      <section className="py-10 mx-auto max-w-7xl">
-        <h2 className="text-xl font-semibold text-gray-900">FAQ</h2>
+      <section className="py-10 mx-auto max-w-5xl">
+        <h2 className="text-2xl font-semibold text-gray-900">FAQ</h2>
         <div className="mt-4">
           <Accordion items={homeFaq} />
         </div>
