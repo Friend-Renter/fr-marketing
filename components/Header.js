@@ -26,7 +26,7 @@ const NavLink = ({ href, children, tone }) => {
 // Logo lockup — keeps the tiny square + FR text; flips depending on tone
 function Logo({ tone }) {
   // Only the text tone flips; the mark stays branded (multi-color)
-  const textTone = tone === "light" ? "text-white" : "text-zinc-900";
+  const textTone = tone === "light" ? "text-brand-50" : "text-brand-900";
   return (
     <Link href="/" className="flex items-start gap-2">
       <img
@@ -37,7 +37,7 @@ function Logo({ tone }) {
         loading="eager"
       />
       <span
-        className={`text-xl font-extrabold ${textTone} leading-4.5 tracking-[3px]`}
+        className={`text-xl font-extrabold ${textTone} leading-4.5 tracking-[2px]`}
       >
         Friend<br></br>Renter
       </span>
