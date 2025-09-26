@@ -15,7 +15,7 @@ export default function Footer() {
               className="h-6 w-6"
               priority={false}
             />
-            <span className="text-base font-semibold text-gray-900">
+            <span className="text-base font-semibold text-brand-900">
               FriendRenter™
             </span>
           </div>
