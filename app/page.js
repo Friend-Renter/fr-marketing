@@ -143,72 +143,67 @@ export default function HomePage() {
       </section>
 
       {/* HOW IT WORKS */}
+      {/* HOW IT WORKS — Option 2: Column wrapper cards */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        {/* Main heading centered above both columns */}
         <div className="text-center">
           <h2 className="text-4xl font-bold tracking-tight text-brand-900">
             How It Works
           </h2>
-          {/* under the main H2 */}
           <p className="mt-3 text-base text-brand-700 max-w-xl mx-auto">
             Add <span className="font-medium text-brand-900">→</span> accept{" "}
             <span className="font-medium text-brand-900">→</span> book — a
             friend-first flow for safer, smoother trips.
           </p>
-          {/* <div className="mt-3 mx-auto h-px w-90 bg-brand-400 rounded" /> */}
         </div>
 
-        <div className="mt-8 grid gap-12 px-2 lg:grid-cols-2 ">
+        <div className="mt-8 grid gap-6 lg:grid-cols-2 ">
           {/* Renters */}
-          <div>
-            <h3 className="text-3xl text-left px-2 sm:px-0 font-semibold tracking-tight text-brand-900">
+          <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-card">
+            <h3 className="text-3xl font-semibold tracking-tight text-brand-900">
               Renters
             </h3>
-            <ul className="mt-4 sm:mt-6 space-y-4 px-2 text-brand-800">
+            <ul className="mt-6 space-y-4  px-2 text-brand-800">
               <li className="flex items-center gap-3">
-                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
-                  <FontAwesomeIcon icon={faIdBadge} className="text-[25px]" />
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-600">
+                  <FontAwesomeIcon icon={faIdBadge} className="text-[24px]" />
                 </span>
-                <div className="leading-normal ">
+                <div>
                   <span className="font-medium text-lg text-brand-800">
                     Create your profile
                   </span>{" "}
                   — a real face behind the request.
                 </div>
               </li>
-
               <li className="flex items-center gap-3">
-                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
-                  <FontAwesomeIcon icon={faUserPlus} className="text-[25px]" />
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-600">
+                  <FontAwesomeIcon icon={faUserPlus} className="text-[24px]" />
                 </span>
-                <div className="leading-normal">
+                <div>
                   <span className="font-medium text-lg text-brand-800">
                     Add the host as a friend
                   </span>{" "}
                   — or send a booking request that includes a friend request.
                 </div>
               </li>
-
               <li className="flex items-center gap-3">
-                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-600">
                   <FontAwesomeIcon
                     icon={faCheckCircle}
-                    className="text-[25px]"
+                    className="text-[24px]"
                   />
                 </span>
-                <div className="leading-normal">
+                <div>
                   <span className="font-medium text-lg text-brand-800">
                     Get accepted
                   </span>{" "}
                   — hosts approve friends before confirming trips.
                 </div>
               </li>
-
               <li className="flex items-center gap-3">
-                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
-                  <FontAwesomeIcon icon={faKey} className="text-[25px]" />
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-600">
+                  <FontAwesomeIcon icon={faKey} className="text-[24px]" />
                 </span>
-                <div className="leading-normal">
+                <div>
                   <span className="font-medium text-lg text-brand-800">
                     Pick up & go
                   </span>{" "}
@@ -216,61 +211,69 @@ export default function HomePage() {
                 </div>
               </li>
             </ul>
+            <div className="mt-8">
+              <a
+                href="#waitlist"
+                className="inline-flex items-center justify-center rounded-md bg-brand-600 px-6 py-2 text-base font-medium text-slate-100 hover:bg-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300"
+              >
+                Join renter waitlist
+              </a>
+            </div>
           </div>
 
           {/* Hosts */}
-          <div id="become-host">
-            <h3 className="text-3xl text-left px-2 sm:px-0 font-semibold tracking-tight text-brand-900">
+          <div
+            id="become-host"
+            className="rounded-lg border border-gray-200 bg-white p-8 shadow-card"
+          >
+            <h3 className="text-3xl font-semibold tracking-tight text-brand-900">
               Hosts
             </h3>
-            <ul className="mt-4 sm:mt-6 px-2 space-y-4 text-brand-800">
+            <ul className="mt-6 space-y-4 px-2 text-brand-800">
               <li className="flex items-center gap-3">
-                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
-                  <FontAwesomeIcon icon={faCarSide} className="text-[25px]" />
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-600">
+                  <FontAwesomeIcon icon={faCarSide} className="text-[24px]" />
                 </span>
-                <div className="leading-normal">
+                <div>
                   <span className="font-medium text-lg text-brand-800">
                     List your car
                   </span>{" "}
                   — set availability, pickup, and house rules.
                 </div>
               </li>
-
               <li className="flex items-center gap-3">
-                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-600">
                   <FontAwesomeIcon
                     icon={faUserShield}
-                    className="text-[25px]"
+                    className="text-[24px]"
                   />
                 </span>
-                <div className="leading-normal">
+                <div>
                   <span className="font-medium text-lg text-brand-800">
                     Friends only
                   </span>{" "}
                   — you choose who can book by accepting friend requests.
                 </div>
               </li>
-
               <li className="flex items-center gap-3">
-                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
-                  <FontAwesomeIcon icon={faUsers} className="text-[25px]" />
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-600">
+                  <FontAwesomeIcon icon={faUsers} className="text-[24px]" />
                 </span>
-                <div className="leading-normal">
+                <div>
                   <span className="font-medium text-lg text-brand-800">
                     Lower risk, better guests
                   </span>{" "}
                   — real profiles, mutuals, and verifications.
                 </div>
               </li>
-
               <li className="flex items-center gap-3">
-                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
+                <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-600">
                   <FontAwesomeIcon
                     icon={faDollarSign}
-                    className="text-[25px]"
+                    className="text-[24px]"
                   />
                 </span>
-                <div className="leading-normal">
+                <div>
                   <span className="font-medium text-lg text-brand-800">
                     Get paid
                   </span>{" "}
@@ -278,15 +281,16 @@ export default function HomePage() {
                 </div>
               </li>
             </ul>
+
+            <div className="mt-8">
+              <a
+                href="#waitlist"
+                className="inline-flex items-center justify-center rounded-md bg-brand-600 px-6 py-2 text-base font-medium text-slate-100 hover:bg-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300"
+              >
+                Join host waitlist
+              </a>
+            </div>
           </div>
-        </div>
-        <div className="mt-12 text-center">
-          <a
-            href="#waitlist"
-            className="inline-flex items-center justify-center rounded-md bg-brand-600 px-8 py-2 text-lg font-medium text-slate-100 hover:bg-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300"
-          >
-            Join waitlist
-          </a>
         </div>
       </section>
 
