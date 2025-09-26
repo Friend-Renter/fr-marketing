@@ -37,7 +37,7 @@ function Logo({ tone }) {
         loading="eager"
       />
       <span
-        className={`text-xl font-extrabold ${textTone} leading-4.5 tracking-[3px]`}
+        className={`text-xl font-extrabold ${textTone} leading-4.5 tracking-[2px]`}
       >
         Friend<br></br>Renter
       </span>
