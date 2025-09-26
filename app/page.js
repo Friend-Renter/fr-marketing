@@ -152,13 +152,13 @@ export default function HomePage() {
           {/* <div className="mt-3 mx-auto h-px w-90 bg-brand-400 rounded" /> */}
         </div>
 
-        <div className="mt-10 grid gap-12 px-2 lg:grid-cols-2 ">
+        <div className="mt-8 grid gap-12 px-2 lg:grid-cols-2 ">
           {/* Renters */}
           <div>
-            <h3 className="text-3xl text-center md:text-left font-semibold tracking-tight text-brand-900">
+            <h3 className="text-3xl text-left px-2 sm:px-0 font-semibold tracking-tight text-brand-900">
               Renters
             </h3>
-            <ul className="mt-4 space-y-4 px-2 text-brand-800">
+            <ul className="mt-4 sm:mt-6 space-y-4 px-2 text-brand-800">
               <li className="flex items-center gap-3">
                 <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
                   <FontAwesomeIcon icon={faIdBadge} className="text-[25px]" />
@@ -214,10 +214,10 @@ export default function HomePage() {
 
           {/* Hosts */}
           <div id="become-host">
-            <h3 className="text-3xl text-center md:text-left font-semibold tracking-tight text-brand-900">
+            <h3 className="text-3xl text-left px-2 sm:px-0 font-semibold tracking-tight text-brand-900">
               Hosts
             </h3>
-            <ul className="mt-3 px-2 space-y-4 text-brand-800">
+            <ul className="mt-4 sm:mt-6 px-2 space-y-4 text-brand-800">
               <li className="flex items-center gap-3">
                 <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-500">
                   <FontAwesomeIcon icon={faCarSide} className="text-[25px]" />
@@ -277,7 +277,7 @@ export default function HomePage() {
         <div className="mt-12 text-center">
           <a
             href="#waitlist"
-            className="inline-flex items-center justify-center rounded-md bg-brand-600 px-6 py-2 text-base font-medium text-slate-100 hover:bg-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300"
+            className="inline-flex items-center justify-center rounded-md bg-brand-600 px-8 py-2 text-lg font-medium text-slate-100 hover:bg-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300"
           >
             Join waitlist
           </a>
