@@ -107,45 +107,86 @@ export default function HomePage() {
         </div>
 
         {/* Content */}
-        <div className="mx-auto flex min-h-[85vh] sm:min-h-[80vh] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
-          <div className="w-full max-w-2xl">
-            {/* Early access pill */}
-            <div className="mb-1">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-3 py-1 text-xs font-medium text-white/95 backdrop-blur">
-                Early access • Limited cities
-              </span>
-            </div>
-            <h1 className="text-5xl font-bold leading-tight tracking-tight text-slate-100 sm:text-5xl md:text-6xl ">
-              Peer-to-peer vehicle sharing between friends.
-            </h1>
-            <p className="max-w-prose text-base text-slate-100 sm:text-lg font-sans">
-              Add a friend, get accepted, then pick up—simple. <br />
-              Join the early access waitlist for the FriendRenter app.
-            </p>
+        <div className="mx-auto flex min-h-[85vh] sm:min-h-[80vh] max-w-7xl items-center px-4 sm:px-6 lg:px-8 py-24 sm:py-0">
+          <div className="grid w-full items-center gap- sm:gap-10 lg:grid-cols-12">
+            {/* LEFT: copy + CTAs */}
+            <div className="lg:col-span-7">
+              {/* Early access pill */}
+              <div className="mb-3">
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-3 py-1 text-xs font-medium text-white/95 backdrop-blur">
+                  Early access • Limited cities
+                </span>
+              </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link
-                href="#waitlist"
-                aria-label="Join Early Access to the FriendRenter app"
-                className="inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium text-slate-100 bg-brand-600 hover:bg-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
-              >
-                Join Early Access
-              </Link>
-              <Link
-                href="#become-host"
-                aria-label="Become a Host (learn more)"
-                className="inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium text-slate-100/90 ring-1 ring-inset ring-white/60 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
-              >
-                Become a Host
-              </Link>
+              <h1 className="text-5xl font-bold leading-tight tracking-tight text-slate-100 sm:text-5xl md:text-6xl ">
+                Peer-to-peer vehicle sharing between friends.
+              </h1>
+              <p className="max-w-prose text-base text-slate-100 sm:text-lg font-sans">
+                Add a friend, get accepted, then pick up—simple. <br />
+                Join the early access waitlist for the FriendRenter app.
+              </p>
+
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Link
+                  href="#waitlist"
+                  className="inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium text-slate-100 bg-brand-600 hover:bg-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                  aria-label="Join Early Access to the FriendRenter app"
+                >
+                  Join Early Access
+                </Link>
+                <Link
+                  href="#become-host"
+                  className="inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium text-slate-100/90 ring-1 ring-inset ring-white/60 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                  aria-label="Become a Host"
+                >
+                  Become a Host
+                </Link>
+              </div>
+
+              <p className="mt-6 text-sm text-slate-100/80">
+                Launching soon — invites roll out by city. Get on the list.
+              </p>
             </div>
 
-            {/* Social proof / location teaser (optional lightweight) */}
-            <p className="mt-6 text-sm  text-slate-100/80">
-              Launching soon — be first in line in your city.
-            </p>
+            {/* RIGHT: phone mockup (image + bottom fade) */}
+            <div className="lg:col-span-5">
+              <div
+                className="relative mx-auto mt-6 w-[320px] sm:w-[260px] lg:w-[260px]  h-[420px] overflow-hidden md:h-auto"
+                aria-label="Preview of the FriendRenter app"
+              >
+                {/* Glow behind */}
+                <div
+                  className="pointer-events-none absolute -z-10 left-8 top-8 blur-2xl"
+                  aria-hidden="true"
+                  style={{
+                    width: 260,
+                    height: 260,
+                    background:
+                      "radial-gradient(60% 60% at 50% 50%, rgba(16,185,129,0.35), rgba(16,185,129,0) 70%)",
+                  }}
+                />
+
+                {/* Device mockup from Mockuphone */}
+                <Image
+                  src="/brand/hero-phone-mockup.png" // <-- put your exported mockup here
+                  alt="FriendRenter app preview"
+                  width={800} // any large intrinsic size, keeps it crisp
+                  height={1600}
+                  priority={false}
+                  sizes="(min-width:1024px) 36vw, 60vw"
+                  className="
+        w-full h-auto block object-top
+        [mask-image:linear-gradient(to_bottom,black_60%,transparent_65%)]
+        [-webkit-mask-image:linear-gradient(to_bottom,black_60%,transparent_65%)]
+        md:[mask-image:none]
+        md:[-webkit-mask-image:none]
+      "
+                />
+              </div>
+            </div>
           </div>
         </div>
+
         {/* End sentinel MUST be the last child inside #hero */}
         <div
           id="hero-sentinel-end"
