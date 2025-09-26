@@ -216,7 +216,7 @@ export default function LeadForm({
   }
 
   return (
-    <div className="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-card">
+    <div className="mt-4 space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-card">
       {step === 1 ? (
         <Step1Quick
           role={role}
@@ -313,6 +313,11 @@ export default function LeadForm({
       >
         Thanks! We’ll reach out as vehicles become available.
       </Modal>
+        {/* privacy note */}
+          <p className="mt-3 text-xs text-gray-600">
+            We’ll only use your email for FriendRenter updates and early access.
+            No sharing, no selling.
+          </p>
     </div>
   );
 }

@@ -493,8 +493,13 @@ export default function HomePage() {
       <CitiesSection />
 
       {/* FAQS */}
-      <section className="py-10 mx-auto max-w-5xl">
-        <h2 className="text-2xl font-semibold text-gray-900">FAQ</h2>
+      <section className="py-10 px-4 mx-auto max-w-5xl">
+        <h2 className="text-4xl font-bold tracking-tight text-brand-900 text-center">
+          FAQ
+        </h2>
+        <p className="mt-2 text-sm text-brand-700 text-center">
+          Answers to the most common questions.
+        </p>
         <div className="mt-4">
           <Accordion items={homeFaq} />
         </div>
@@ -519,18 +524,34 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* WAITLIST FORM (anchor only; plug in your component or keep simple form) */}
+      {/* WAITLIST / LEAD FORM */}
       <section
         id="waitlist"
         className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 scroll-mt-8 md:scroll-mt-10"
       >
-        <h2 className="text-2xl font-semibold tracking-tight text-brand-900">
-          Be first in line
-        </h2>
-        <p className="mb-4 mt-1 text-brand-700">
-          Tell us how you plan to use FriendRenter (rent, host, or both) and
-          your city. We’ll send next steps soon.
-        </p>
+        <div className="text-center">
+          <h2 className="text-4xl font-bold tracking-tight text-brand-900">
+            Be First In Line
+          </h2>
+          <p className="mt-2 text-sm text-brand-700">
+            Tell us how you plan to use FriendRenter (rent, host, or both) and
+            your city.
+          </p>
+
+          {/* tiny value badges (optional but nice) */}
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs">
+            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 font-medium text-emerald-700 ring-1 ring-emerald-200">
+              <FontAwesomeIcon icon={faUserPlus} className="text-[12px]" />
+              Early access invites
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-gray-50 px-2.5 py-1 font-medium text-gray-700 ring-1 ring-gray-200">
+              <FontAwesomeIcon icon={faShieldHalved} className="text-[12px]" />
+              No spam. Unsubscribe anytime.
+            </span>
+          </div>
+        </div>
+
+        {/* Card wrapper for the form */}
 
         <LeadForm defaultRole="host" pageSource="landing" />
       </section>
