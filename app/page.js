@@ -385,120 +385,119 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="mt-8 overflow-x-auto">
-          <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-card">
-            <table className="w-full min-w-[720px] border-separate border-spacing-0">
-              <thead>
-                <tr>
-                  <th className="bg-brand-50 px-4 py-3 text-left text-base font-semibold text-brand-900">
-                    Feature
-                  </th>
-                  <th className="bg-brand-50 px-4 py-3 text-center text-base font-semibold text-brand-900">
-                    FriendRenter
-                  </th>
-                  <th className="bg-gray-50 px-4 py-3 text-center text-base font-semibold text-gray-900">
-                    Traditional Rentals
-                  </th>
-                  {/* <th className="bg-gray-50 px-4 py-3 text-left text-base font-semibold text-gray-900">
-                  Other P2P
-                </th> */}
-                </tr>
-              </thead>
-              <tbody className="text-base">
-                {[
-                  {
-                    label: "Book between friends",
-                    fr: true,
-                    tr: false,
-                    p2p: "maybe",
-                  },
-                  {
-                    label: "Host approval required",
-                    fr: true,
-                    tr: false,
-                    p2p: "sometimes",
-                  },
-                  {
-                    label: "Photo check-in/out & receipts",
-                    fr: true,
-                    tr: false,
-                    p2p: "varies",
-                  },
-                  {
-                    label: "No counter lines",
-                    fr: true,
-                    tr: false,
-                    p2p: true,
-                  },
-                  {
-                    label: "Transparent, app-first experience",
-                    fr: true,
-                    tr: false,
-                    p2p: "varies",
-                  },
-                  {
-                    label: "Local, flexible meetup",
-                    fr: true,
-                    tr: false,
-                    p2p: true,
-                  },
-                ].map((row, i) => (
-                  <tr
-                    key={row.label}
-                    className="border-b border-gray-200 last:border-b-0"
-                  >
-                    <td className="px-4 py-3 font-normal text-gray-900">
-                      {row.label}
-                    </td>
+        {/* Responsive compare: cards on mobile, table on md+ */}
+        <div className="mt-8">
+          {/* Mobile (stacked cards) */}
+          <div className="md:hidden space-y-3">
+            {[
+              { label: "Book between friends", fr: true, tr: false },
+              { label: "Host approval required", fr: true, tr: false },
+              { label: "Photo check-in/out & receipts", fr: true, tr: false },
+              { label: "No counter lines", fr: true, tr: false },
+              {
+                label: "Transparent, app-first experience",
+                fr: true,
+                tr: false,
+              },
+              { label: "Local, flexible meetup", fr: true, tr: false },
+            ].map((row) => (
+              <div
+                key={row.label}
+                className="rounded-lg border border-gray-200 bg-white p-4 shadow-card"
+              >
+                <div className="text-sm font-medium text-gray-900">
+                  {row.label}
+                </div>
+                <div className="mt-2 grid grid-cols-2 gap-3">
+                  {/* FriendRenter */}
+                  <div className="flex items-center justify-center gap-2">
+                    <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-200">
+                      FriendRenter
+                    </span>
+                    <span className="inline-flex items-center text-emerald-700">
+                      <FontAwesomeIcon icon={faCheck} className="text-[14px]" />
+                      <span className="sr-only">Yes</span>
+                    </span>
+                  </div>
+                  {/* Traditional */}
+                  <div className="flex items-center justify-center gap-2">
+                    <span className="inline-flex items-center rounded-full bg-gray-50 px-2 py-0.5 text-xs font-semibold text-gray-700 ring-1 ring-gray-200">
+                      Traditional
+                    </span>
+                    <span className="inline-flex items-center text-gray-500">
+                      <FontAwesomeIcon icon={faMinus} className="text-[14px]" />
+                      <span className="sr-only">No</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
 
-                    {/* FriendRenter */}
-                    <td className="px-4 py-3 text-center">
-                      <span className="inline-flex items-center text-brand-700">
-                        <FontAwesomeIcon
-                          icon={faCheck}
-                          className="mr-2 text-[16px]"
-                        />
-                        <span className="sr-only">Yes</span>
-                      </span>
-                    </td>
-
-                    {/* Traditional */}
-                    <td className="px-4 py-3 text-center">
-                      <span className="inline-flex items-center text-gray-500">
-                        <FontAwesomeIcon
-                          icon={faMinus}
-                          className="mr-2 text-[16px]"
-                        />
-                        <span className="sr-only">No</span>
-                      </span>
-                    </td>
-
-                    {/* Other P2P */}
-                    {/* <td className="px-4 py-3">
-                    {row.p2p === true ? (
-                      <span className="inline-flex items-center text-brand-700">
-                        <FontAwesomeIcon
-                          icon={faCheck}
-                          className="mr-2 text-[16px]"
-                        />
-                        <span className="sr-only">Yes</span>
-                      </span>
-                    ) : row.p2p === false ? (
-                      <span className="inline-flex items-center text-gray-500">
-                        <FontAwesomeIcon
-                          icon={faMinus}
-                          className="mr-2 text-[16px]"
-                        />
-                        <span className="sr-only">No</span>
-                      </span>
-                    ) : (
-                      <span className="text-gray-600">varies</span>
-                    )}
-                  </td> */}
+          {/* Desktop (table) */}
+          <div className="hidden md:block overflow-x-auto">
+            <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-card">
+              <table className="w-full border-separate border-spacing-0">
+                <thead>
+                  <tr>
+                    <th className="bg-brand-50 px-4 py-3 text-left text-base font-semibold text-brand-900">
+                      Feature
+                    </th>
+                    <th className="bg-brand-50 px-4 py-3 text-center text-base font-semibold text-brand-900">
+                      FriendRenter
+                    </th>
+                    <th className="bg-gray-50 px-4 py-3 text-center text-base font-semibold text-gray-900">
+                      Traditional Rentals
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="text-base">
+                  {[
+                    { label: "Book between friends", fr: true, tr: false },
+                    { label: "Host approval required", fr: true, tr: false },
+                    {
+                      label: "Photo check-in/out & receipts",
+                      fr: true,
+                      tr: false,
+                    },
+                    { label: "No counter lines", fr: true, tr: false },
+                    {
+                      label: "Transparent, app-first experience",
+                      fr: true,
+                      tr: false,
+                    },
+                    { label: "Local, flexible meetup", fr: true, tr: false },
+                  ].map((row) => (
+                    <tr
+                      key={row.label}
+                      className="border-b border-gray-200 last:border-b-0"
+                    >
+                      <td className="px-4 py-3 font-normal text-gray-900">
+                        {row.label}
+                      </td>
+                      <td className="px-4 py-3 text-center">
+                        <span className="inline-flex items-center text-brand-700">
+                          <FontAwesomeIcon
+                            icon={faCheck}
+                            className="mr-2 text-[16px]"
+                          />
+                          <span className="sr-only">Yes</span>
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-center">
+                        <span className="inline-flex items-center text-gray-500">
+                          <FontAwesomeIcon
+                            icon={faMinus}
+                            className="mr-2 text-[16px]"
+                          />
+                          <span className="sr-only">No</span>
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
