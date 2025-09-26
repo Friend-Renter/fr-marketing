@@ -216,7 +216,7 @@ export default function LeadForm({
   }
 
   return (
-    <div className="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-card">
+    <div className="mt-4 space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-card">
       {step === 1 ? (
         <Step1Quick
           role={role}
@@ -286,7 +286,7 @@ export default function LeadForm({
       {/* Step 1 modal: CTA -> go to Step 2 */}
       <Modal
         open={openStep1Modal}
-        title="You're on the list!"
+        title="You're on the Early Access list!"
         onClose={() => {
           setOpenStep1Modal(false);
           setStep(2);
@@ -311,8 +311,13 @@ export default function LeadForm({
           if (typeof window !== "undefined") window.location.reload();
         }}
       >
-        Thanks! We’ll reach out as vehicles become available.
+        Thanks! We’ll send your app invite as your city opens.
       </Modal>
+      {/* privacy note */}
+      <p className="mt-3 text-xs text-gray-600">
+        We’ll only use your email for FriendRenter updates and early access. No
+        sharing, no selling.
+      </p>
     </div>
   );
 }

@@ -25,12 +25,12 @@ import CitiesSection from "@/components/CitiesSection";
 export const metadata = {
   title: "FriendRenter™ — Rent from friends (Coming Soon)",
   description:
-    "A friend-first rental marketplace. Add the host as a friend, get accepted, then book. A tighter, trust-first way to rent",
+    "A friend-first rental marketplace. Join early access to the FriendRenter app. Add the host as a friend, get accepted, then book.",
   openGraph: {
     images: [
       `/og?title=${encodeURIComponent(
         "Rent from friends"
-      )}&subtitle=${encodeURIComponent("Add • Accept • Book")}`,
+      )}&subtitle=${encodeURIComponent("Early Access • Add • Accept • Book")}`,
     ],
   },
   twitter: {
@@ -38,12 +38,16 @@ export const metadata = {
     images: [
       `/og?title=${encodeURIComponent(
         "Rent from friends"
-      )}&subtitle=${encodeURIComponent("Add • Accept • Book")}`,
+      )}&subtitle=${encodeURIComponent("Early Access • Add • Accept • Book")}`,
     ],
   },
 };
 
 const homeFaq = [
+  {
+    q: "Is the app available now?",
+    a: "We’re inviting early users city by city. Join the early access list and we’ll email your invite as your area opens.",
+  },
   {
     q: "Do I have to be friends to book?",
     a: "Yes. You add the host as a friend (or request + add at the same time). Once the host accepts, your booking can be confirmed.",
@@ -105,23 +109,31 @@ export default function HomePage() {
         {/* Content */}
         <div className="mx-auto flex min-h-[85vh] sm:min-h-[80vh] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
           <div className="w-full max-w-2xl">
+            {/* Early access pill */}
+            <div className="mb-1">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-3 py-1 text-xs font-medium text-white/95 backdrop-blur">
+                Early access • Limited cities
+              </span>
+            </div>
             <h1 className="text-5xl font-bold leading-tight tracking-tight text-slate-100 sm:text-5xl md:text-6xl ">
               Peer-to-peer vehicle sharing between friends.
             </h1>
-            <p className=" max-w-prose text-base text-slate-100 sm:text-lg font-sans">
-              Add a friend, get accepted, then pick up—simple. <br></br>A
-              tighter, trust-first way to rent local cars.
+            <p className="max-w-prose text-base text-slate-100 sm:text-lg font-sans">
+              Add a friend, get accepted, then pick up—simple. <br />
+              Join the early access waitlist for the FriendRenter app.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
                 href="#waitlist"
+                aria-label="Join Early Access to the FriendRenter app"
                 className="inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium text-slate-100 bg-brand-600 hover:bg-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               >
-                Join the Waitlist
+                Join Early Access
               </Link>
               <Link
                 href="#become-host"
+                aria-label="Become a Host (learn more)"
                 className="inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium text-slate-100/90 ring-1 ring-inset ring-white/60 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               >
                 Become a Host
@@ -142,7 +154,6 @@ export default function HomePage() {
         />
       </section>
 
-      {/* HOW IT WORKS */}
       {/* HOW IT WORKS — Option 2: Column wrapper cards */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="text-center">
@@ -308,7 +319,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {/* Friends-only booking */}
           <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-card">
             <div className="flex items-center gap-3">
@@ -493,8 +504,13 @@ export default function HomePage() {
       <CitiesSection />
 
       {/* FAQS */}
-      <section className="py-10 mx-auto max-w-5xl">
-        <h2 className="text-2xl font-semibold text-gray-900">FAQ</h2>
+      <section className="py-10 px-4 mx-auto max-w-5xl">
+        <h2 className="text-4xl font-bold tracking-tight text-brand-900 text-center">
+          FAQ
+        </h2>
+        <p className="mt-2 text-sm text-brand-700 text-center">
+          Answers to the most common questions.
+        </p>
         <div className="mt-4">
           <Accordion items={homeFaq} />
         </div>
@@ -507,8 +523,9 @@ export default function HomePage() {
             Ready when your friends are.
           </h3>
           <p className="mt-1 text-sm text-gray-700">
-            Renters add hosts as friends and book with confidence; hosts approve
-            friends and stay in control—coming soon.
+            Join early access to the FriendRenter app. Renters add hosts as
+            friends and book with confidence; hosts approve friends and stay in
+            control.
           </p>
           <div className="mt-4">
             <Link href="#waitlist">
@@ -519,18 +536,34 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* WAITLIST FORM (anchor only; plug in your component or keep simple form) */}
+      {/* WAITLIST / LEAD FORM */}
       <section
         id="waitlist"
         className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 scroll-mt-8 md:scroll-mt-10"
       >
-        <h2 className="text-2xl font-semibold tracking-tight text-brand-900">
-          Be first in line
-        </h2>
-        <p className="mb-4 mt-1 text-brand-700">
-          Tell us how you plan to use FriendRenter (rent, host, or both) and
-          your city. We’ll send next steps soon.
-        </p>
+        <div className="text-center">
+          <h2 className="text-4xl font-bold tracking-tight text-brand-900">
+            Be First In Line
+          </h2>
+          <p className="mt-2 text-sm text-brand-700">
+            Tell us how you plan to use FriendRenter (rent, host, or both) and
+            your city.
+          </p>
+
+          {/* tiny value badges (optional but nice) */}
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs">
+            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 font-medium text-emerald-700 ring-1 ring-emerald-200">
+              <FontAwesomeIcon icon={faUserPlus} className="text-[12px]" />
+              Early access invites
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-gray-50 px-2.5 py-1 font-medium text-gray-700 ring-1 ring-gray-200">
+              <FontAwesomeIcon icon={faShieldHalved} className="text-[12px]" />
+              No spam. Unsubscribe anytime.
+            </span>
+          </div>
+        </div>
+
+        {/* Card wrapper for the form */}
 
         <LeadForm defaultRole="host" pageSource="landing" />
       </section>

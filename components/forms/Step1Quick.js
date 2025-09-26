@@ -131,7 +131,7 @@ export default function Step1Quick({
           className="h-4 w-4"
         />
         <label htmlFor="consent" className="text-sm text-gray-700">
-          I agree to be contacted about FR.{" "}
+          I agree to be contacted about FriendRenter™.{" "}
           <a href="/legal/privacy" className="underline">
             Privacy Policy
           </a>
