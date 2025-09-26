@@ -304,24 +304,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Trust by design */}
-          <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-card">
-            <div className="flex items-center gap-3">
-              <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-600">
-                <FontAwesomeIcon
-                  icon={faShieldHalved}
-                  className="text-[24px]"
-                />
-              </span>
-              <h3 className="font-semibold text-gray-900">Trust by design</h3>
-            </div>
-            <p className="mt-2 text-sm text-gray-700">
-              Bookings only happen between friends (or soon-to-be). Add → accept
-              → book.
-            </p>
-          </div>
-
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {/* Friends-only booking */}
           <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-card">
             <div className="flex items-center gap-3">
@@ -333,8 +316,22 @@ export default function HomePage() {
               </h3>
             </div>
             <p className="mt-2 text-sm text-gray-700">
-              You add the host as a friend, they accept, then your trip is
-              confirmed.
+              Bookings only happen between friends (or soon-to-be). Add → accept
+              → book.
+            </p>
+          </div>
+
+          {/* Local convenience */}
+          <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-card">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-600">
+                <FontAwesomeIcon icon={faLocationDot} className="text-[24px]" />
+              </span>
+              <h3 className="font-semibold text-gray-900">Local convenience</h3>
+            </div>
+            <p className="mt-2 text-sm text-gray-700">
+              Meet where it’s easy for both of you. No counter lines, no upsell
+              desk.
             </p>
           </div>
 
@@ -352,20 +349,6 @@ export default function HomePage() {
             <p className="mt-2 text-sm text-gray-700">
               Manage friends, requests, and trips from your phone. Photo
               check-in/out built in.
-            </p>
-          </div>
-
-          {/* Local convenience */}
-          <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-card">
-            <div className="flex items-center gap-3">
-              <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-600">
-                <FontAwesomeIcon icon={faLocationDot} className="text-[24px]" />
-              </span>
-              <h3 className="font-semibold text-gray-900">Local convenience</h3>
-            </div>
-            <p className="mt-2 text-sm text-gray-700">
-              Meet where it’s easy for both of you. No counter lines, no upsell
-              desk.
             </p>
           </div>
         </div>
@@ -386,7 +369,7 @@ export default function HomePage() {
         </div>
 
         {/* Responsive compare: cards on mobile, table on md+ */}
-        <div className="mt-8">
+        <div className="mt-6">
           {/* Mobile (stacked cards) */}
           <div className="md:hidden space-y-3">
             {[
