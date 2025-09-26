@@ -135,7 +135,7 @@ export default function HomePage() {
                   Join Early Access
                 </Link>
                 <Link
-                  href="#become-host"
+                  href="#waitlist"
                   className="inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-medium text-slate-100/90 ring-1 ring-inset ring-white/60 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                   aria-label="Become a Host"
                 >
