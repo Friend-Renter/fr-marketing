@@ -142,10 +142,6 @@ export default function HomePage() {
                   Become a Host
                 </Link>
               </div>
-
-              <p className="mt-6 text-sm text-slate-100/80">
-                Launching soon — invites roll out by city. Get on the list.
-              </p>
             </div>
 
             {/* RIGHT: phone mockup (image + bottom fade) */}
