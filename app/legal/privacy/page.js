@@ -1,4 +1,6 @@
 // app/privacy/page.tsx (or wherever your route lives)
+import Link from "next/link";
+
 export default function PrivacyPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
@@ -35,9 +37,13 @@ export default function PrivacyPage() {
         </p>
         <p className="mt-2 text-gray-700">
           Use of the Site is also subject to our{" "}
-          <a className="text-brand-700 underline" href="/legal/terms">
+          <Link
+            className="text-brand-700 underline"
+            href="/legal/terms"
+            prefetch={false}
+          >
             Terms of Use
-          </a>
+          </Link>
           .{" "}
         </p>
         {/* Divider */}
