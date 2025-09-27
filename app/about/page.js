@@ -117,7 +117,7 @@ export default function AboutPage() {
               role: "Founder & CEO",
               oneLiner:
                 "Community-driven operator focused on practical, fair sharing.",
-              imageSrc: "/brand/personplaceholder.png", // TODO: add your headshot
+              imageSrc: "/brand/asa.jpg",
               bio: `Asa leads FriendRenter’s vision and operations. Obsessed with
 making sharing safe, simple, and respectful for everyone involved.`,
               languages: ["English"],
@@ -128,11 +128,10 @@ making sharing safe, simple, and respectful for everyone involved.`,
               role: "Co-founder & CTO",
               oneLiner:
                 "Full-stack builder leading product, app, and safety systems.",
-              imageSrc: "/brand/omar.jpg", // TODO: add your headshot
+              imageSrc: "/brand/omar.jpg",
               bio: `Omar builds the friend-to-friend flow under the hood: real profiles, approvals, receipts, and the photo 
               evidence system that keeps everyone honest. As Co-founder & CTO, he runs product and engineering end-to-end. 
-              He’s big on entrepreneurship and keeping money local — if it helps people be their own boss, he’s building it. 
-              Favorite hobbies: deleting code, exterminating bugs, and saying “one more deploy.`,
+              He’s big on entrepreneurship and keeping money local — if it helps people be their own boss, he’s building it.`,
               languages: ["English", "Español", "日本語(少し)"],
               favorites: ["Nissan Z (all gens)", "Porsche (911/718)"],
             },

@@ -60,8 +60,7 @@ export default function TeamSection({ members = [] }) {
             {/* Optional mini chips (show up to 2 across languages/favorites) */}
             {(() => {
               const langs = Array.isArray(m.languages) ? m.languages : [];
-              const favs = Array.isArray(m.favorites) ? m.favorites : [];
-              const chips = [...langs, ...favs].slice(0, 5);
+              const chips = [...langs].slice(0, 3);
               if (chips.length === 0) return null;
               return (
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -108,6 +107,7 @@ export default function TeamSection({ members = [] }) {
             oneLiner: "",
             imageSrc: "",
             bio: "",
+
             languages: [],
             favorites: [],
           }
