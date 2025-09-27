@@ -33,7 +33,13 @@ export default function PrivacyPage() {
           </a>
           .
         </p>
-
+        <p className="mt-2 text-gray-700">
+          Use of the Site is also subject to our{" "}
+          <a className="text-brand-700 underline" href="/legal/terms">
+            Terms of Use
+          </a>
+          .{" "}
+        </p>
         {/* Divider */}
         <hr className="my-6 border-gray-200" />
 
