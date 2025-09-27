@@ -35,7 +35,7 @@ export default function WhyFriendRenterPage() {
       </header>
 
       {/* Card */}
-      <article className="mt-10 bg-white p-6 sm:p-8 max-w-none">
+      <article className="mt-6 bg-white py-6 sm:p-8 max-w-none">
         {/* What we are */}
         <section id="what-we-are">
           <h2 className="text-xl font-semibold text-gray-900">What we are</h2>
@@ -52,7 +52,7 @@ export default function WhyFriendRenterPage() {
           <div className="mt-3 grid gap-6 sm:grid-cols-2">
             <div>
               <h3 className="font-medium text-gray-900">For hosts</h3>
-              <ul className="mt-2 list-disc pl-5 text-gray-700">
+              <ul className="mt-2 list-disc  text-gray-700 px-5">
                 <li>Be your own boss: set daily rates, deposits, and minimum renter age.</li>
                 <li>Share your vehicle details and verify your account (18+ to host).</li>
                 <li>Approve who counts as a “friend” before they can book.</li>
@@ -60,7 +60,7 @@ export default function WhyFriendRenterPage() {
             </div>
             <div>
               <h3 className="font-medium text-gray-900">For renters</h3>
-              <ul className="mt-2 list-disc pl-5 text-gray-700">
+              <ul className="mt-2 list-disc px-5 text-gray-700">
                 <li>Book from people you know. Keep it local and simple with mobile booking.</li>
                 <li>Skip the counter — communicate directly and know who you’re renting from.</li>
                 <li>Clear paper trail with check-in/out photos, condition notes, and receipts.</li>
@@ -76,7 +76,7 @@ export default function WhyFriendRenterPage() {
         {/* Trust & Safety */}
         <section id="trust" className="mt-8">
           <h2 className="text-xl font-semibold text-gray-900">Trust &amp; safety built in</h2>
-          <ul className="mt-3 list-disc pl-5 text-gray-700">
+          <ul className="mt-3 list-disc px-5 text-gray-700">
             <li><strong>Verification:</strong> KYC/ID checks at sign-up. Hosts are 18+; hosts set renter age minimums (e.g., 21+ or higher for certain vehicles).</li>
             <li><strong>Approvals:</strong> Hosts approve friends before booking; first-time requests include a friend request + booking request.</li>
             <li><strong>Coverage:</strong> Rentals include baseline liability coverage, and renters can purchase optional protection plans for their trip.</li>
@@ -88,7 +88,7 @@ export default function WhyFriendRenterPage() {
         {/* What makes us different */}
         <section id="why-different" className="mt-8">
           <h2 className="text-xl font-semibold text-gray-900">What makes us different</h2>
-          <ul className="mt-3 list-disc pl-5 text-gray-700">
+          <ul className="mt-3 list-disc px-5 text-gray-700">
             <li><strong>Friends-first access:</strong> No randos. Hosts choose who can book.</li>
             <li><strong>Trust inside the flow:</strong> Verification, approvals, and check-ins are part of booking — not a bolt-on.</li>
             <li><strong>Owner control:</strong> You set rates, deposits, and age minimums.</li>

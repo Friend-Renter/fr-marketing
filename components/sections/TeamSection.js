@@ -90,7 +90,7 @@ export default function TeamSection({ members = [] }) {
             {/* Decorative background blob */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-brand-50"
+              className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-brand-100"
             />
           </article>
         ))}
