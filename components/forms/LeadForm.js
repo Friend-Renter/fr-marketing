@@ -1,7 +1,7 @@
 // components/forms/LeadForm.jsx
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import Step1Quick from "./Step1Quick";
 import Step2Host from "./Step2Host";
@@ -13,34 +13,25 @@ const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 /**
  * Role-aware, 2-step Lead form shell.
- * Back-compat:
- *  - accepts `type` prop from old usage ("host" | "renter")
- *  - maps to defaultRole for Step 2 routing
+ * Notes:
+ * - Accepts either `pageSourceBase` (preferred) OR legacy `pageSource`.
+ *   If `pageSourceBase` is provided, we will submit `pageSource = `${pageSourceBase}_${role}``.
+ *   If not, we use the provided `pageSource` prop (e.g., "landing").
  */
 export default function LeadForm({
-  defaultRole,
-  pageSource = "landing",
-  citySlug,
-  // legacy prop:
-  type,
+  defaultRole = "host",        // 'host' | 'renter' | 'both'
+  pageSourceBase,              // e.g., "city_lincoln-ne"
+  pageSource = "site",         // legacy usage (e.g., landing page)
+  citySlug,                    // optional city hint
 }) {
-  // Back-compat mapping
-  const initialRole = useMemo(() => {
-    if (defaultRole) return defaultRole;
-    if (type === "host") return "host";
-    if (type === "renter") return "renter";
-    // Landing default: host (as requested)
-    return "host";
-  }, [defaultRole, type]);
-
-  const [role, setRole] = useState(initialRole); // 'host' | 'renter' | 'both'
-  const [step, setStep] = useState(1); // 1 or 2
+  const [role, setRole] = useState(defaultRole); // 'host' | 'renter' | 'both'
+  const [step, setStep] = useState(1);           // 1 or 2
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(null); // { ok, msg }
+  const [status, setStatus] = useState(null);    // { ok: boolean, msg: string }
   const [leadEmail, setLeadEmail] = useState(""); // key for enrich
   const [savedAt, setSavedAt] = useState(null);
-
   const [resetSignal, setResetSignal] = useState(0);
+
   const [openStep1Modal, setOpenStep1Modal] = useState(false);
   const [openStep2Modal, setOpenStep2Modal] = useState(false);
 
@@ -49,11 +40,13 @@ export default function LeadForm({
   // Utilities
   const getIdem = () => {
     try {
+      // Browser crypto (no import needed)
       return crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random()}`;
     } catch {
       return `${Date.now()}-${Math.random()}`;
     }
   };
+
   const getUtm = () => {
     if (typeof window === "undefined") return {};
     const u = new URL(window.location.href);
@@ -62,7 +55,6 @@ export default function LeadForm({
       utmMedium: u.searchParams.get("utm_medium") || undefined,
       utmCampaign: u.searchParams.get("utm_campaign") || undefined,
       referrer: document?.referrer || undefined,
-      pageSource,
     };
   };
 
@@ -75,6 +67,12 @@ export default function LeadForm({
     try {
       captchaToken = await recaptchaRef.current?.executeAsync?.();
     } catch {}
+
+    // Prefer pageSourceBase → compose with current role; else fallback to legacy pageSource prop
+    const computedSource = pageSourceBase
+      ? `${pageSourceBase}_${role}`
+      : pageSource || "site";
+
     try {
       const payload = {
         firstName: values.firstName?.trim(),
@@ -87,8 +85,10 @@ export default function LeadForm({
         captchaToken,
         honeypot: values.honeypot || "",
         citySlug: citySlug || "",
+        pageSource: computedSource,
         ...getUtm(),
       };
+
       const res = await fetch(`${API_BASE}/v1/leads`, {
         method: "POST",
         headers: {
@@ -97,36 +97,31 @@ export default function LeadForm({
         },
         body: JSON.stringify(payload),
       });
+
       // safe body read
       let data = null;
       try {
         const t = await res.text();
         data = t ? JSON.parse(t) : null;
       } catch {}
+
       if (res.ok) {
         setLeadEmail(payload.email);
-        setStatus({
-          ok: true,
-          msg: "Thanks! Add a few details to skip the line.",
-        });
+        setStatus({ ok: true, msg: "Thanks! Add a few details to skip the line." });
         setStep(2);
-        setStatus({
-          ok: true,
-          msg: "Thanks! Add a few details to skip the line.",
-        });
         setOpenStep1Modal(true); // show CTA
         return;
       }
-      if (res.status === 429)
-        return setStatus({
-          ok: false,
-          msg: "Too many requests. Try again later.",
-        });
-      if (res.status === 401)
-        return setStatus({
-          ok: false,
-          msg: "Captcha check failed. Please try again.",
-        });
+
+      if (res.status === 429) {
+        setStatus({ ok: false, msg: "Too many requests. Try again later." });
+        return;
+      }
+      if (res.status === 401) {
+        setStatus({ ok: false, msg: "Captcha check failed. Please try again." });
+        return;
+      }
+
       setStatus({
         ok: false,
         msg: (data && data.message) || `http_${res.status}`,
@@ -153,17 +148,17 @@ export default function LeadForm({
     try {
       captchaToken = await recaptchaRef.current?.executeAsync?.();
     } catch {}
+
     try {
       const body = { captchaToken };
       if (hostDetails) body.hostDetails = hostDetails;
       if (renterDetails) body.renterDetails = renterDetails;
+
       if (!leadEmail) {
-        setStatus({
-          ok: false,
-          msg: "Missing email context. Please complete Step 1.",
-        });
+        setStatus({ ok: false, msg: "Missing email context. Please complete Step 1." });
         return;
       }
+
       const res = await fetch(
         `${API_BASE}/v1/leads/enrich?email=${encodeURIComponent(leadEmail)}`,
         {
@@ -175,29 +170,30 @@ export default function LeadForm({
           body: JSON.stringify(body),
         }
       );
+
       let data = null;
       try {
         const t = await res.text();
         data = t ? JSON.parse(t) : null;
       } catch {}
+
       if (res.ok) {
         setSavedAt(new Date());
-        setStatus({ ok: true, msg: "Saved. You’re at the front of the line." });
         setStatus({ ok: true, msg: "Saved. You’re at the front of the line." });
         setResetSignal((n) => n + 1); // clear Step 2 forms
         setOpenStep2Modal(true);
         return;
       }
-      if (res.status === 429)
-        return setStatus({
-          ok: false,
-          msg: "Too many updates today. Try later.",
-        });
-      if (res.status === 401)
-        return setStatus({
-          ok: false,
-          msg: "Captcha check failed. Please try again.",
-        });
+
+      if (res.status === 429) {
+        setStatus({ ok: false, msg: "Too many updates today. Try later." });
+        return;
+      }
+      if (res.status === 401) {
+        setStatus({ ok: false, msg: "Captcha check failed. Please try again." });
+        return;
+      }
+
       setStatus({
         ok: false,
         msg: (data && data.message) || `http_${res.status}`,

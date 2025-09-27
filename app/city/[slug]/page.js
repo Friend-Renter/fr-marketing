@@ -50,11 +50,10 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function CityPage({ params }) {
+export default async function CityPage({ params, searchParams }) {
   const { slug } = await params; // ✅ await the Params object
   const city = getCityContent(slug);
   if (!city) return notFound();
-  console.log("heroBg:", city?.hero?.bgImage);
   const heroBg = city?.hero?.bgImage;
   const badge = city?.hero?.badge || "Friends-first rentals";
   const headline =
@@ -62,6 +61,36 @@ export default async function CityPage({ params }) {
   const subhead =
     city?.hero?.subhead || "Verified people, clear protections, simple pickup.";
 
+  // Defaults (no back-compat):
+  const qType = (searchParams?.type || "").toString().toLowerCase();
+  const defaultRole = ["host", "renter", "both"].includes(qType)
+    ? qType
+    : city?.defaults?.role || "host";
+  const pageSourceBase = `city_${city.id}`;
+  const editorial = city?.editorial || {};
+  const thingsToDo = Array.isArray(editorial.thingsToDo)
+    ? editorial.thingsToDo
+    : [];
+  const howItWorks =
+    Array.isArray(editorial.howItWorks) && editorial.howItWorks.length
+      ? editorial.howItWorks
+      : [
+          {
+            step: 1,
+            title: "Add a friend",
+            desc: "Verify your ID and circle.",
+          },
+          {
+            step: 2,
+            title: "Request & confirm",
+            desc: "Pick a car, agree on details, lock it in.",
+          },
+          {
+            step: 3,
+            title: "Meet & go",
+            desc: "Public meetup, quick photos, keys, done.",
+          },
+        ];
   return (
     <div className="mx-auto max-w-6xl px-4">
       {/* HERO */}
@@ -138,66 +167,47 @@ export default async function CityPage({ params }) {
         </div>
       </section>
 
-      {/* WHY HERE / VALUE PROPS */}
-      {Array.isArray(city.valueProps) && city.valueProps.length > 0 ? (
-        <section className="mt-8 grid gap-6 md:grid-cols-3">
-          {city.valueProps.map((v, i) => (
-            <div
-              key={i}
-              className="rounded-lg border border-gray-200 bg-white p-5 shadow-card"
-            >
-              <h3 className="font-semibold text-gray-900">{v.title}</h3>
-              <p className="mt-1 text-sm text-gray-700">{v.desc}</p>
-            </div>
+      {/* MAKE THE MOST OF {CITY} (flavor list) */}
+      {thingsToDo.length > 0 && (
+        <section className="py-8">
+          <h2 className="text-xl font-semibold text-gray-900">
+            Make the most of {city.cityName}
+          </h2>
+          <ul className="mt-4 space-y-3">
+            {thingsToDo.map((t, i) => (
+              <li key={i} className="leading-snug text-gray-800">
+                <span className="mr-2">•</span>
+                <span className="font-medium">{t.title}</span>
+                {t.desc ? (
+                  <span className="text-gray-700"> — {t.desc}</span>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* HOW IT WORKS HERE (compact inline) */}
+      <section className="py-6">
+        <h2 className="text-xl font-semibold text-gray-900">
+          How it works here
+        </h2>
+        <ol className="mt-4 grid gap-3 sm:grid-cols-3">
+          {howItWorks.map((s, i) => (
+            <li key={i} className="leading-snug">
+              <div className="text-xs font-semibold text-brand-700">
+                Step {s.step ?? i + 1}
+              </div>
+              <div className="font-medium text-gray-900">{s.title}</div>
+              {s.desc ? (
+                <div className="text-sm text-gray-700">{s.desc}</div>
+              ) : null}
+            </li>
           ))}
-        </section>
-      ) : null}
+        </ol>
+      </section>
 
-      {/* HOW PICKUP WORKS LOCALLY */}
-      {Array.isArray(city.howItWorksLocal) &&
-      city.howItWorksLocal.length > 0 ? (
-        <section className="py-10">
-          <h2 className="text-xl font-semibold text-gray-900">
-            How pickup works here
-          </h2>
-          <div className="mt-4 grid gap-4 md:grid-cols-3">
-            {city.howItWorksLocal.map((s, i) => (
-              <div
-                key={i}
-                className="rounded-lg border border-gray-200 bg-white p-4 shadow-card"
-              >
-                <div className="text-xs font-semibold text-brand-700">
-                  Step {s.step ?? i + 1}
-                </div>
-                <div className="mt-1 font-medium text-gray-900">{s.title}</div>
-                <div className="mt-1 text-sm text-gray-700">{s.desc}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {/* POPULAR PICKUP AREAS */}
-      {Array.isArray(city.pickupAreas) && city.pickupAreas.length > 0 ? (
-        <section className="py-6">
-          <h2 className="text-xl font-semibold text-gray-900">
-            Popular pickup areas
-          </h2>
-          <div className="mt-4 grid gap-3 md:grid-cols-2">
-            {city.pickupAreas.map((a, i) => (
-              <div
-                key={i}
-                className="rounded-lg border border-gray-200 bg-white p-4 shadow-card"
-              >
-                <div className="font-medium text-gray-900">{a.name}</div>
-                <div className="text-sm text-gray-700">{a.tip}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {/* FAQ */}
+      {/* FAQ (moved up, before form) */}
       {Array.isArray(city.faq) && city.faq.length > 0 ? (
         <section className="py-8">
           <h2 className="text-xl font-semibold text-gray-900">FAQ</h2>
@@ -207,36 +217,20 @@ export default async function CityPage({ params }) {
         </section>
       ) : null}
 
-      {/* GET STARTED (FORMS) */}
+      {/* GET STARTED (single unified form) */}
       <section className="py-12">
         <h2 className="text-xl font-semibold text-gray-900">
           Get started in {city.cityName}
         </h2>
-        <div className="mt-4 grid gap-6 md:grid-cols-2">
-          <div>
-            <h3 className="font-medium text-gray-900">Hosts</h3>
-            <p className="mt-1 text-sm text-gray-700">
-              List your car and start earning with your circle.
-            </p>
-            <div className="mt-3">
-              <LeadForm
-                defaultRole="host"
-                pageSource={`city_${city.id}_host`}
-              />
-            </div>
-          </div>
-          <div>
-            <h3 className="font-medium text-gray-900">Renters</h3>
-            <p className="mt-1 text-sm text-gray-700">
-              Join the waitlist for {city.cityName}.
-            </p>
-            <div className="mt-3">
-              <LeadForm
-                defaultRole="renter"
-                pageSource={`city_${city.id}_renter`}
-              />
-            </div>
-          </div>
+        <p className="mt-1 text-sm text-gray-700">
+          Pick your role, add your info, and we’ll follow up for early access.
+        </p>
+        <div className="mt-4">
+          <LeadForm
+            defaultRole={defaultRole}
+            // Let the form compute pageSource with current radio role:
+            pageSourceBase={`city_${city.id}`}
+          />
         </div>
       </section>
 
