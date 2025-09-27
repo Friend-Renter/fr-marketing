@@ -22,7 +22,7 @@ export default function AboutPage() {
         {/* CTAs */}
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button
-            href="/#waitlist?type=host"
+            href="/#waitlist"
             variant="primary"
             ctaId="cta_about_host"
             prefetch={false}
@@ -30,7 +30,7 @@ export default function AboutPage() {
             Join host early access
           </Button>
           <Button
-            href="/#waitlist?type=renter"
+            href="/#waitlist"
             variant="outline"
             ctaId="cta_about_renter"
             prefetch={false}
@@ -41,7 +41,7 @@ export default function AboutPage() {
       </header>
 
       {/* Card */}
-      <article className="mt-10 bg-white p-6 sm:p-8 max-w-none">
+      <article className=" bg-white p-6 sm:p-8 max-w-none">
         {/* What we are */}
         <section id="what-we-are">
           <h2 className="text-xl font-semibold text-gray-900">What we are</h2>
@@ -230,7 +230,7 @@ export default function AboutPage() {
             </p>
             <div className="mt-4 flex flex-col gap-3 sm:flex-row">
               <Button
-                href="/#waitlist?type=host"
+                href="/#waitlist"
                 variant="primary"
                 ctaId="cta_about_host_footer"
                 prefetch={false}
@@ -238,7 +238,7 @@ export default function AboutPage() {
                 Host early access
               </Button>
               <Button
-                href="/#waitlist?type=renter"
+                href="/#waitlist"
                 variant="outline"
                 ctaId="cta_about_renter_footer"
                 prefetch={false}
