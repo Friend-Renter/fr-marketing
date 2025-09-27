@@ -2,7 +2,12 @@
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
 
-export default function Step2Renter({ onSubmit, loading, savedAt, resetSignal }) {
+export default function Step2Renter({
+  onSubmit,
+  loading,
+  savedAt,
+  resetSignal,
+}) {
   const [pickup, setPickup] = useState({ city: "", state: "", zip5: "" });
   const [dates, setDates] = useState({
     earliestStart: "",
@@ -22,8 +27,17 @@ export default function Step2Renter({ onSubmit, loading, savedAt, resetSignal })
   useEffect(() => {
     if (resetSignal != null) {
       setPickup({ city: "", state: "", zip5: "" });
-      setDates({ earliestStart: "", latestStart: "", typicalDurationBand: "1-3" });
-      setPrefs({ bodyType: "No preference", seats: "5", transmission: "No preference", extras: [] });
+      setDates({
+        earliestStart: "",
+        latestStart: "",
+        typicalDurationBand: "1-3",
+      });
+      setPrefs({
+        bodyType: "No preference",
+        seats: "5",
+        transmission: "No preference",
+        extras: [],
+      });
       setBudgetBand("50_80");
       setAgeBand("25_plus");
       setNotes("");
@@ -51,36 +65,53 @@ export default function Step2Renter({ onSubmit, loading, savedAt, resetSignal })
   }
 
   return (
-    <form onSubmit={handleSave} className="rounded-lg border border-gray-200 p-4">
+    <form
+      onSubmit={handleSave}
+      className="rounded-lg border border-gray-200 p-4"
+    >
       <h3 className="text-lg font-semibold text-gray-900">Renter details</h3>
       <p className="mt-1 text-sm text-gray-600">What you’re looking for.</p>
 
       {/* pickup */}
       <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
         <div>
-          <label className="block text-sm text-gray-700">City</label>
+          <label htmlFor="pickupCity" className=" block text-sm text-gray-700">
+            City
+          </label>
           <input
+            id="pickupCity"
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
             value={pickup.city}
             onChange={(e) => setPickup((p) => ({ ...p, city: e.target.value }))}
+            autoComplete="address-level2"
           />
         </div>
         <div>
-          <label className="block text-sm text-gray-700">State</label>
+          <label htmlFor="pickupState" className="block text-sm text-gray-700">
+            State
+          </label>
           <input
+            id="pickupState"
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
             value={pickup.state}
-            onChange={(e) => setPickup((p) => ({ ...p, state: e.target.value }))}
+            onChange={(e) =>
+              setPickup((p) => ({ ...p, state: e.target.value }))
+            }
+            autoComplete="address-level1"
           />
         </div>
         <div>
-          <label className="block text-sm text-gray-700">ZIP</label>
+          <label htmlFor="pickupZip" className="block text-sm text-gray-700">
+            ZIP
+          </label>
           <input
+            id="pickupZip"
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
             value={pickup.zip5}
             onChange={(e) => setPickup((p) => ({ ...p, zip5: e.target.value }))}
             inputMode="numeric"
             pattern="\d{5}"
+            autoComplete="postal-code"
           />
         </div>
       </div>
@@ -93,7 +124,9 @@ export default function Step2Renter({ onSubmit, loading, savedAt, resetSignal })
             type="date"
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
             value={dates.earliestStart}
-            onChange={(e) => setDates((d) => ({ ...d, earliestStart: e.target.value }))}
+            onChange={(e) =>
+              setDates((d) => ({ ...d, earliestStart: e.target.value }))
+            }
           />
         </div>
         <div>
@@ -102,15 +135,21 @@ export default function Step2Renter({ onSubmit, loading, savedAt, resetSignal })
             type="date"
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
             value={dates.latestStart}
-            onChange={(e) => setDates((d) => ({ ...d, latestStart: e.target.value }))}
+            onChange={(e) =>
+              setDates((d) => ({ ...d, latestStart: e.target.value }))
+            }
           />
         </div>
         <div>
-          <label className="block text-sm text-gray-700">Typical duration</label>
+          <label className="block text-sm text-gray-700">
+            Typical duration
+          </label>
           <select
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
             value={dates.typicalDurationBand}
-            onChange={(e) => setDates((d) => ({ ...d, typicalDurationBand: e.target.value }))}
+            onChange={(e) =>
+              setDates((d) => ({ ...d, typicalDurationBand: e.target.value }))
+            }
           >
             <option value="1-3">1–3 days</option>
             <option value="4-7">4–7 days</option>
@@ -126,11 +165,17 @@ export default function Step2Renter({ onSubmit, loading, savedAt, resetSignal })
           <select
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
             value={prefs.bodyType}
-            onChange={(e) => setPrefs((p) => ({ ...p, bodyType: e.target.value }))}
+            onChange={(e) =>
+              setPrefs((p) => ({ ...p, bodyType: e.target.value }))
+            }
           >
-            {["Sedan", "SUV", "Truck", "Van", "EV", "No preference"].map((v) => (
-              <option key={v} value={v}>{v}</option>
-            ))}
+            {["Sedan", "SUV", "Truck", "Van", "EV", "No preference"].map(
+              (v) => (
+                <option key={v} value={v}>
+                  {v}
+                </option>
+              )
+            )}
           </select>
         </div>
         <div>
@@ -141,7 +186,9 @@ export default function Step2Renter({ onSubmit, loading, savedAt, resetSignal })
             onChange={(e) => setPrefs((p) => ({ ...p, seats: e.target.value }))}
           >
             {["2", "4", "5", "6", "7", "8"].map((v) => (
-              <option key={v} value={v}>{v}</option>
+              <option key={v} value={v}>
+                {v}
+              </option>
             ))}
           </select>
         </div>
@@ -150,10 +197,14 @@ export default function Step2Renter({ onSubmit, loading, savedAt, resetSignal })
           <select
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
             value={prefs.transmission}
-            onChange={(e) => setPrefs((p) => ({ ...p, transmission: e.target.value }))}
+            onChange={(e) =>
+              setPrefs((p) => ({ ...p, transmission: e.target.value }))
+            }
           >
             {["Auto", "Manual", "No preference"].map((v) => (
-              <option key={v} value={v}>{v}</option>
+              <option key={v} value={v}>
+                {v}
+              </option>
             ))}
           </select>
         </div>
@@ -162,7 +213,13 @@ export default function Step2Renter({ onSubmit, loading, savedAt, resetSignal })
       <div className="mt-3">
         <label className="block text-sm text-gray-700">Extras</label>
         <div className="mt-2 flex flex-wrap gap-3 text-sm">
-          {["Car seat", "Ski rack", "Bike rack", "Snow tires", "No preference"].map((x) => (
+          {[
+            "Car seat",
+            "Ski rack",
+            "Bike rack",
+            "Snow tires",
+            "No preference",
+          ].map((x) => (
             <label key={x} className="inline-flex items-center gap-2">
               <input
                 type="checkbox"
@@ -178,8 +235,11 @@ export default function Step2Renter({ onSubmit, loading, savedAt, resetSignal })
       {/* budget / age */}
       <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
         <div>
-          <label className="block text-sm text-gray-700">Budget (per day)</label>
+          <label htmlFor="budgetBand" className="block text-sm text-gray-700">
+            Budget (per day)
+          </label>
           <select
+            id="budgetBand"
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
             value={budgetBand}
             onChange={(e) => setBudgetBand(e.target.value)}
@@ -191,16 +251,22 @@ export default function Step2Renter({ onSubmit, loading, savedAt, resetSignal })
           </select>
         </div>
         <div>
-          <label className="block text-sm text-gray-700">Age band</label>
+          <label htmlFor="ageBand" className="block text-sm text-gray-700">
+            Age band
+          </label>
           <select
+            id="ageBand"
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
             value={ageBand}
             onChange={(e) => setAgeBand(e.target.value)}
           >
-            <option value="u21">Under 21</option>
+            <option value="18_20">18–20</option>
             <option value="21_24">21–24</option>
             <option value="25_plus">25+</option>
           </select>
+          <p className="mt-1 text-xs text-gray-600">
+            Hosts may set higher minimum ages; local laws apply.
+          </p>
         </div>
       </div>
 
@@ -216,7 +282,9 @@ export default function Step2Renter({ onSubmit, loading, savedAt, resetSignal })
 
       <div className="mt-5 flex items-center justify-between">
         <div className="text-xs text-gray-500">
-          {savedAt ? `Saved at ${savedAt.toLocaleTimeString()}` : "Not saved yet"}
+          {savedAt
+            ? `Saved at ${savedAt.toLocaleTimeString()}`
+            : "Not saved yet"}
         </div>
         <Button type="submit" variant="primary" disabled={loading}>
           {loading ? "Saving…" : "Save renter details"}

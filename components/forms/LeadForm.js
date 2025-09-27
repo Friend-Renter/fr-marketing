@@ -313,11 +313,20 @@ export default function LeadForm({
       >
         Thanks! We’ll send your app invite as your city opens.
       </Modal>
-      {/* privacy note */}
-      <p className="mt-3 text-xs text-gray-600">
-        We’ll only use your email for FriendRenter updates and early access. No
-        sharing, no selling.
-      </p>
+
+      {/* Privacy & compliance notes */}
+      <div className="mt-3 space-y-1">
+        <p className="text-xs text-gray-600">
+          We’ll only use your email for FriendRenter updates and early access.
+          No sharing, no selling.
+        </p>
+
+        {/* Screen-reader only reCAPTCHA notice (badge already visible) */}
+        <p className="sr-only">
+          This site is protected by reCAPTCHA and the Google Privacy Policy and
+          Terms of Service apply.
+        </p>
+      </div>
     </div>
   );
 }
