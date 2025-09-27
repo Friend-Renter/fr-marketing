@@ -344,8 +344,8 @@ export default function HomePage() {
 
       {/* WHY FRIENDRENTER */}
       <section
-        id="why"
-        className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"
+        id="why-friendrenter"
+        className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 scroll-mt-8 md:scroll-mt-10"
       >
         <div className="text-center">
           <h2 className="text-4xl font-bold tracking-tight text-brand-900">
