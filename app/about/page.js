@@ -54,7 +54,7 @@ export default function AboutPage() {
         </section>
 
         {/* Origin story */}
-        <section id="origin" className="mt-8">
+        {/* <section id="origin" className="mt-8">
           <h2 className="text-xl font-semibold text-gray-900">
             Why we’re building this
           </h2>
@@ -66,14 +66,14 @@ export default function AboutPage() {
             helping people run small, real businesses — is the core of
             FriendRenter.
           </p>
-        </section>
+        </section> */}
 
         {/* How it works (plain English) */}
         <section id="how" className="mt-8">
           <h2 className="text-xl font-semibold text-gray-900">How it works</h2>
           <div className="mt-3 grid gap-6 sm:grid-cols-2">
             <div>
-              <h3 className="font-medium text-gray-900">For hosts</h3>
+              <h3 className="font-medium text-gray-900">For Hosts</h3>
               <ul className="mt-2 list-disc pl-5 text-gray-700 px-2">
                 <li>
                   Be your own boss: set daily rates, deposits, and minimum
@@ -87,7 +87,7 @@ export default function AboutPage() {
               </ul>
             </div>
             <div>
-              <h3 className="font-medium text-gray-900">For renters</h3>
+              <h3 className="font-medium text-gray-900">For Renters</h3>
               <ul className="mt-2 list-disc pl-5 text-gray-700 px-2">
                 <li>
                   Book from people you know. Keep it local and simple with
@@ -104,11 +104,11 @@ export default function AboutPage() {
               </ul>
             </div>
           </div>
-          <p className="mt-4 text-gray-700">
+          {/* <p className="mt-4 text-gray-700">
             We’re starting with cars, then expanding to marine (boats, jet
             skis), and later adding smaller categories. The app brings it all
             together — friends-first access, clean UX, and transparent records.
-          </p>
+          </p> */}
         </section>
 
         {/* Trust & Safety */}
@@ -144,7 +144,7 @@ export default function AboutPage() {
         </section>
 
         {/* Nebraska first */}
-        <section id="nebraska" className="mt-8">
+        {/* <section id="nebraska" className="mt-8">
           <h2 className="text-xl font-semibold text-gray-900">
             Starting in Nebraska
           </h2>
@@ -154,7 +154,7 @@ export default function AboutPage() {
             <strong>Lincoln</strong> first — building with our neighbors,
             refining the playbook locally, then expanding thoughtfully.
           </p>
-        </section>
+        </section> */}
 
         {/* Differentiators */}
         <section id="why-different" className="mt-8">
@@ -186,7 +186,7 @@ export default function AboutPage() {
         </section>
 
         {/* Vision: Public vs Private Garage */}
-        <section id="vision" className="mt-8">
+        {/* <section id="vision" className="mt-8">
           <h2 className="text-xl font-semibold text-gray-900">
             The garage vision
           </h2>
@@ -201,7 +201,7 @@ export default function AboutPage() {
             This is our north star and may evolve as we learn with the
             community.
           </p>
-        </section>
+        </section> */}
 
         {/* Team */}
         <section id="team" className="mt-8">
@@ -246,7 +246,7 @@ export default function AboutPage() {
                 Renter early access
               </Button>
             </div>
-            <p className="mt-4 text-sm text-brand-700">
+            <p className="mt-4 text-sm text-brand-700 text-left">
               Partnerships or media? Email{" "}
               <a className="underline" href="mailto:info@friendrenter.com">
                 info@friendrenter.com

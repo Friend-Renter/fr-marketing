@@ -31,7 +31,7 @@ export default function TermsPage() {
           please see our{" "}
           <Link
             className="text-brand-700 underline"
-            href="/privacy"
+            href="/legal/privacy"
             prefetch={false}
           >
             Privacy Policy
