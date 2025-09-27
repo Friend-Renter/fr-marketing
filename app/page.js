@@ -352,7 +352,14 @@ export default function HomePage() {
             Why FriendRenter
           </h2>
           <p className="mt-3 text-base text-brand-700 max-w-2xl mx-auto">
-            Trust isn’t an add-on—it’s how booking works here.
+            Trust isn’t an add-on—it’s how booking works here.{" "}
+            <Link
+              href="/why-friendrenter"
+              className="text-brand-700 text-sm underline underline-offset-2"
+              prefetch={false}
+            >
+              Learn more →
+            </Link>
           </p>
         </div>
 
