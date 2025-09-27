@@ -14,73 +14,34 @@
     "bgImage": "/brand/lincoln.jpg",
     "badge": "Friends-first rentals"
   },
-  "valueProps": [
-    {
-      "title": "UNL-friendly pickup",
-      "desc": "Meet near campus or downtown with clear instructions."
-    },
-    {
-      "title": "Easy airport handoff",
-      "desc": "Curbside options on request when available."
-    },
-    {
-      "title": "Game-day ready",
-      "desc": "Plan ahead around Memorial Stadium weekends."
-    }
-  ],
-  "howItWorksLocal": [
-    {
-      "step": 1,
-      "title": "Meet at a public landmark",
-      "desc": "Haymarket or campus perimeter works best."
-    },
-    {
-      "step": 2,
-      "title": "Quick ID check",
-      "desc": "Show your verified ID and grab the keys."
-    },
-    {
-      "step": 3,
-      "title": "Return with photos",
-      "desc": "A few pics (fuel, odometer, exterior) and you’re done."
-    }
-  ],
-  "pickupAreas": [
-    { "name": "Haymarket", "tip": "Meet in a well-lit public lot." },
-    { "name": "UNL Campus Perimeter", "tip": "Avoid restricted campus lots." },
-    { "name": "SouthPointe Pavilions", "tip": "Easy access off Hwy 2." },
-    { "name": "Gateway area", "tip": "Plenty of parking options." }
-  ],
   "faq": [
-    {
-      "q": "Is street parking okay for pickup?",
-      "a": "Hosts will specify; most meet in public lots or garages."
-    },
-    {
-      "q": "What about game days?",
-      "a": "Book early and allow extra time downtown on big weekends."
-    },
-    {
-      "q": "Winter weather tips?",
-      "a": "Follow pickup notes; allow time to clear snow/ice and check tires."
-    },
-    {
-      "q": "Is there a deposit?",
-      "a": "A temporary hold (e.g., $200–$300) is placed and released after return if no issues."
-    },
-    {
-      "q": "Can I extend my trip?",
-      "a": "If the car is available — request in advance in the app."
-    }
+    { "q": "Is street parking okay for pickup?", "a": "Hosts will specify; most meet in public lots or garages." },
+    { "q": "What about game days?", "a": "Book early and allow extra time downtown on big weekends." },
+    { "q": "Winter weather tips?", "a": "Follow pickup notes; allow time to clear snow/ice and check tires." },
+    { "q": "Is there a deposit?", "a": "A temporary hold (e.g., $200–$300) is placed and released after return if no issues." },
+    { "q": "Can I extend my trip?", "a": "If the car is available — request in advance in the app." }
   ],
   "primaryCta": {
     "label": "List your car in Lincoln",
-    "href": "/#waitlist?type=host&city=lincoln-ne",
+    "href": "/#waitlist?city=lincoln-ne",
     "id": "cta_city_primary_lincoln"
   },
   "secondaryCta": {
     "label": "Join the Lincoln waitlist",
-    "href": "/#waitlist?type=renter&city=lincoln-ne",
+    "href": "/#waitlist?city=lincoln-ne",
     "id": "cta_city_secondary_lincoln"
+  },
+  "defaults": { "role": "host" },
+  "editorial": {
+    "thingsToDo": [
+      { "title": "Memorial Stadium game day", "desc": "Plan parking; meet in a public garage; easy return." },
+      { "title": "Haymarket evening drive", "desc": "Garage pickup, dinner, and a smooth drop-off." },
+      { "title": "Sunken Gardens & Pioneers loop", "desc": "Scenic afternoon with quick photo stops." }
+    ],
+    "howItWorks": [
+      { "step": 1, "title": "Add a friend", "desc": "Verify your ID and circle." },
+      { "step": 2, "title": "Request & confirm", "desc": "Pick a car, agree on details, lock it in." },
+      { "step": 3, "title": "Meet & go", "desc": "Public meetup, quick photos, keys, done." }
+    ]
   }
 }

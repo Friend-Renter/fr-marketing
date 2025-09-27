@@ -14,79 +14,34 @@
     "bgImage": "/brand/omaha.webp",
     "badge": "Friends-first rentals"
   },
-  "valueProps": [
-    {
-      "title": "Airport-adjacent pickup",
-      "desc": "Use the rideshare lot at Eppley when available."
-    },
-    {
-      "title": "Neighborhood meetups",
-      "desc": "Public garages in Old Market & Midtown Crossing."
-    },
-    {
-      "title": "Transparent pricing",
-      "desc": "What you see is what you pay — no desk add-ons."
-    }
-  ],
-  "howItWorksLocal": [
-    {
-      "step": 1,
-      "title": "Meet at a public garage or lot",
-      "desc": "Hosts specify the exact spot for easy handoff."
-    },
-    {
-      "step": 2,
-      "title": "Quick inspection photos",
-      "desc": "Exterior + odometer before you roll."
-    },
-    {
-      "step": 3,
-      "title": "Return to the same spot",
-      "desc": "Unless you arrange otherwise with the host."
-    }
-  ],
-  "pickupAreas": [
-    {
-      "name": "Eppley rideshare lot",
-      "tip": "Terminal curbside only if host offers."
-    },
-    {
-      "name": "Old Market garages",
-      "tip": "Event nights can be busy — plan ahead."
-    },
-    { "name": "Midtown Crossing", "tip": "Convenient structured parking." },
-    { "name": "Westroads area", "tip": "Easy access from I-680." }
-  ],
   "faq": [
-    {
-      "q": "Terminal pickup allowed?",
-      "a": "Usually the rideshare lot; terminal curbside if the host offers it."
-    },
-    {
-      "q": "Are there tolls?",
-      "a": "Minimal; any tolls are billed post-trip via the app."
-    },
-    {
-      "q": "Busy weekends?",
-      "a": "Reserve early around Old Market events and concert nights."
-    },
-    {
-      "q": "Deposit/hold?",
-      "a": "A temporary hold (e.g., $200–$300) is placed and released after return if no issues."
-    },
-    {
-      "q": "Mileage limits?",
-      "a": "Shown on each listing; ask your host if you’re unsure."
-    }
+    { "q": "Terminal pickup allowed?", "a": "Usually the rideshare lot; terminal curbside if the host offers it." },
+    { "q": "Are there tolls?", "a": "Minimal; any tolls are billed post-trip via the app." },
+    { "q": "Busy weekends?", "a": "Reserve early around Old Market events and concert nights." },
+    { "q": "Deposit/hold?", "a": "A temporary hold (e.g., $200–$300) is placed and released after return if no issues." },
+    { "q": "Mileage limits?", "a": "Shown on each listing; ask your host if you’re unsure." }
   ],
   "primaryCta": {
     "label": "List your car in Omaha",
-    "href": "/#waitlist?type=host&city=omaha-ne",
+    "href": "/#waitlist?city=omaha-ne",
     "id": "cta_city_primary_omaha"
   },
   "secondaryCta": {
     "label": "Join the Omaha waitlist",
-    "href": "/#waitlist?type=renter&city=omaha-ne",
+    "href": "/#waitlist?city=omaha-ne",
     "id": "cta_city_secondary_omaha"
+  },
+  "defaults": { "role": "host" },
+  "editorial": {
+    "thingsToDo": [
+      { "title": "Old Market night", "desc": "Garage pickup, stroll the bricks, and easy drop-off." },
+      { "title": "Zoo & riverfront loop", "desc": "Henry Doorly + Gene Leahy Mall in a single day." },
+      { "title": "Benson coffee crawl", "desc": "Hit a few spots and keep parking simple." }
+    ],
+    "howItWorks": [
+      { "step": 1, "title": "Add a friend", "desc": "Verify your ID and circle." },
+      { "step": 2, "title": "Request & confirm", "desc": "Pick a car, agree on details, lock it in." },
+      { "step": 3, "title": "Meet & go", "desc": "Public meetup, quick photos, keys, done." }
+    ]
   }
 }
