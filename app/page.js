@@ -559,7 +559,7 @@ export default function HomePage() {
           <h3 className="text-lg font-semibold text-gray-900">
             Ready when your friends are.
           </h3>
-          <p className="mt-1 text-sm text-gray-700">
+          <p className="mt-1 text-sm text-gray-700 text-justify">
             Join early access to the FriendRenter app. Renters add hosts as
             friends and book with confidence; hosts approve friends and stay in
             control.
