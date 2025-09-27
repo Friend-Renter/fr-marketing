@@ -41,20 +41,41 @@ export default function TeamSection({ members = [] }) {
             <div className="flex items-center gap-4">
               <div className="relative h-16 w-16 overflow-hidden rounded-full ring-1 ring-gray-200">
                 <Image
-                  src={m.imageSrc}
+                  src={m.imageSrc || "/brand/personplaceholder.png"}
                   alt={`${m.name} headshot`}
                   width={160}
                   height={160}
                   className="h-full w-full object-cover"
+                  unoptimized
                 />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">{m.name}</h3>
+                <h3 className="text-lg font-semibold text-gray-900">
+                  {m.name}
+                </h3>
                 <p className="text-sm text-gray-600">{m.role}</p>
               </div>
             </div>
             <p className="mt-3 text-sm text-gray-700">{m.oneLiner}</p>
-
+            {/* Optional mini chips (show up to 2 across languages/favorites) */}
+            {(() => {
+              const langs = Array.isArray(m.languages) ? m.languages : [];
+              const favs = Array.isArray(m.favorites) ? m.favorites : [];
+              const chips = [...langs, ...favs].slice(0, 5);
+              if (chips.length === 0) return null;
+              return (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {chips.map((c) => (
+                    <span
+                      key={c}
+                      className="inline-flex items-center rounded-full bg-gray-50 px-2.5 py-0.5 text-[11px] font-medium text-gray-700 ring-1 ring-gray-200"
+                    >
+                      {c}
+                    </span>
+                  ))}
+                </div>
+              );
+            })()}
             <div className="mt-4">
               <button
                 type="button"
@@ -87,6 +108,8 @@ export default function TeamSection({ members = [] }) {
             oneLiner: "",
             imageSrc: "",
             bio: "",
+            languages: [],
+            favorites: [],
           }
         }
       />
