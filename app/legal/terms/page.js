@@ -1,4 +1,6 @@
 // app/legal/terms/page.tsx
+import Link from "next/link";
+
 export default function TermsPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
@@ -18,18 +20,22 @@ export default function TermsPage() {
           These Terms of Use (<strong>“Terms”</strong>) govern your access to
           and use of the FriendRenter marketing website, waitlist, and lead-
           capture forms (the <strong>“Site”</strong>). The Site is operated by
-          FriendRenter, Inc., a Delaware corporation (<strong>“FriendRenter”</strong>,{" "}
-          <strong>“we”</strong>, <strong>“our”</strong>, or <strong>“us”</strong>).
-          By using the Site, you agree to these Terms. If you do not agree,
-          do not use the Site.
+          FriendRenter, Inc., a Delaware corporation (
+          <strong>“FriendRenter”</strong>, <strong>“we”</strong>,{" "}
+          <strong>“our”</strong>, or <strong>“us”</strong>). By using the Site,
+          you agree to these Terms. If you do not agree, do not use the Site.
         </p>
 
         <p className="mt-3 text-gray-700">
           For information about how we collect and use personal information,
           please see our{" "}
-          <a className="text-brand-700 underline" href="/legal/privacy">
+          <Link
+            className="text-brand-700 underline"
+            href="/privacy"
+            prefetch={false}
+          >
             Privacy Policy
-          </a>
+          </Link>
           .
         </p>
 
@@ -41,8 +47,12 @@ export default function TermsPage() {
             1) Who we are &amp; contact
           </h2>
           <p className="text-gray-700">
-            FriendRenter, Inc. is incorporated in Delaware. You can contact us at{" "}
-            <a className="text-brand-700 underline" href="mailto:info@friendrenter.com">
+            FriendRenter, Inc. is incorporated in Delaware. You can contact us
+            at{" "}
+            <a
+              className="text-brand-700 underline"
+              href="mailto:info@friendrenter.com"
+            >
               info@friendrenter.com
             </a>
             .
@@ -65,11 +75,14 @@ export default function TermsPage() {
 
         {/* 3) Eligibility */}
         <section id="eligibility" className="mt-8">
-          <h2 className="text-xl font-semibold text-gray-900">3) Eligibility</h2>
+          <h2 className="text-xl font-semibold text-gray-900">
+            3) Eligibility
+          </h2>
           <p className="text-gray-700">
-            The Site is intended for individuals who are <strong>18 years of age
-            or older</strong>. By using the Site, you represent that you are 18+
-            and have authority to agree to these Terms.
+            The Site is intended for individuals who are{" "}
+            <strong>18 years of age or older</strong>. By using the Site, you
+            represent that you are 18+ and have authority to agree to these
+            Terms.
           </p>
         </section>
 
@@ -81,38 +94,51 @@ export default function TermsPage() {
           <p className="text-gray-700">
             Submitting your information may place you on a waitlist; however,
             <strong> access is not guaranteed</strong>. We may determine
-            priority or eligibility <strong>at our discretion</strong>, and
-            we may change or discontinue waitlist rules at any time.
+            priority or eligibility <strong>at our discretion</strong>, and we
+            may change or discontinue waitlist rules at any time.
           </p>
         </section>
 
         {/* 5) Acceptable use */}
         <section id="acceptable-use" className="mt-8">
-          <h2 className="text-xl font-semibold text-gray-900">5) Acceptable use</h2>
+          <h2 className="text-xl font-semibold text-gray-900">
+            5) Acceptable use
+          </h2>
           <p className="text-gray-700">
             You may use the Site only for lawful, personal, non-commercial
             purposes. You agree not to:
           </p>
           <ul className="mt-3 list-disc pl-5 text-gray-700">
-            <li>access or use the Site in violation of any law or regulation;</li>
-            <li>probe, scan, or test the vulnerability of the Site or any network;</li>
+            <li>
+              access or use the Site in violation of any law or regulation;
+            </li>
+            <li>
+              probe, scan, or test the vulnerability of the Site or any network;
+            </li>
             <li>interfere with, disrupt, or damage the Site or servers;</li>
-            <li>use bots, scrapers, or automated means without our prior written permission;</li>
+            <li>
+              use bots, scrapers, or automated means without our prior written
+              permission;
+            </li>
             <li>submit spam, misleading, or fraudulent information;</li>
-            <li>infringe, misappropriate, or violate others’ rights or our rights.</li>
+            <li>
+              infringe, misappropriate, or violate others’ rights or our rights.
+            </li>
           </ul>
         </section>
 
         {/* 6) Your submissions */}
         <section id="submissions" className="mt-8">
-          <h2 className="text-xl font-semibold text-gray-900">6) Your submissions</h2>
+          <h2 className="text-xl font-semibold text-gray-900">
+            6) Your submissions
+          </h2>
           <p className="text-gray-700">
             You are responsible for the accuracy of information you submit. By
             submitting information through the Site (for example, joining the
             waitlist or contacting us), you grant us a non-exclusive, worldwide,
             royalty-free license to use, reproduce, and process that information
-            for operating, improving, and securing the Site; managing interest and
-            early access; and communicating with you.
+            for operating, improving, and securing the Site; managing interest
+            and early access; and communicating with you.
           </p>
         </section>
 
@@ -125,15 +151,24 @@ export default function TermsPage() {
             The Site may use third-party services such as Google reCAPTCHA,
             Google Maps, analytics, and email delivery. Your use of those
             features may be subject to the third parties’ terms and privacy
-            policies. <strong>This site is protected by reCAPTCHA and the Google{" "}
-            <a className="underline text-brand-700" href="https://policies.google.com/privacy">
-              Privacy Policy
-            </a>{" "}
-            and{" "}
-            <a className="underline text-brand-700" href="https://policies.google.com/terms">
-              Terms of Service
-            </a>{" "}
-            apply.</strong>
+            policies.{" "}
+            <strong>
+              This site is protected by reCAPTCHA and the Google{" "}
+              <a
+                className="underline text-brand-700"
+                href="https://policies.google.com/privacy"
+              >
+                Privacy Policy
+              </a>{" "}
+              and{" "}
+              <a
+                className="underline text-brand-700"
+                href="https://policies.google.com/terms"
+              >
+                Terms of Service
+              </a>{" "}
+              apply.
+            </strong>
           </p>
         </section>
 
@@ -157,7 +192,9 @@ export default function TermsPage() {
 
         {/* 9) Disclaimers */}
         <section id="disclaimers" className="mt-8">
-          <h2 className="text-xl font-semibold text-gray-900">9) Disclaimers</h2>
+          <h2 className="text-xl font-semibold text-gray-900">
+            9) Disclaimers
+          </h2>
           <p className="text-gray-700">
             THE SITE IS PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS WITHOUT
             WARRANTIES OF ANY KIND, WHETHER EXPRESS, IMPLIED, OR STATUTORY,
@@ -177,12 +214,13 @@ export default function TermsPage() {
             TO THE MAXIMUM EXTENT PERMITTED BY LAW, FRIENDRENTER AND ITS
             OFFICERS, DIRECTORS, EMPLOYEES, AND AGENTS WILL NOT BE LIABLE FOR
             ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR
-            PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS, REVENUE, DATA, OR GOODWILL,
-            ARISING OUT OF OR RELATED TO YOUR USE OF THE SITE. TO THE MAXIMUM
-            EXTENT PERMITTED BY LAW, OUR TOTAL LIABILITY FOR ANY CLAIMS ARISING
-            OUT OF OR RELATED TO THE SITE WILL NOT EXCEED <strong>$100</strong>.
-            Some jurisdictions do not allow certain limitations; in such cases,
-            the limitations will apply to the fullest extent permitted.
+            PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS, REVENUE, DATA, OR
+            GOODWILL, ARISING OUT OF OR RELATED TO YOUR USE OF THE SITE. TO THE
+            MAXIMUM EXTENT PERMITTED BY LAW, OUR TOTAL LIABILITY FOR ANY CLAIMS
+            ARISING OUT OF OR RELATED TO THE SITE WILL NOT EXCEED{" "}
+            <strong>$100</strong>. Some jurisdictions do not allow certain
+            limitations; in such cases, the limitations will apply to the
+            fullest extent permitted.
           </p>
         </section>
 
@@ -208,28 +246,31 @@ export default function TermsPage() {
           <p className="text-gray-700">
             <strong>Binding arbitration.</strong> You and FriendRenter agree
             that any dispute, claim, or controversy arising out of or relating
-            to these Terms or the Site will be resolved by <strong>binding
-            arbitration</strong> administered by the American Arbitration
-            Association (<strong>AAA</strong>) under its Consumer Arbitration
-            Rules, except that either party may (a) seek relief in{" "}
+            to these Terms or the Site will be resolved by{" "}
+            <strong>binding arbitration</strong> administered by the American
+            Arbitration Association (<strong>AAA</strong>) under its Consumer
+            Arbitration Rules, except that either party may (a) seek relief in{" "}
             <strong>small-claims court</strong> for eligible matters or (b)
-            bring an action in court solely for <strong>injunctive or other
-            equitable relief</strong> to protect intellectual-property or
-            proprietary rights. The arbitration seat, or legal place, shall be
-            Delaware. Judgment on the award may be entered in any court of
-            competent jurisdiction.
+            bring an action in court solely for{" "}
+            <strong>injunctive or other equitable relief</strong> to protect
+            intellectual-property or proprietary rights. The arbitration seat,
+            or legal place, shall be Delaware. Judgment on the award may be
+            entered in any court of competent jurisdiction.
           </p>
           <p className="mt-3 text-gray-700">
             <strong>Class-action and jury trial waiver.</strong> You and
-            FriendRenter agree that each may bring claims against the other
-            only in your or its individual capacity and <strong>not</strong> as
-            a plaintiff or class member in any purported class or representative
+            FriendRenter agree that each may bring claims against the other only
+            in your or its individual capacity and <strong>not</strong> as a
+            plaintiff or class member in any purported class or representative
             proceeding. <strong>Jury trial is waived.</strong>
           </p>
           <p className="mt-3 text-gray-700">
             <strong>Opt-out.</strong> You may opt out of this arbitration and
             class-action waiver by sending an email to{" "}
-            <a className="text-brand-700 underline" href="mailto:info@friendrenter.com">
+            <a
+              className="text-brand-700 underline"
+              href="mailto:info@friendrenter.com"
+            >
               info@friendrenter.com
             </a>{" "}
             within <strong>30 days</strong> of the date you first agree to these
@@ -248,9 +289,9 @@ export default function TermsPage() {
             These Terms and any disputes not subject to arbitration are governed
             by the laws of the <strong>State of Delaware</strong>, without
             regard to conflicts of law principles. For the carve-outs above and
-            to enforce arbitral awards, the exclusive venue shall be the state or
-            federal courts located in <strong>Wilmington, Delaware</strong>, and
-            you consent to personal jurisdiction there.
+            to enforce arbitral awards, the exclusive venue shall be the state
+            or federal courts located in <strong>Wilmington, Delaware</strong>,
+            and you consent to personal jurisdiction there.
           </p>
         </section>
 
@@ -280,7 +321,8 @@ export default function TermsPage() {
             </li>
             <li>
               <strong>No assignment.</strong> You may not assign or transfer
-              these Terms without our consent; we may assign them as permitted by law.
+              these Terms without our consent; we may assign them as permitted
+              by law.
             </li>
             <li>
               <strong>No waiver.</strong> Our failure to enforce a provision is
@@ -297,7 +339,10 @@ export default function TermsPage() {
           <h2 className="text-xl font-semibold text-gray-900">16) Contact</h2>
           <p className="text-gray-700">
             Questions about these Terms? Email{" "}
-            <a className="text-brand-700 underline" href="mailto:info@friendrenter.com">
+            <a
+              className="text-brand-700 underline"
+              href="mailto:info@friendrenter.com"
+            >
               info@friendrenter.com
             </a>
             .

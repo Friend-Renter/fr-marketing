@@ -32,11 +32,11 @@ export default function Footer() {
                 About
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link href="/safety" className="hover:text-brand-700">
                 Safety
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link href="/legal/terms" className="hover:text-brand-700">
                 Terms
