@@ -49,8 +49,10 @@ export default function Step1Quick({
         <div>
           <label className="block text-sm text-gray-700">First name *</label>
           <input
+            id="firstName"
             name="firstName"
             required
+            autoComplete="given-name"
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
           />
         </div>
@@ -58,16 +60,20 @@ export default function Step1Quick({
         <div>
           <label className="block text-sm text-gray-700">Last name</label>{" "}
           <input
+            id="lastName"
             name="lastName"
+            autoComplete="family-name"
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
           />{" "}
         </div>
         <div>
           <label className="block text-sm text-gray-700">Email *</label>
           <input
+            id="email"
             type="email"
             name="email"
             required
+            autoComplete="email"
             className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
           />
         </div>
@@ -77,7 +83,10 @@ export default function Step1Quick({
       <div>
         <label className="block text-sm text-gray-700">Phone (optional)</label>
         <input
+          id="phone"
           name="phone"
+          autoComplete="tel"
+          inputMode="tel"
           className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
         />
       </div>
@@ -86,9 +95,11 @@ export default function Step1Quick({
       <div>
         <label className="block text-sm text-gray-700">City or ZIP *</label>
         <input
+          id="cityOrZip"
           name="cityOrZip"
           required
           placeholder="Lincoln, NE or 68508"
+          autoComplete="postal-code"
           className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
         />
       </div>
