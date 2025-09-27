@@ -211,9 +211,9 @@ export default function PrivacyPage() {
               <strong>Access/Correction/Deletion:</strong> Email{" "}
               <a
                 className="text-brand-700 underline"
-                href="mailto:privacy@friendrenter.com"
+                href="mailto:info@friendrenter.com"
               >
-                privacy@friendrenter.com
+                info@friendrenter.com
               </a>{" "}
               to request a copy, correction, or deletion of your personal
               information (subject to legal allowances/requirements).
@@ -287,9 +287,9 @@ export default function PrivacyPage() {
             <strong>Email:</strong>{" "}
             <a
               className="text-brand-700 underline"
-              href="mailto:privacy@friendrenter.com"
+              href="mailto:info@friendrenter.com"
             >
-              privacy@friendrenter.com
+              info@friendrenter.com
             </a>
             <br />
             <span className="text-gray-600">
@@ -346,9 +346,9 @@ export default function PrivacyPage() {
             certain uses, without discrimination. To exercise rights, email{" "}
             <a
               className="text-brand-700 underline"
-              href="mailto:privacy@friendrenter.com"
+              href="mailto:info@friendrenter.com"
             >
-              privacy@friendrenter.com
+              info@friendrenter.com
             </a>
             . We’ll verify your request (and California residency as applicable)
             before acting.
