@@ -7,6 +7,7 @@ import {
   faMagnifyingGlass,
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
+import Button from "./ui/Button";
 
 const CITIES = [
   {
@@ -141,13 +142,24 @@ export default function CitiesSection() {
 
             {/* per-city CTA */}
             <div className="mt-5">
-              <a
-                href="#waitlist"
-                className="inline-flex items-center justify-center rounded-md bg-brand-600 px-3 py-2 text-sm font-medium text-slate-100 hover:bg-brand-500"
-                onClick={(e) => e.stopPropagation()}
+              <Button
+                variant="primary"
+                className="px-3 py-2 text-sm"
+                ctaId="cta_city_card_join"
+                trackProps={{ city: c.slug }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // Smooth-scroll if the waitlist is on this page; otherwise jump to home#waitlist
+                  const el = document.getElementById("waitlist");
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  } else {
+                    window.location.href = "/#waitlist";
+                  }
+                }}
               >
                 Join Early Access
-              </a>
+              </Button>
             </div>
           </Link>
         ))}
@@ -156,12 +168,21 @@ export default function CitiesSection() {
         {filtered.length === 0 && (
           <div className="rounded-lg border border-dashed border-gray-300 bg-white p-8 text-center text-gray-600">
             No cities match “{q}”.{" "}
-            <a
-              href="#waitlist"
-              className="text-brand-700 underline underline-offset-2 hover:text-brand-600"
+            <Button
+              variant="ghost"
+              className="underline underline-offset-2 hover:no-underline px-0 py-0 font-medium"
+              ctaId="cta_city_empty_request"
+              onClick={() => {
+                const el = document.getElementById("waitlist");
+                if (el) {
+                  el.scrollIntoView({ behavior: "smooth", block: "start" });
+                } else {
+                  window.location.href = "/#waitlist";
+                }
+              }}
             >
               Request your city
-            </a>
+            </Button>
             .
           </div>
         )}
