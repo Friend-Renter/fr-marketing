@@ -124,7 +124,7 @@ export default function MobileDrawer({ open, onClose }) {
                       </li>
                       <li>
                         <Link
-                          href="/why-friendrenter"
+                          href="/#why-friendrenter"
                           className="block rounded px-3 py-3 text-base hover:bg-emerald-50"
                           onClick={() => onClose("nav_link")}
                         >
