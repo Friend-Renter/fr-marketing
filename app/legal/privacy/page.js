@@ -181,10 +181,13 @@ export default function PrivacyPage() {
             5) Cookies &amp; similar technologies
           </h2>
           <p className="text-gray-700">
-            We use limited cookies and similar tech to run the Site, protect it
-            from abuse, and understand aggregate usage (e.g., load times, page
-            views). You can control cookies via your browser settings. At this
-            time, we do not respond to “Do Not Track” signals.
+            We do <strong>not</strong> use non-essential cookies (e.g.,
+            analytics, ads) on this Site. The Site may use{" "}
+            <strong>strictly necessary</strong> cookies and similar technologies
+            for security and basic functionality — for example, Google reCAPTCHA
+            to protect our forms from abuse. You can control cookies via your
+            browser settings. We do not respond to “Do Not Track” signals at
+            this time.
           </p>
           <p className="mt-3 text-gray-700">
             <strong>Google reCAPTCHA &amp; Maps (if shown):</strong> These
