@@ -6,6 +6,13 @@ import LeadForm from "@/components/forms/LeadForm";
 import SeoJsonLd from "@/components/SeoJsonLd";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUserPlus,
+  faCheckCircle,
+  faKey,
+  faCarSide,
+} from "@fortawesome/free-solid-svg-icons";
 
 export const runtime = "nodejs"; // uses fs
 
@@ -49,6 +56,15 @@ export async function generateMetadata({ params }) {
     },
   };
 }
+
+const iconForStep = (s, i) => {
+  const t = (s?.title || "").toLowerCase();
+  if (t.includes("add")) return faUserPlus;
+  if (t.includes("request") || t.includes("confirm")) return faCheckCircle;
+  if (t.includes("meet") || t.includes("pickup") || t.includes("pick up"))
+    return faKey;
+  return faCarSide; // fallback
+};
 
 export default async function CityPage({ params, searchParams }) {
   const { slug } = await params; // ✅ await the Params object
@@ -187,25 +203,33 @@ export default async function CityPage({ params, searchParams }) {
         </section>
       )}
 
-      {/* HOW IT WORKS HERE (compact inline) */}
-      <section className="py-6">
-        <h2 className="text-xl font-semibold text-gray-900">
-          How it works here
-        </h2>
-        <ol className="mt-4 grid gap-3 sm:grid-cols-3">
-          {howItWorks.map((s, i) => (
-            <li key={i} className="leading-snug">
-              <div className="text-xs font-semibold text-brand-700">
-                Step {s.step ?? i + 1}
-              </div>
-              <div className="font-medium text-gray-900">{s.title}</div>
-              {s.desc ? (
-                <div className="text-sm text-gray-700">{s.desc}</div>
-              ) : null}
-            </li>
-          ))}
-        </ol>
-      </section>
+     {/* HOW IT WORKS HERE (cards + icons) */}
+<section className="py-6">
+  <h2 className="text-xl font-semibold text-gray-900">How it works here</h2>
+  <ol className="mt-4 grid gap-4 sm:grid-cols-3">
+    {howItWorks.map((s, i) => (
+      <li key={i} className="list-none">
+        <div className="h-full rounded-lg border border-gray-200 bg-white p-4 shadow-card">
+          <div className="text-xs font-semibold text-brand-700">
+            Step {s.step ?? i + 1}
+          </div>
+          <div className="mt-1 flex items-center gap-2">
+            <FontAwesomeIcon
+              icon={iconForStep(s, i)}
+              className="text-[18px] text-brand-600"
+              aria-hidden="true"
+            />
+            <div className="font-medium text-gray-900">{s.title}</div>
+          </div>
+          {s.desc ? (
+            <div className="mt-2 text-sm text-gray-700">{s.desc}</div>
+          ) : null}
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>
+
 
       {/* FAQ (moved up, before form) */}
       {Array.isArray(city.faq) && city.faq.length > 0 ? (
