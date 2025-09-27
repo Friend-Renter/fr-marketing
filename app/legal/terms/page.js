@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function TermsPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-6xl  py-12 sm:px-6 lg:px-8">
       {/* Page header */}
       <div className="text-center">
         <h1 className="text-4xl font-bold tracking-tight text-brand-900">
@@ -15,8 +15,8 @@ export default function TermsPage() {
       </div>
 
       {/* Content card */}
-      <article className="bg-white p-6 sm:p-8 max-w-none">
-        <p className="text-gray-700">
+      <article className="bg-white py-6 px-4 sm:p-8 max-w-none text-justify">
+        <p className="text-gray-700 ">
           These Terms of Use (<strong>“Terms”</strong>) govern your access to
           and use of the FriendRenter marketing website, waitlist, and lead-
           capture forms (the <strong>“Site”</strong>). The Site is operated by
@@ -308,7 +308,7 @@ export default function TermsPage() {
         </section>
 
         {/* 15) General */}
-        <section id="general" className="mt-8">
+        <section id="general" className="mt-8 px-2">
           <h2 className="text-xl font-semibold text-gray-900">15) General</h2>
           <ul className="mt-3 list-disc pl-5 text-gray-700">
             <li>
@@ -336,8 +336,8 @@ export default function TermsPage() {
 
         {/* 16) Contact */}
         <section id="contact-bottom" className="mt-8">
-          <h2 className="text-xl font-semibold text-gray-900">16) Contact</h2>
-          <p className="text-gray-700">
+          <h2 className="text-xl font-semibold text-gray-900 ">16) Contact</h2>
+          <p className="text-gray-700 text-left">
             Questions about these Terms? Email{" "}
             <a
               className="text-brand-700 underline"

@@ -41,7 +41,7 @@ export default function AboutPage() {
       </header>
 
       {/* Card */}
-      <article className=" bg-white p-6 sm:p-8 max-w-none">
+      <article className=" bg-white py-6 sm:p-8 max-w-none text-justify">
         {/* What we are */}
         <section id="what-we-are">
           <h2 className="text-xl font-semibold text-gray-900">What we are</h2>
@@ -74,7 +74,7 @@ export default function AboutPage() {
           <div className="mt-3 grid gap-6 sm:grid-cols-2">
             <div>
               <h3 className="font-medium text-gray-900">For hosts</h3>
-              <ul className="mt-2 list-disc pl-5 text-gray-700">
+              <ul className="mt-2 list-disc pl-5 text-gray-700 px-2">
                 <li>
                   Be your own boss: set daily rates, deposits, and minimum
                   renter age.
@@ -88,7 +88,7 @@ export default function AboutPage() {
             </div>
             <div>
               <h3 className="font-medium text-gray-900">For renters</h3>
-              <ul className="mt-2 list-disc pl-5 text-gray-700">
+              <ul className="mt-2 list-disc pl-5 text-gray-700 px-2">
                 <li>
                   Book from people you know. Keep it local and simple with
                   mobile booking.
@@ -116,7 +116,7 @@ export default function AboutPage() {
           <h2 className="text-xl font-semibold text-gray-900">
             Trust &amp; safety built in
           </h2>
-          <ul className="mt-3 list-disc pl-5 text-gray-700">
+          <ul className="mt-3 list-disc pl-5 text-gray-700 px-2">
             <li>
               <strong>Verification:</strong> KYC/ID checks at sign-up. Hosts are
               18+; hosts set renter age minimums (e.g., 21+ or higher for
@@ -161,7 +161,7 @@ export default function AboutPage() {
           <h2 className="text-xl font-semibold text-gray-900">
             What makes us different
           </h2>
-          <ul className="mt-3 list-disc pl-5 text-gray-700">
+          <ul className="mt-3 list-disc pl-5 text-gray-700 px-2">
             <li>
               <strong>Friends-first access:</strong> No randos. Hosts choose who
               can book.
@@ -206,7 +206,7 @@ export default function AboutPage() {
         {/* Team */}
         <section id="team" className="mt-8">
           <h2 className="text-xl font-semibold text-gray-900">Team</h2>
-          <ul className="mt-3 list-disc pl-5 text-gray-700">
+          <ul className="mt-3 list-disc pl-5 text-gray-700 px-2">
             <li>
               <strong>Asa — Founder &amp; CEO:</strong> Community-driven
               operator focused on making sharing practical and fair.
