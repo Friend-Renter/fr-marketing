@@ -185,7 +185,7 @@ export default function Header() {
           </NavLink>
           <CitiesMenu tone={tone === "light" ? "light" : "dark"} />
           <NavLink
-            href="#why-friendrenter"
+            href="/#why-friendrenter"
             tone={tone === "light" ? "light" : "dark"}
           >
             Why FriendRenter™
