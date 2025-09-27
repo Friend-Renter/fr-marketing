@@ -128,7 +128,7 @@ export default function MobileDrawer({ open, onClose }) {
                           className="block rounded px-3 py-3 text-base hover:bg-emerald-50"
                           onClick={() => onClose("nav_link")}
                         >
-                          Why FriendRenter™
+                          Why FriendRenter
                         </Link>
                       </li>
                       <li>

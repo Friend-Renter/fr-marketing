@@ -188,7 +188,7 @@ export default function Header() {
             href="/#why-friendrenter"
             tone={tone === "light" ? "light" : "dark"}
           >
-            Why FriendRenter™
+            Why FriendRenter
           </NavLink>
           <NavLink
             href="/legal/terms"
