@@ -206,7 +206,7 @@ export default function HomePage() {
 
         <div className="mt-8 grid gap-6 lg:grid-cols-2 ">
           {/* Renters */}
-          <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-card">
+          <div className="rounded-lg border border-gray-200 bg-white py-8 px-4 shadow-card">
             <h3 className="text-3xl font-semibold tracking-tight text-brand-900">
               Renters
             </h3>
@@ -272,12 +272,12 @@ export default function HomePage() {
           {/* Hosts */}
           <div
             id="become-host"
-            className="rounded-lg border border-gray-200 bg-white p-8 shadow-card"
+            className="rounded-lg border border-gray-200 bg-white py-8 px-4 shadow-card"
           >
             <h3 className="text-3xl font-semibold tracking-tight text-brand-900">
               Hosts
             </h3>
-            <ul className="mt-6 space-y-4 px-2 text-brand-800">
+            <ul className="mt-6 space-y-4 px-0 px-2 text-brand-800">
               <li className="flex items-center gap-3">
                 <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-600">
                   <FontAwesomeIcon icon={faCarSide} className="text-[24px]" />
