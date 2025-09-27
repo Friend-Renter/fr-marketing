@@ -1,4 +1,4 @@
-// app/about/page.tsx
+// app/about/page.jsx
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import TeamSection from "@/components/sections/TeamSection";
@@ -103,7 +103,7 @@ export default function AboutPage() {
               oneLiner: "Community-driven operator focused on practical, fair sharing.",
               imageSrc: "/brand/team/asa.jpg", // TODO: add your headshot
               bio: `Asa leads FriendRenter’s vision and operations. Obsessed with
-              making sharing safe, simple, and respectful for everyone involved.`,
+making sharing safe, simple, and respectful for everyone involved.`,
             },
             {
               name: "Omar",
@@ -111,7 +111,7 @@ export default function AboutPage() {
               oneLiner: "Full-stack builder leading product, app, and safety systems.",
               imageSrc: "/brand/team/omar.jpg", // TODO: add your headshot
               bio: `Omar owns the product and engineering stack—crafting the friends-first
-              flow, verifications, and the photo evidence systems that power trust.`,
+flow, verifications, and the photo evidence systems that power trust.`,
             },
           ]}
         />

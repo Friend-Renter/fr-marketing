@@ -1,44 +1,31 @@
-// components/modals/BioModal.tsx
+// components/modals/BioModal.jsx
 "use client";
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-
-type Member = {
-  name: string;
-  role: string;
-  oneLiner: string;
-  imageSrc: string;
-  bio: string;
-};
 
 export default function BioModal({
   id = "bio-modal",
   isOpen,
   onClose,
   member,
-}: {
-  id?: string;
-  isOpen: boolean;
-  onClose: () => void;
-  member: Member;
 }) {
-  const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+  const closeBtnRef = useRef(null);
 
   useEffect(() => {
-    if (isOpen) {
-      // Basic focus & scroll lock
-      const prevOverflow = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      setTimeout(() => closeBtnRef.current?.focus(), 0);
-      return () => {
-        document.body.style.overflow = prevOverflow;
-      };
-    }
+    if (!isOpen) return;
+    // Basic focus & scroll lock
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const t = setTimeout(() => closeBtnRef.current?.focus(), 0);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      clearTimeout(t);
+    };
   }, [isOpen]);
 
   useEffect(() => {
-    function onKey(e: KeyboardEvent) {
+    function onKey(e) {
       if (e.key === "Escape") onClose();
     }
     if (isOpen) document.addEventListener("keydown", onKey);
@@ -52,10 +39,10 @@ export default function BioModal({
       id={id}
       role="dialog"
       aria-modal="true"
-      aria-label={`${member.name} — Bio`}
+      aria-label={`${member?.name || ""} — Bio`}
       className="fixed inset-0 z-[100] flex items-center justify-center"
       onMouseDown={(e) => {
-        // close on backdrop click (but ignore inner clicks)
+        // close on backdrop click (ignore inner clicks)
         if (e.target === e.currentTarget) onClose();
       }}
     >
@@ -66,7 +53,7 @@ export default function BioModal({
       <div className="relative z-[101] w-full max-w-lg rounded-xl bg-white p-5 shadow-xl ring-1 ring-black/5">
         <div className="flex items-start gap-4">
           <div className="relative h-16 w-16 overflow-hidden rounded-full ring-1 ring-gray-200">
-            {member.imageSrc ? (
+            {member?.imageSrc ? (
               <Image
                 src={member.imageSrc}
                 alt={`${member.name} headshot`}
@@ -77,9 +64,11 @@ export default function BioModal({
             ) : null}
           </div>
           <div className="min-w-0">
-            <h3 className="text-xl font-semibold text-gray-900">{member.name}</h3>
-            <p className="text-sm text-gray-600">{member.role}</p>
-            {member.oneLiner ? (
+            <h3 className="text-xl font-semibold text-gray-900">
+              {member?.name}
+            </h3>
+            <p className="text-sm text-gray-600">{member?.role}</p>
+            {member?.oneLiner ? (
               <p className="mt-2 text-sm text-gray-700">{member.oneLiner}</p>
             ) : null}
           </div>
@@ -104,7 +93,7 @@ export default function BioModal({
         </div>
 
         <div className="mt-4 text-[15px] leading-relaxed text-gray-700">
-          {member.bio}
+          {member?.bio}
         </div>
 
         <div className="mt-5 flex justify-end">

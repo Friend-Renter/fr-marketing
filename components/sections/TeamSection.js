@@ -1,38 +1,29 @@
-// components/sections/TeamSection.tsx
+// components/sections/TeamSection.jsx
 "use client";
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import BioModal from "@/components/modals/BioModal";
 
-type Member = {
-  name: string;
-  role: string;
-  oneLiner: string;
-  imageSrc: string;
-  bio: string;
-};
-
-export default function TeamSection({ members }: { members: Member[] }) {
+export default function TeamSection({ members = [] }) {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState<Member | null>(null);
-  const openBtnRef = useRef<HTMLButtonElement | null>(null);
+  const [selected, setSelected] = useState(null);
+  const openerRef = useRef(null);
 
-  function onCardClick(m: Member, btn: HTMLButtonElement | null) {
+  function onCardClick(m, btn) {
     setSelected(m);
     setOpen(true);
-    openBtnRef.current = btn;
+    openerRef.current = btn;
   }
 
   function handleClose() {
     setOpen(false);
     // restore focus to the button that opened the modal
-    requestAnimationFrame(() => openBtnRef.current?.focus());
+    requestAnimationFrame(() => openerRef.current?.focus());
   }
 
-  // Close on Cmd/Ctrl+W guard within modal? (Optional)
   useEffect(() => {
-    function onKey(e: KeyboardEvent) {
+    function onKey(e) {
       if (e.key === "Escape") setOpen(false);
     }
     document.addEventListener("keydown", onKey);
