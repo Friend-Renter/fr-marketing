@@ -443,7 +443,7 @@ export default function HomePage() {
                 <div className="text-sm font-medium text-gray-900">
                   {row.label}
                 </div>
-                <div className="mt-2 grid grid-cols-2 gap-3">
+                <div className="mt-3 grid grid-cols-2 gap-0">
                   {/* FriendRenter */}
                   <div className="flex items-center justify-center gap-2">
                     <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-200">
@@ -457,7 +457,7 @@ export default function HomePage() {
                   {/* Traditional */}
                   <div className="flex items-center justify-center gap-2">
                     <span className="inline-flex items-center rounded-full bg-gray-50 px-2 py-0.5 text-xs font-semibold text-gray-700 ring-1 ring-gray-200">
-                      Traditional
+                      Traditional Rentals
                     </span>
                     <span className="inline-flex items-center text-gray-500">
                       <FontAwesomeIcon icon={faMinus} className="text-[14px]" />
