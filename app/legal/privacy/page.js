@@ -58,7 +58,7 @@ export default function PrivacyPage() {
             We collect information you choose to give us when you submit a form
             or interact with the Site:
           </p>
-          <ul className="mt-3 list-disc pl-5 text-gray-700 text-left">
+          <ul className="mt-3 list-disc pl-5 text-gray-700 px-2">
             <li>
               <strong>Contact details:</strong> first name, last name, email,
               phone.
@@ -110,7 +110,7 @@ export default function PrivacyPage() {
           <h2 className="text-xl font-semibold text-gray-900">
             2) How we use your information
           </h2>
-          <ul className="mt-3 list-disc pl-5 text-gray-700 text-left">
+          <ul className="mt-3 list-disc pl-5 text-gray-700 px-2">
             <li>
               <strong>Respond</strong> to your inquiries and{" "}
               <strong>provide updates</strong> about FriendRenter services and
@@ -145,7 +145,7 @@ export default function PrivacyPage() {
           <h2 className="text-xl font-semibold text-gray-900">
             3) Legal bases (for visitors where applicable)
           </h2>
-          <ul className="mt-3 list-disc pl-5 text-gray-700 text-left">
+          <ul className="mt-3 list-disc pl-5 text-gray-700 px-2">
             <li>
               <strong>Consent</strong> (when you submit forms or opt-in to
               updates).
@@ -213,7 +213,7 @@ export default function PrivacyPage() {
           <h2 className="text-xl font-semibold text-gray-900">
             6) Your choices
           </h2>
-          <ul className="mt-3 list-disc pl-5 text-gray-700 text-left">
+          <ul className="mt-3 list-disc pl-5 text-gray-700 px-2">
             <li>
               <strong>Consent checkbox:</strong> By submitting a form, you
               consent to our collection and use of your info as described here.
@@ -323,7 +323,7 @@ export default function PrivacyPage() {
             We collect the following categories of personal information from
             California residents for the purposes described above:
           </p>
-          <ul className="mt-3 list-disc pl-5 text-gray-700 text-left">
+          <ul className="mt-3 list-disc pl-5 text-gray-700 px-2">
             <li>
               <strong>Identifiers:</strong> name, email, phone.
             </li>
@@ -340,7 +340,7 @@ export default function PrivacyPage() {
               “wants to host in Austin”).
             </li>
           </ul>
-          <p className="mt-3 text-gray-700 text-left">
+          <p className="mt-3 text-gray-700 ">
             <strong>Purposes:</strong> provide updates, manage early access,
             respond to inquiries, plan rollout, analytics, security/compliance.
             <br />

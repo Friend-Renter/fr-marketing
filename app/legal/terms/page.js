@@ -308,7 +308,7 @@ export default function TermsPage() {
         </section>
 
         {/* 15) General */}
-        <section id="general" className="mt-8 text-left">
+        <section id="general" className="mt-8 px-2">
           <h2 className="text-xl font-semibold text-gray-900">15) General</h2>
           <ul className="mt-3 list-disc pl-5 text-gray-700">
             <li>
@@ -336,8 +336,8 @@ export default function TermsPage() {
 
         {/* 16) Contact */}
         <section id="contact-bottom" className="mt-8">
-          <h2 className="text-xl font-semibold text-gray-900">16) Contact</h2>
-          <p className="text-gray-700">
+          <h2 className="text-xl font-semibold text-gray-900 ">16) Contact</h2>
+          <p className="text-gray-700 text-left">
             Questions about these Terms? Email{" "}
             <a
               className="text-brand-700 underline"
