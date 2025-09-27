@@ -27,9 +27,9 @@ export default function PrivacyPage() {
           If you have questions or requests, contact us at{" "}
           <a
             className="text-brand-700 underline"
-            href="mailto:privacy@friendrenter.com"
+            href="mailto:info@friendrenter.com"
           >
-            privacy@friendrenter.com
+            info@friendrenter.com
           </a>
           .
         </p>
