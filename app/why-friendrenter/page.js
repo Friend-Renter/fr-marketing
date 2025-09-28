@@ -265,7 +265,7 @@ function InlineCtas() {
 
 export default function WhyFriendRenterPage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       {/* Hero */}
       <header className="text-center">
         <h1 className="text-4xl font-bold tracking-tight text-brand-900">
@@ -347,7 +347,7 @@ export default function WhyFriendRenterPage() {
       <div className="mt-8">
         <AnchorNav />
       </div>
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* WHAT */}
         <section className="mt-10" id="what">
           <SectionHeader
