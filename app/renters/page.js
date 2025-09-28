@@ -7,17 +7,17 @@ import Button from "@/components/ui/Button";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faUsers,            // friends-only / community
-  faShield,           // verification/protection
-  faIdCard,           // ID verification
-  faCamera,           // check-in/out photos
-  faReceipt,          // receipts / paper trail
-  faClock,            // timing
-  faCreditCard,       // payment card
-  faHandHoldingDollar,// deposit/payout concepts
-  faCarSide,          // cars / driving
-  faMapMarkerAlt,     // pickup location
-  faCircleCheck,      // confirmations
+  faUsers, // friends-only / community
+  faShield, // verification/protection
+  faIdCard, // ID verification
+  faCamera, // check-in/out photos
+  faReceipt, // receipts / paper trail
+  faClock, // timing
+  faCreditCard, // payment card
+  faHandHoldingDollar, // deposit/payout concepts
+  faCarSide, // cars / driving
+  faMapMarkerAlt, // pickup location
+  faCircleCheck, // confirmations
 } from "@fortawesome/free-solid-svg-icons";
 
 const renterFaq = [
@@ -63,7 +63,8 @@ export default function RentersPage() {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 text-brand-100"
           style={{
-            backgroundImage: "radial-gradient(currentColor 1px, transparent 1px)",
+            backgroundImage:
+              "radial-gradient(currentColor 1px, transparent 1px)",
             backgroundSize: "16px 16px",
             maskImage:
               "linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.95))",
@@ -82,7 +83,8 @@ export default function RentersPage() {
             Book from friends. Skip the counter.
           </h1>
           <p className="mt-2 text-gray-700">
-            Verified IDs, upfront pricing, and quick pickup with photo check-in/out.
+            Verified IDs, upfront pricing, and quick pickup with photo
+            check-in/out.
           </p>
 
           <div className="mt-5 flex flex-wrap items-center gap-3">
@@ -203,7 +205,9 @@ export default function RentersPage() {
                   <FontAwesomeIcon icon={c.icon} className="h-4 w-4" />
                 </div>
               </div>
-              <h3 className="mt-2 text-sm font-semibold text-gray-900">{c.t}</h3>
+              <h3 className="mt-2 text-sm font-semibold text-gray-900">
+                {c.t}
+              </h3>
               <p className="mt-1 text-sm text-gray-700">{c.d}</p>
             </li>
           ))}
@@ -212,71 +216,85 @@ export default function RentersPage() {
 
       {/* REQUIREMENTS */}
       <section id="requirements" className="mt-12 scroll-mt-22 md:scroll-mt-24">
-   <h2 className="text-xl font-semibold text-gray-900">Requirements</h2>
-   <div className="mt-4 grid gap-6 md:grid-cols-4">
-     {[
-          { icon: faIdCard, t: "Valid license", d: "Unexpired driver’s license." },
-          { icon: faShield, t: "ID verification", d: "Government ID + selfie check." },
-          { icon: faCreditCard, t: "Payment card", d: "Major credit/debit card." },
-          {
-            icon: faHandHoldingDollar,
-            t: "Refundable hold",
-            d: "Temporary deposit hold during the trip.",
-          },
-         ].map((c, i) => (
-     <div
-         key={i}
-         className="rounded-lg border border-gray-200 bg-white p-4 shadow-card"
-       >
-         <div className="flex items-center gap-3">
-           <div className="flex h-9 w-9 items-center justify-center rounded-md bg-brand-50 text-brand-700">
-             <FontAwesomeIcon icon={c.icon} className="h-5 w-5" />
-           </div>
-           <h3 className="font-semibold text-gray-900">{c.t}</h3>
-         </div>
-         <p className="mt-2 text-sm text-gray-700">{c.d}</p>
-       </div>
-     ))}
-   </div>
- </section>
+        <h2 className="text-xl font-semibold text-gray-900">Requirements</h2>
+        <div className="mt-4 grid gap-6 md:grid-cols-4">
+          {[
+            {
+              icon: faIdCard,
+              t: "Valid license",
+              d: "Unexpired driver’s license.",
+            },
+            {
+              icon: faShield,
+              t: "ID verification",
+              d: "Government ID + selfie check.",
+            },
+            {
+              icon: faCreditCard,
+              t: "Payment card",
+              d: "Major credit/debit card.",
+            },
+            {
+              icon: faHandHoldingDollar,
+              t: "Refundable hold",
+              d: "Temporary deposit hold during the trip.",
+            },
+          ].map((c, i) => (
+            <div
+              key={i}
+              className="rounded-lg border border-gray-200 bg-white p-4 shadow-card"
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-md bg-brand-50 text-brand-700">
+                  <FontAwesomeIcon icon={c.icon} className="h-5 w-5" />
+                </div>
+                <h3 className="font-semibold text-gray-900">{c.t}</h3>
+              </div>
+              <p className="mt-2 text-sm text-gray-700">{c.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* PRICING (compact cards) */}
       {/* PRICING (compact cards) */}
- <section id="pricing" className="mt-12 scroll-mt-22 md:scroll-mt-24">
-   <h2 className="text-xl font-semibold text-gray-900">Pricing & deposits</h2>
-   <div className="mt-4 grid gap-6 md:grid-cols-3">
-     {[
-          {
-            icon: faHandHoldingDollar,
-            t: "Daily rate (host-set)",
-            d: "Varies by car and date—shown upfront before booking.",
-          },
-          {
-            icon: faClock,
-            t: "Service fee (~10%)",
-            d: "Processing & support, displayed clearly at checkout.",
-          },
-          {
-            icon: faReceipt,
-            t: "Refundable hold",
-            d: "Example $200–$300. Released after return if no issues.",
-          },
-         ].map((c, i) => (
-    <div
-        key={i}
-         className="rounded-lg border border-gray-200 bg-white p-4 shadow-card"
-       >
-         <div className="flex items-center gap-3">
-           <div className="flex h-9 w-9 items-center justify-center rounded-md bg-brand-50 text-brand-700">
-             <FontAwesomeIcon icon={c.icon} className="h-5 w-5" />
-           </div>
-           <h3 className="font-semibold text-gray-900">{c.t}</h3>
-         </div>
-         <p className="mt-2 text-sm text-gray-700">{c.d}</p>
-       </div>
-     ))}
-   </div>
- </section>
+      <section id="pricing" className="mt-12 scroll-mt-22 md:scroll-mt-24">
+        <h2 className="text-xl font-semibold text-gray-900">
+          Pricing & deposits
+        </h2>
+        <div className="mt-4 grid gap-6 md:grid-cols-3">
+          {[
+            {
+              icon: faHandHoldingDollar,
+              t: "Daily rate (host-set)",
+              d: "Varies by car and date—shown upfront before booking.",
+            },
+            {
+              icon: faClock,
+              t: "Service fee (~10%)",
+              d: "Processing & support, displayed clearly at checkout.",
+            },
+            {
+              icon: faReceipt,
+              t: "Refundable hold",
+              d: "Example $200–$300. Released after return if no issues.",
+            },
+          ].map((c, i) => (
+            <div
+              key={i}
+              className="rounded-lg border border-gray-200 bg-white p-4 shadow-card"
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-md bg-brand-50 text-brand-700">
+                  <FontAwesomeIcon icon={c.icon} className="h-5 w-5" />
+                </div>
+                <h3 className="font-semibold text-gray-900">{c.t}</h3>
+              </div>
+              <p className="mt-2 text-sm text-gray-700">{c.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* PICKUP & RETURN */}
       <section className="mt-12">
@@ -303,9 +321,14 @@ export default function RentersPage() {
               key={i}
               className="rounded-lg border border-gray-200 bg-white p-4 shadow-card"
             >
-              <div className="text-xs font-semibold text-brand-700">Step {i + 1}</div>
+              <div className="text-xs font-semibold text-brand-700">
+                Step {i + 1}
+              </div>
               <div className="mt-1 flex items-center gap-2 font-medium text-gray-900">
-                <FontAwesomeIcon icon={s.icon} className="h-4 w-4 text-brand-700" />
+                <FontAwesomeIcon
+                  icon={s.icon}
+                  className="h-4 w-4 text-brand-700"
+                />
                 {s.t}
               </div>
               <div className="mt-1 text-sm text-gray-700">{s.d}</div>
@@ -325,7 +348,9 @@ export default function RentersPage() {
 
       {/* WAITLIST FORM */}
       <section id="lead" className="mt-12 max-w-xl">
-        <h2 className="text-xl font-semibold text-gray-900">Join the waitlist</h2>
+        <h2 className="text-xl font-semibold text-gray-900">
+          Join the waitlist
+        </h2>
         <p className="mt-1 text-sm text-gray-700">
           We’ll notify you when cars are available in your area.
         </p>
