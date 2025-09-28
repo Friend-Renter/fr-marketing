@@ -59,13 +59,13 @@ function AnchorNav() {
     { href: "#faq", label: "FAQ" },
   ];
   return (
-    <nav className="sticky top-14 z-10 -mx-4 overflow-x-auto border-b border-zinc-200 bg-white/70 px-4 py-2 backdrop-blur sm:mx-0">
-      <ul className="flex gap-4 text-base">
+    <nav className="sticky top-14 z-10 overflow-x-auto border-b border-zinc-200 bg-white/70 px- py-2 backdrop-blur sm:mx-0 ">
+      <ul className="flex gap-4 text-base ">
         {items.map((it) => (
           <li key={it.href}>
             <a
               href={it.href}
-              className="text-brand-800 hover:text-brand-900 whitespace-nowrap"
+              className="text-brand-800 hover:text-brand-900 whitespace-nowrap pr-"
             >
               {it.label}
             </a>
@@ -331,16 +331,24 @@ export default function WhyFriendRenterPage() {
         </div>
 
         {/* CTAs */}
-        {/* <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <div className="mt-6 flex flex-row items-center justify-center gap-3">
           <Button
             href="/#waitlist"
             variant="primary"
             ctaId="cta_why_host"
             prefetch={false}
           >
-            Join early access
+            Join Early Access
+          </Button>{" "}
+          <Button
+            href="/#waitlist"
+            variant="outline"
+            ctaId="cta_why_host"
+            prefetch={false}
+          >
+            Contact Us
           </Button>
-        </div> */}
+        </div>
       </header>
 
       {/* Anchor nav */}
@@ -349,7 +357,7 @@ export default function WhyFriendRenterPage() {
       </div>
       <div className="max-w-5xl mx-auto">
         {/* WHAT */}
-        <section className="mt-10" id="what">
+        <section className="mt-10 scroll-mt-18 md:scroll-mt-10" id="what">
           <SectionHeader
             eyebrow="What we are"
             title="A friends-only way to share vehicles locally"
@@ -381,7 +389,7 @@ export default function WhyFriendRenterPage() {
         </section>
 
         {/* HOW */}
-        <section className="mt-14" id="how">
+        <section className="mt-14 scroll-mt-18 md:scroll-mt-10" id="how">
           <SectionHeader
             eyebrow="How it works"
             title="Two simple flows"
@@ -440,11 +448,10 @@ export default function WhyFriendRenterPage() {
               ]}
             />
           </div>
-          <InlineCtas />
         </section>
 
         {/* TRUST & SAFETY */}
-        <section className="mt-14" id="trust">
+        <section className="mt-14 scroll-mt-18 md:scroll-mt-10" id="trust">
           <SectionHeader
             eyebrow="Trust & safety"
             title="Protection pillars"
@@ -487,7 +494,10 @@ export default function WhyFriendRenterPage() {
         </section>
 
         {/* PAPER TRAIL */}
-        <section className="mt-14" id="paper-trail">
+        <section
+          className="mt-14 scroll-mt-18 md:scroll-mt-10"
+          id="paper-trail"
+        >
           <SectionHeader
             eyebrow="Receipts & records"
             title="A clean paper trail keeps it friendly"
@@ -528,7 +538,7 @@ export default function WhyFriendRenterPage() {
         </section>
 
         {/* COVERAGE / DEPOSITS CARD */}
-        <section className="mt-14" id="coverage">
+        <section className="mt-14 scroll-mt-18 md:scroll-mt-10" id="coverage">
           <div className="rounded-xl border border-zinc-200 bg-brand-50 p-6">
             <SectionHeader
               eyebrow="Money & rules"
@@ -586,7 +596,7 @@ export default function WhyFriendRenterPage() {
         </section>
 
         {/* COMPARE */}
-        <section className="mt-14" id="compare">
+        <section className="mt-14 scroll-mt-18 md:scroll-mt-10" id="compare">
           <SectionHeader
             eyebrow="Why FriendRenter"
             title="How we compare"
@@ -638,7 +648,7 @@ export default function WhyFriendRenterPage() {
         </section>
 
         {/* FAQ (teaser) */}
-        <section className="mt-14" id="faq">
+        <section className="mt-14 scroll-mt-18 md:scroll-mt-10" id="faq">
           <SectionHeader
             eyebrow="FAQ"
             title="Quick answers"
