@@ -410,6 +410,10 @@ export default function WhyFriendRenterPage() {
                   title: "Check-in / check-out",
                   body: "Capture photos, odometer, and notes for a clean paper trail.",
                 },
+                {
+                  title: "Fast payouts",
+                  body: "Weekly batches; typically 2–3 business days after trip end.",
+                },
               ]}
             />
             <StepList
