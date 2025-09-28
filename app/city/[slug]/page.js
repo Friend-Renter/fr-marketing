@@ -253,7 +253,7 @@ export default async function CityPage({ params, searchParams }) {
       ) : null}
 
       {/* GET STARTED (single unified form) */}
-      <section className="py-12">
+      <section className="py-12 scroll-mt-8 md:scroll-mt-10" id="form">
         <h2 className="text-xl font-semibold text-brand-900">
           Get started in {city.cityName}
         </h2>

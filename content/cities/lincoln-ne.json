@@ -66,12 +66,12 @@
   ],
   "primaryCta": {
     "label": "List your car in Lincoln",
-    "href": "/#waitlist?city=lincoln-ne",
+    "href": "/city/lincoln-ne/#form",
     "id": "cta_city_primary_lincoln"
   },
   "secondaryCta": {
     "label": "Join the Lincoln waitlist",
-    "href": "/#waitlist?city=lincoln-ne",
+    "href": "/city/lincoln-ne/#form",
     "id": "cta_city_secondary_lincoln"
   },
   "defaults": { "role": "host" },

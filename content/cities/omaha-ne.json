@@ -66,12 +66,12 @@
   ],
   "primaryCta": {
     "label": "List your car in Omaha",
-    "href": "/#waitlist?city=omaha-ne",
+    "href": "/city/omaha-ne/#form",
     "id": "cta_city_primary_omaha"
   },
   "secondaryCta": {
     "label": "Join the Omaha waitlist",
-    "href": "/#waitlist?city=omaha-ne",
+    "href": "/city/omaha-ne/#form",
     "id": "cta_city_secondary_omaha"
   },
   "defaults": { "role": "host" },
