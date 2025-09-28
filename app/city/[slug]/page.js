@@ -190,7 +190,7 @@ export default async function CityPage({ params, searchParams }) {
           <h2 className="text-xl font-semibold text-brand-900">
             Make the most of {city.cityName}
           </h2>
-          <ul className="mt-4 space-y-3">
+          <ul className="mt-4 space-y-3 px-2 sm:px-0">
             {thingsToDo.map((t, i) => (
               <li key={i} className="leading-snug text-gray-800">
                 <span className="mr-2">•</span>
