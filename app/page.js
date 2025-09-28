@@ -72,10 +72,6 @@ const homeFaq = [
     q: "How do payouts work for hosts?",
     a: "Fast payouts, typically 2–3 business days after the trip ends.",
   },
-  {
-    q: "Is FriendRenter like Turo?",
-    a: "Similar mechanics, different vibe—bookings happen between friends. Add → accept → book.",
-  },
 ];
 
 export default function HomePage() {
