@@ -12,6 +12,7 @@ import {
   faCheckCircle,
   faKey,
   faCarSide,
+  faMobileScreenButton,
 } from "@fortawesome/free-solid-svg-icons";
 
 export const runtime = "nodejs"; // uses fs
@@ -186,7 +187,7 @@ export default async function CityPage({ params, searchParams }) {
       {/* MAKE THE MOST OF {CITY} (flavor list) */}
       {thingsToDo.length > 0 && (
         <section className="py-8">
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-brand-900">
             Make the most of {city.cityName}
           </h2>
           <ul className="mt-4 space-y-3">
@@ -203,38 +204,48 @@ export default async function CityPage({ params, searchParams }) {
         </section>
       )}
 
-     {/* HOW IT WORKS HERE (cards + icons) */}
-<section className="py-6">
-  <h2 className="text-xl font-semibold text-gray-900">How it works here</h2>
-  <ol className="mt-4 grid gap-4 sm:grid-cols-3">
-    {howItWorks.map((s, i) => (
-      <li key={i} className="list-none">
-        <div className="h-full rounded-lg border border-gray-200 bg-white p-4 shadow-card">
-          <div className="text-xs font-semibold text-brand-700">
-            Step {s.step ?? i + 1}
-          </div>
-          <div className="mt-1 flex items-center gap-2">
-            <FontAwesomeIcon
-              icon={iconForStep(s, i)}
-              className="text-[18px] text-brand-600"
-              aria-hidden="true"
-            />
-            <div className="font-medium text-gray-900">{s.title}</div>
-          </div>
-          {s.desc ? (
-            <div className="mt-2 text-sm text-gray-700">{s.desc}</div>
-          ) : null}
+      {/* HOW IT WORKS HERE (cards + icons + app caption) */}
+      <section className="py-6">
+        <h2 className="text-xl font-semibold text-gray-900">
+          How it works here
+        </h2>
+        <div className="mt-1 text-sm text-gray-600 flex items-center gap-2">
+          <FontAwesomeIcon
+            icon={faMobileScreenButton}
+            className="text-[14px] text-brand-600"
+            aria-hidden="true"
+          />
+          <span>All steps happen in the FriendRenter app.</span>
         </div>
-      </li>
-    ))}
-  </ol>
-</section>
 
+        <ol className="mt-4 grid gap-4 sm:grid-cols-3">
+          {howItWorks.map((s, i) => (
+            <li key={i} className="list-none">
+              <div className="h-full rounded-lg border border-gray-200 bg-white p-4 shadow-card">
+                <div className="text-xs font-semibold text-brand-700">
+                  Step {s.step ?? i + 1}
+                </div>
+                <div className="mt-1 flex items-center gap-2">
+                  <FontAwesomeIcon
+                    icon={iconForStep(s, i)}
+                    className="text-[18px] text-brand-600"
+                    aria-hidden="true"
+                  />
+                  <div className="font-medium text-gray-900">{s.title}</div>
+                </div>
+                {s.desc ? (
+                  <div className="mt-2 text-sm text-gray-700">{s.desc}</div>
+                ) : null}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
 
       {/* FAQ (moved up, before form) */}
       {Array.isArray(city.faq) && city.faq.length > 0 ? (
         <section className="py-8">
-          <h2 className="text-xl font-semibold text-gray-900">FAQ</h2>
+          <h2 className="text-xl font-semibold text-brand-900">FAQ</h2>
           <div className="mt-4">
             <Accordion items={city.faq} />
           </div>
@@ -243,7 +254,7 @@ export default async function CityPage({ params, searchParams }) {
 
       {/* GET STARTED (single unified form) */}
       <section className="py-12">
-        <h2 className="text-xl font-semibold text-gray-900">
+        <h2 className="text-xl font-semibold text-brand-900">
           Get started in {city.cityName}
         </h2>
         <p className="mt-1 text-sm text-gray-700">
