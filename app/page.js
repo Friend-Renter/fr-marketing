@@ -202,7 +202,7 @@ export default function HomePage() {
 
         <div className="mt-8 grid gap-6 lg:grid-cols-2 ">
           {/* Renters */}
-          <div className="rounded-lg border border-gray-200 bg-white py-8 px-6 shadow-card bg-gradient-to-br from-brand-50 to-zinc-50">
+          <div className="rounded-lg border border-gray-200 bg-white py-8 pl-10 px-6 shadow-card bg-gradient-to-br from-brand-50 to-zinc-50">
             <h3 className="text-2xl font-semibold tracking-tight text-brand-900">
               Renters
             </h3>
@@ -268,7 +268,7 @@ export default function HomePage() {
           {/* Hosts */}
           <div
             id="become-host"
-            className="rounded-lg border border-gray-200 bg-white py-8 px-6 shadow-card bg-gradient-to-br from-brand-50 to-zinc-50"
+            className="rounded-lg border border-gray-200 bg-white pl-10 py-8 px-6 shadow-card bg-gradient-to-br from-brand-50 to-zinc-50"
           >
             <h3 className="text-2xl font-semibold tracking-tight text-brand-900">
               Hosts
