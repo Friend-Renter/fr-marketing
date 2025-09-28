@@ -59,13 +59,13 @@ function AnchorNav() {
     { href: "#faq", label: "FAQ" },
   ];
   return (
-    <nav className="sticky top-14 z-10 -mx-4 overflow-x-auto border-b border-zinc-200 bg-white/70 px-4 py-2 backdrop-blur sm:mx-0">
-      <ul className="flex gap-4 text-base">
+    <nav className="sticky top-14 z-10 overflow-x-auto border-b border-zinc-200 bg-white/70 px- py-2 backdrop-blur sm:mx-0 ">
+      <ul className="flex gap-4 text-base ">
         {items.map((it) => (
           <li key={it.href}>
             <a
               href={it.href}
-              className="text-brand-800 hover:text-brand-900 whitespace-nowrap"
+              className="text-brand-800 hover:text-brand-900 whitespace-nowrap pr-"
             >
               {it.label}
             </a>
@@ -331,16 +331,23 @@ export default function WhyFriendRenterPage() {
         </div>
 
         {/* CTAs */}
-        {/* <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <div className="mt-6 flex flex-row items-center justify-center gap-3">
           <Button
             href="/#waitlist"
             variant="primary"
             ctaId="cta_why_host"
             prefetch={false}
           >
-            Join early access
+            Join Early Access
+          </Button> <Button
+            href="/#waitlist"
+            variant="outline"
+            ctaId="cta_why_host"
+            prefetch={false}
+          >
+            Contact Us
           </Button>
-        </div> */}
+        </div>
       </header>
 
       {/* Anchor nav */}
@@ -440,7 +447,6 @@ export default function WhyFriendRenterPage() {
               ]}
             />
           </div>
-          <InlineCtas />
         </section>
 
         {/* TRUST & SAFETY */}
