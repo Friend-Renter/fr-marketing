@@ -203,16 +203,16 @@ export default function HomePage() {
         <div className="mt-8 grid gap-6 lg:grid-cols-2 ">
           {/* Renters */}
           <div className="rounded-lg border border-gray-200 bg-white py-8 px-4 shadow-card">
-            <h3 className="text-3xl font-semibold tracking-tight text-brand-900">
+            <h3 className="text-2xl font-semibold tracking-tight text-brand-900">
               Renters
             </h3>
-            <ul className="mt-6 space-y-4  px-2 text-brand-800">
+            <ul className="mt-6 space-y-4 text-sm  px-2 text-brand-800">
               <li className="flex items-center gap-3">
                 <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-600">
                   <FontAwesomeIcon icon={faIdBadge} className="text-[24px]" />
                 </span>
                 <div>
-                  <span className="font-medium text-lg text-brand-800">
+                  <span className="font-medium text-base text-brand-800">
                     Create your profile
                   </span>{" "}
                   — a real face behind the request.
@@ -223,7 +223,7 @@ export default function HomePage() {
                   <FontAwesomeIcon icon={faUserPlus} className="text-[24px]" />
                 </span>
                 <div>
-                  <span className="font-medium text-lg text-brand-800">
+                  <span className="font-medium text-base text-brand-800">
                     Add the host as a friend
                   </span>{" "}
                   — or send a booking request that includes a friend request.
@@ -237,7 +237,7 @@ export default function HomePage() {
                   />
                 </span>
                 <div>
-                  <span className="font-medium text-lg text-brand-800">
+                  <span className="font-medium text-base text-brand-800">
                     Get accepted
                   </span>{" "}
                   — hosts approve friends before confirming trips.
@@ -248,7 +248,7 @@ export default function HomePage() {
                   <FontAwesomeIcon icon={faKey} className="text-[24px]" />
                 </span>
                 <div>
-                  <span className="font-medium text-lg text-brand-800">
+                  <span className="font-medium text-base text-brand-800">
                     Pick up & go
                   </span>{" "}
                   — smooth handoff, clear return.
@@ -270,16 +270,16 @@ export default function HomePage() {
             id="become-host"
             className="rounded-lg border border-gray-200 bg-white py-8 px-4 shadow-card"
           >
-            <h3 className="text-3xl font-semibold tracking-tight text-brand-900">
+            <h3 className="text-2xl font-semibold tracking-tight text-brand-900">
               Hosts
             </h3>
-            <ul className="mt-6 space-y-4 px-0 px-2 text-brand-800">
+            <ul className="mt-6 space-y-4 text-sm px-0 px-2 text-brand-800">
               <li className="flex items-center gap-3">
                 <span className="inline-flex h-8 w-8 flex-none items-center justify-center text-brand-600">
                   <FontAwesomeIcon icon={faCarSide} className="text-[24px]" />
                 </span>
                 <div>
-                  <span className="font-medium text-lg text-brand-800">
+                  <span className="font-medium text-base text-brand-800">
                     List your car
                   </span>{" "}
                   — set availability, pickup, and house rules.
@@ -293,7 +293,7 @@ export default function HomePage() {
                   />
                 </span>
                 <div>
-                  <span className="font-medium text-lg text-brand-800">
+                  <span className="font-medium text-base text-brand-800">
                     Friends only
                   </span>{" "}
                   — you choose who can book by accepting friend requests.
@@ -304,7 +304,7 @@ export default function HomePage() {
                   <FontAwesomeIcon icon={faUsers} className="text-[24px]" />
                 </span>
                 <div>
-                  <span className="font-medium text-lg text-brand-800">
+                  <span className="font-medium text-base text-brand-800">
                     Lower risk, better guests
                   </span>{" "}
                   — real profiles, mutuals, and verifications.
