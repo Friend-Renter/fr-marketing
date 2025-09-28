@@ -15,11 +15,54 @@
     "badge": "Friends-first rentals"
   },
   "faq": [
-    { "q": "Is street parking okay for pickup?", "a": "Hosts will specify; most meet in public lots or garages." },
-    { "q": "What about game days?", "a": "Book early and allow extra time downtown on big weekends." },
-    { "q": "Winter weather tips?", "a": "Follow pickup notes; allow time to clear snow/ice and check tires." },
-    { "q": "Is there a deposit?", "a": "A temporary hold (e.g., $200–$300) is placed and released after return if no issues." },
-    { "q": "Can I extend my trip?", "a": "If the car is available — request in advance in the app." }
+    {
+      "q": "How do bookings work in Lincoln?",
+      "a": "All requests happen in the FriendRenter app: add the host as a friend → get accepted → confirm your booking → meet at a public spot for pickup."
+    },
+    {
+      "q": "Do I have to be friends to book?",
+      "a": "Yes. Bookings are friends-only. Add the host as a friend (or request and add at the same time) and wait for acceptance before confirmation."
+    },
+    {
+      "q": "Where do pickups usually happen?",
+      "a": "Public, well-lit spots—often near Haymarket, UNL perimeter, or major shopping areas. Your host will share the exact meeting point in the app."
+    },
+    {
+      "q": "Game day tips near Memorial Stadium?",
+      "a": "Plan ahead—downtown traffic and parking fill fast. Agree on a garage or lot outside the closure zone and allow extra time for both pickup and return."
+    },
+    {
+      "q": "Winter weather tips in Lincoln?",
+      "a": "Allow time to clear snow/ice, drive cautiously, and take check-in/out photos. If conditions look severe, coordinate pickup timing with your host in the app."
+    },
+    {
+      "q": "Who sets deposits and age requirements?",
+      "a": "Hosts do. Deposit amounts, minimum age, and any additional requirements are set by the host and shown before you book."
+    },
+    {
+      "q": "Are there mileage limits or extra fees?",
+      "a": "Hosts choose mileage limits and any extras (e.g., cleaning). You’ll see limits up front; any overages are settled after the trip."
+    },
+    {
+      "q": "Can I extend my trip?",
+      "a": "Usually—if the car’s available. Request an extension in the app before your return time so the host can approve."
+    },
+    {
+      "q": "What about fueling and tolls?",
+      "a": "Return the car at or above the agreed fuel level. Tolls and incidental charges, if any, are reconciled after the trip."
+    },
+    {
+      "q": "Smoking, pets, and other house rules?",
+      "a": "Hosts set the rules. Check the listing for smoking/pets and any cleaning expectations before you book."
+    },
+    {
+      "q": "Insurance and protections?",
+      "a": "Bookings include clear protections and required photo check-in/out steps. You’ll see coverage details and responsibilities before confirming."
+    },
+    {
+      "q": "What if plans change or I need to cancel?",
+      "a": "Use the app to modify or cancel. The host’s policy applies; you’ll see timing windows and any fees before you confirm changes."
+    }
   ],
   "primaryCta": {
     "label": "List your car in Lincoln",
@@ -34,14 +77,35 @@
   "defaults": { "role": "host" },
   "editorial": {
     "thingsToDo": [
-      { "title": "Memorial Stadium game day", "desc": "Plan parking; meet in a public garage; easy return." },
-      { "title": "Haymarket evening drive", "desc": "Garage pickup, dinner, and a smooth drop-off." },
-      { "title": "Sunken Gardens & Pioneers loop", "desc": "Scenic afternoon with quick photo stops." }
+      {
+        "title": "Memorial Stadium game day",
+        "desc": "Plan parking; meet in a public garage; easy return."
+      },
+      {
+        "title": "Haymarket evening drive",
+        "desc": "Garage pickup, dinner, and a smooth drop-off."
+      },
+      {
+        "title": "Sunken Gardens & Pioneers loop",
+        "desc": "Scenic afternoon with quick photo stops."
+      }
     ],
     "howItWorks": [
-      { "step": 1, "title": "Add a friend", "desc": "Verify your ID and circle." },
-      { "step": 2, "title": "Request & confirm", "desc": "Pick a car, agree on details, lock it in." },
-      { "step": 3, "title": "Meet & go", "desc": "Public meetup, quick photos, keys, done." }
+      {
+        "step": 1,
+        "title": "Add a friend",
+        "desc": "Verify your ID and circle."
+      },
+      {
+        "step": 2,
+        "title": "Request & confirm",
+        "desc": "Pick a car, agree on details, lock it in."
+      },
+      {
+        "step": 3,
+        "title": "Meet & go",
+        "desc": "Public meetup, quick photos, keys, done."
+      }
     ]
   }
 }

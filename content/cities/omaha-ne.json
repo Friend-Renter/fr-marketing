@@ -15,11 +15,54 @@
     "badge": "Friends-first rentals"
   },
   "faq": [
-    { "q": "Terminal pickup allowed?", "a": "Usually the rideshare lot; terminal curbside if the host offers it." },
-    { "q": "Are there tolls?", "a": "Minimal; any tolls are billed post-trip via the app." },
-    { "q": "Busy weekends?", "a": "Reserve early around Old Market events and concert nights." },
-    { "q": "Deposit/hold?", "a": "A temporary hold (e.g., $200–$300) is placed and released after return if no issues." },
-    { "q": "Mileage limits?", "a": "Shown on each listing; ask your host if you’re unsure." }
+    {
+      "q": "How do bookings work in Omaha?",
+      "a": "Everything runs through the FriendRenter app: add the host as a friend → get accepted → confirm your booking → meet at an agreed public spot."
+    },
+    {
+      "q": "Do I have to be friends to book?",
+      "a": "Yes—friends-only. Send a friend request (or include it with your booking request) and wait for host acceptance to confirm."
+    },
+    {
+      "q": "Where do pickups usually happen?",
+      "a": "Common spots are public garages/lots around Old Market, Midtown Crossing, or neighborhood centers. Your host will specify the exact location in the app."
+    },
+    {
+      "q": "Airport pickup at Eppley (OMA)?",
+      "a": "Often the rideshare lot or another public area near the terminal. Curbside handoff is at the host’s discretion and may depend on airport rules and timing."
+    },
+    {
+      "q": "Busy nights in Old Market?",
+      "a": "Event nights can be crowded—plan extra time and pick a garage with predictable access for both pickup and return."
+    },
+    {
+      "q": "Who sets deposits, age, and requirements?",
+      "a": "Hosts do. Deposit amount, minimum age, and any extra requirements are host-defined and shown before you book."
+    },
+    {
+      "q": "Mileage limits and extra fees?",
+      "a": "Hosts set mileage limits and any extras (e.g., cleaning). You’ll see limits up front, and any overages are settled afterward."
+    },
+    {
+      "q": "Can I extend my booking?",
+      "a": "If the car’s available, yes. Request the extension in the app ahead of time so the host can approve."
+    },
+    {
+      "q": "Tolls, fueling, and return condition?",
+      "a": "Return fuel to the agreed level and follow any host return notes. Tolls/incidentals are reconciled after the trip."
+    },
+    {
+      "q": "Smoking, pets, and house rules?",
+      "a": "Hosts choose the rules. Review the listing for smoking/pets and cleaning expectations before you confirm."
+    },
+    {
+      "q": "Protections and photo steps?",
+      "a": "Bookings include clear protections plus photo check-in/out. Coverage details and responsibilities are shown before you confirm."
+    },
+    {
+      "q": "What if I need to change or cancel?",
+      "a": "Manage it in the app. The host’s policy applies; you’ll see timing windows and any fees before you finalize changes."
+    }
   ],
   "primaryCta": {
     "label": "List your car in Omaha",
@@ -34,14 +77,35 @@
   "defaults": { "role": "host" },
   "editorial": {
     "thingsToDo": [
-      { "title": "Old Market night", "desc": "Garage pickup, stroll the bricks, and easy drop-off." },
-      { "title": "Zoo & riverfront loop", "desc": "Henry Doorly + Gene Leahy Mall in a single day." },
-      { "title": "Benson coffee crawl", "desc": "Hit a few spots and keep parking simple." }
+      {
+        "title": "Old Market night",
+        "desc": "Garage pickup, stroll the bricks, and easy drop-off."
+      },
+      {
+        "title": "Zoo & riverfront loop",
+        "desc": "Henry Doorly + Gene Leahy Mall in a single day."
+      },
+      {
+        "title": "Benson coffee crawl",
+        "desc": "Hit a few spots and keep parking simple."
+      }
     ],
     "howItWorks": [
-      { "step": 1, "title": "Add a friend", "desc": "Verify your ID and circle." },
-      { "step": 2, "title": "Request & confirm", "desc": "Pick a car, agree on details, lock it in." },
-      { "step": 3, "title": "Meet & go", "desc": "Public meetup, quick photos, keys, done." }
+      {
+        "step": 1,
+        "title": "Add a friend",
+        "desc": "Verify your ID and circle."
+      },
+      {
+        "step": 2,
+        "title": "Request & confirm",
+        "desc": "Pick a car, agree on details, lock it in."
+      },
+      {
+        "step": 3,
+        "title": "Meet & go",
+        "desc": "Public meetup, quick photos, keys, done."
+      }
     ]
   }
 }
