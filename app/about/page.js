@@ -103,7 +103,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team — visual grid + bio modal (client) */}
-      <section id="team" className="mt-12">
+      {/* <section id="team" className="mt-12">
         <h2 className="text-2xl font-semibold text-gray-900">Team</h2>
         <p className="mt-2 text-gray-700">
           A small team with builder energy—focused on trust, good design, and
@@ -137,7 +137,7 @@ making sharing safe, simple, and respectful for everyone involved.`,
             },
           ]}
         />
-      </section>
+      </section> */}
 
       {/* CTA */}
       <section id="cta" className="mt-12">
